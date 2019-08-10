@@ -6,7 +6,7 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>Reverse Geocoding</title>
 
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="gmapapi.js"></script>
   <script type="text/javascript">
     var geocoder;
 
@@ -22,6 +22,7 @@
 
     function errorFunction() {
       alert("Geocoder failed");
+      codeLatLng(12.4965795, 78.0282787)
     }
 
     function initialize() {
