@@ -1,24 +1,74 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <title>EM</title>
-  <base href="/">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Reverse Geocoding</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript">
+    var geocoder;
 
-  <meta name="theme-color" content="#ee6e73">
-<link rel="stylesheet" href="styles.afbf251e75074918a432.css"></head>
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+    }
+    //Get the latitude and the longitude;
+    function successFunction(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      codeLatLng(lat, lng)
+    }
 
-<body>
-  <div class="container-fluid">
-    <app-root></app-root>
-  </div>
-  <script type="text/javascript" src="assets/materialize-init.js"></script>
-<script src="runtime-es2015.10a1f01eef199006286d.js" type="module"></script><script src="polyfills-es2015.e4a1185e6871d06f842f.js" type="module"></script><script src="runtime-es5.9ad22a88fcc70a015907.js" nomodule defer></script><script src="polyfills-es5.da479429bfd39fbf99d9.js" nomodule defer></script><script src="scripts.1a55e7fe7974b4f3cb55.js" defer></script><script src="main-es2015.bfc8ca869373d850168f.js" type="module"></script><script src="main-es5.be52ee85dc9aa2b52b5f.js" nomodule defer></script></body>
+    function errorFunction() {
+      alert("Geocoder failed");
+    }
+
+    function initialize() {
+      geocoder = new google.maps.Geocoder();
+
+
+
+    }
+
+    function codeLatLng(lat, lng) {
+
+      var latlng = new google.maps.LatLng(lat, lng);
+      geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          console.log(results)
+          if (results[1]) {
+            //formatted address
+            alert(results[0].formatted_address)
+            //find country name
+            for (var i = 0; i < results[0].address_components.length; i++) {
+              for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+
+                //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                  //this is the object you are looking for
+                  city = results[0].address_components[i];
+                  break;
+                }
+              }
+            }
+            //city data
+            alert(city.short_name + " " + city.long_name)
+
+
+          } else {
+            alert("No results found");
+          }
+        } else {
+          alert("Geocoder failed due to: " + status);
+        }
+      });
+    }
+  </script>
+</head>
+
+<body onload="initialize()">
+
+</body>
 
 </html>
