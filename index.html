@@ -35,9 +35,12 @@
 alert('codelatlng')
       var latlng = new google.maps.LatLng(lat, lng);
       geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        alert('geocoder')
         if (status == google.maps.GeocoderStatus.OK) {
+          alert('status ok')
           console.log(results)
           if (results[1]) {
+            alert('res')
             //formatted address
             alert(results[0].formatted_address)
             //find country name
