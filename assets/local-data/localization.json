@@ -1,0 +1,36 @@
+{
+    "languages": [
+        {
+            "language": "English",
+            "key": "en",
+            "short": "EN"
+        },
+        {
+            "language": "தமிழ்",
+            "key": "ta",
+            "short": "த"
+        }
+    ],
+    "data": {
+        "appTitle": {
+            "en": "Operator System",
+            "ta": "ஆபரேட்டர் அமைப்பு"
+        },
+        "dashboardmenu": {
+            "en": "Dashboard",
+            "ta": "டாஷ்போர்டு"
+        },
+        "ownersmenu": {
+            "en": "Owners",
+            "ta": "உரிமையாளர்கள்"
+        },
+        "placesmenu": {
+            "en": "Places",
+            "ta": "இடங்கள்"
+        },
+        "operatorsmenu": {
+            "en": "Operators",
+            "ta": "ஆபரேட்டர்கள்"
+        }
+    }
+}
