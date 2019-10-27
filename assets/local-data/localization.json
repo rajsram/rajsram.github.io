@@ -31,6 +31,10 @@
         "operatorsmenu": {
             "en": "Operators",
             "ta": "ஆபரேட்டர்கள்"
+        },
+        "langChangeConform": {
+            "en": "Do you want to apply language setting now?, it will reload this page",
+            "ta": "நீங்கள் இப்போது மொழி அமைப்பைப் பயன்படுத்த விரும்புகிறீர்களா?, இது இந்தப் பக்கத்தை மீண்டும் ஏற்றும்"
         }
     }
 }
