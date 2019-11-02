@@ -44,9 +44,32 @@
             "en": "Login",
             "ta": "உள்நுழைய"
         },
+        "logoutbtn": {
+            "en": "Logout",
+            "ta": "வெளியேறு"
+        },
+        "profilebtn": {
+            "en": "Profile",
+            "ta": "சுயவிவர"
+        },
         "langChangeConform": {
             "en": "Do you want to apply language setting now?, it will reload this page",
             "ta": "நீங்கள் இப்போது மொழி அமைப்பைப் பயன்படுத்த விரும்புகிறீர்களா?, இது இந்தப் பக்கத்தை மீண்டும் ஏற்றும்"
+        },
+        "loginEmailReq": {
+            "en": "Email is required."
+        },
+        "loginEmailPatr": {
+            "en": "Email or mobile is wrong."
+        },
+        "loginPasswordReq": {
+            "en": "Password is required."
+        },
+        "loginPasswordPatr": {
+            "en": "Password is wrong."
+        },
+        "wrongUser": {
+            "en": "Email or mobile or password is wrong"
         }
     }
 }
