@@ -70,6 +70,21 @@
         },
         "wrongUser": {
             "en": "Email or mobile or password is wrong"
+        },
+        "organisationName":{
+            "en":"Organisation Name"
+        },
+        "shortName":{
+            "en":"Short Name"
+        },
+        "phoneNumber":{
+            "en":"Phone Number"
+        },
+        "email":{
+            "en":"Email"
+        },
+        "createdDate":{
+            "en":"Created Date"
         }
     }
 }
