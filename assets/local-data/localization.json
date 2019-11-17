@@ -71,20 +71,65 @@
         "wrongUser": {
             "en": "Email or mobile or password is wrong"
         },
-        "organisationName":{
-            "en":"Organisation Name"
+        "organisationName": {
+            "en": "Organisation Name"
         },
-        "shortName":{
-            "en":"Short Name"
+        "shortName": {
+            "en": "Short Name"
         },
-        "phoneNumber":{
-            "en":"Phone Number"
+        "phoneNumber": {
+            "en": "Phone Number"
         },
-        "email":{
-            "en":"Email"
+        "email": {
+            "en": "Email"
         },
-        "createdDate":{
-            "en":"Created Date"
+        "createdDate": {
+            "en": "Created Date"
+        },
+        "ownerForm": {
+            "en": "Owner From"
+        },
+        "ownerNameInput": {
+            "en": "Owner Name"
+        },
+        "ownerNameReq": {
+            "en": "Owner name required"
+        },
+        "ownerNameMinLen": {
+            "en": "Owner name minimum 5 chnar"
+        },
+        "ownerShortNameInput": {
+            "en": "Owner Shortname"
+        },
+        "ownerShortNameReq": {
+            "en": "Owner shrotname required"
+        },
+        "ownerShortNameMinLen": {
+            "en": "Owner shortname minimum 5 char"
+        },
+        "ownerEmailInput": {
+            "en": "Owner Email"
+        },
+        "ownerEmailReq": {
+            "en": "Owner Email required"
+        },
+        "ownerEmailPatr": {
+            "en": "Password must minimum 8 char maximum 20 char atleast one uppercase, one number and one special char"
+        },
+        "ownerPhoneInput": {
+            "en": "Owner phone number"
+        },
+        "ownerPhoneReq": {
+            "en": "Owner phone number required"
+        },
+        "ownerPhonePatr": {
+            "en": "Owner phone number not correct"
+        },
+        "savebtn": {
+            "en": "Save"
+        },
+        "cancelbtn": {
+            "en": "Cancel"
         }
     }
 }
