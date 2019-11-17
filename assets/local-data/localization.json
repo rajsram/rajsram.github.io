@@ -86,44 +86,44 @@
         "createdDate": {
             "en": "Created Date"
         },
-        "ownerForm": {
-            "en": "Owner From"
+        "addOwner": {
+            "en": "Add Owner"
         },
-        "ownerNameInput": {
-            "en": "Owner Name"
+        "editOwner": {
+            "en": "Edit Owner"
         },
-        "ownerNameReq": {
-            "en": "Owner name required"
+        "nameInput": {
+            "en": "Name"
         },
-        "ownerNameMinLen": {
-            "en": "Owner name minimum 5 chnar"
+        "nameReq": {
+            "en": "Name required"
         },
-        "ownerShortNameInput": {
-            "en": "Owner Shortname"
+        "nameMinLen": {
+            "en": "Minimum character"
         },
-        "ownerShortNameReq": {
-            "en": "Owner shrotname required"
+        "shortNameInput": {
+            "en": "Shortname"
         },
-        "ownerShortNameMinLen": {
-            "en": "Owner shortname minimum 5 char"
+        "shortNameReq": {
+            "en": "Shrotname required"
         },
-        "ownerEmailInput": {
-            "en": "Owner Email"
+        "emailInput": {
+            "en": "Email"
         },
-        "ownerEmailReq": {
+        "emailReq": {
             "en": "Owner Email required"
         },
-        "ownerEmailPatr": {
-            "en": "Password must minimum 8 char maximum 20 char atleast one uppercase, one number and one special char"
+        "emailPatrError": {
+            "en": "Invalid Email"
         },
-        "ownerPhoneInput": {
-            "en": "Owner phone number"
+        "phoneInput": {
+            "en": "Phone number"
         },
-        "ownerPhoneReq": {
-            "en": "Owner phone number required"
+        "phoneReq": {
+            "en": "Phone number required"
         },
-        "ownerPhonePatr": {
-            "en": "Owner phone number not correct"
+        "phonePatrError": {
+            "en": "Invalid phone number"
         },
         "savebtn": {
             "en": "Save"
