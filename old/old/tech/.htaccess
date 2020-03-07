@@ -1,0 +1,7 @@
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^tech\.rajeshsankar\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.tech\.rajeshsankar\.com$
+RewriteRule ^/?$ "http\:\/\/rajeshsankar\.com\/tech" [R=301,L]
+

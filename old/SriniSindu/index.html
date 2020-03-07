@@ -1,0 +1,549 @@
+<!doctype html>
+<!--
+Version : 1.1
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/ico" href="images/hearts.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <title>Srini Weds Sindu - 14,18 Nov 2018</title>
+
+    <!-- GOOGLE FONTS-->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa%7CScope+One%7CTangerine:700" rel="stylesheet">
+    <!-- END GOOGLE FONTS-->
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="css/bootstrap.css?ver=3.3.6">
+    <!-- END BOOTSTRAP-->
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="css/font-awesome.css?ver=4.6.3">
+    <!-- END FONT AWESOME -->
+
+    <!-- ANIMATE CSS -->
+    <link rel="stylesheet" href="css/animate.css?ver=3.5.1">
+    <!-- END ANIMATE CSS -->
+
+    <!-- SWIPER CSS -->
+    <link rel="stylesheet" href="css/swiper.css?ver=3.3.1">
+    <!-- END SWIPER CSS -->
+
+    <!-- WDP STYLES -->
+    <link rel="stylesheet" href="css/wdp-styles.css?ver=1.1">
+    <!-- END WDP STYLES -->
+
+    <!-- WDP STYLE SKIN -->
+    <!-- For Default Skin -->
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/skin/wdp-skin-default.css?ver=1.1">
+
+    <!-- For Turquoise Skin -->
+    <!--<link rel="icon" href="images/turquoise/favicon.ico">
+<link rel="apple-touch-icon" href="images/turquoise/apple-touch-icon.png">
+<link rel="stylesheet" href="css/skin/wdp-skin-turquoise.css?ver=1.1">-->
+
+    <!-- For Lavender Skin -->
+    <!--<link rel="icon" href="images/lavender/favicon.ico">
+<link rel="apple-touch-icon" href="images/lavender/apple-touch-icon.png">
+<link rel="stylesheet" href="css/skin/wdp-skin-lavender.css?ver=1.1">-->
+    <!-- END WDP STYLE SKIN -->
+
+    <!-- WDP MEDIA -->
+    <link rel="stylesheet" href="css/wdp-media.css?ver=1.1">
+    <!-- END WDP MEDIA -->
+
+    <!-- JQUERY JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- MODERNIZR JS -->
+    <script src="js/modernizr-custom.js?ver=3.3.1"></script>
+    <!-- END MODERNIZR JS -->
+    <style>
+        .wdp_header {
+            top: 0;
+            border-bottom: 1px solid #ec365a0d;
+        }
+
+        @media only screen and (min-width: 600px) and (max-width: 992px) {
+
+            #wdp_slideshow,
+            #wdp_featured_image {
+                height: 200px;
+            }
+
+            .wdp_splash_inner {
+                top: 0;
+            }
+        }
+
+        @media only screen and (min-width: 993px) {
+
+            #wdp_slideshow,
+            #wdp_featured_image {
+                height: 560px;
+            }
+
+            .wdp_splash_inner {
+                top: 145px;
+            }
+
+            .wdp_event_location {
+                margin-left: 42%;
+            }
+
+            .auto-scroll {
+                display: none;
+            }
+        }
+
+        .count-parts {
+            display: flex;
+            text-align: center;
+            width: 310px;
+            margin-left: calc(50% - 155px);
+        }
+
+        .count-part {
+            margin: 0 7px;
+            padding: 7px;
+            width: 65px;
+            height: 70px;
+            background-color: #ec365a;
+            color: white;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .count-part .count {
+            background-color: white;
+            color: #ec365a;
+            border-radius: 35px;
+            border: 4px double;
+            margin-top: 4px;
+            font-size: 20px;
+            width: 35px;
+            height: 35px;
+            line-height: 32px;
+            margin-left: 7px;
+        }
+
+        .auto-scroll {
+            position: fixed;
+            height: 30px;
+            width: 100%;
+            bottom: 0;
+            background-color: #ec365a0f;
+            color: #ec365a;
+            text-align: center;
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        .auto-scroll span {
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 7px solid #ec365a;
+        }
+    </style>
+</head>
+
+<body class="home">
+    <div class="auto-scroll">
+        <div>More</div>
+        <span></span>
+    </div>
+    <!-- WDP PRELOADER -->
+    <div class="wdp_preloader"></div>
+    <!-- END WDP PRELOADER -->
+
+    <!-- PAGE -->
+    <div id="page" class="site">
+
+        <!-- SITE-HEADER -->
+        <header id="masthead" class="site-header wdp_header" role="banner">
+
+            <!-- SITE-BRANDING -->
+            <div class="site-branding container text-center">
+
+                <!-- WDP BRANDING -->
+                <h1 class="site-title wdp_site_title"><span class="groom">Srini</span><img src="images/header-icon-overlay.png"
+                        alt="" class="wdp_img_center wdp_header_icon"><span class="bride">Sindu</span></h1>
+                <!-- END WDP BRANDING -->
+
+            </div>
+            <!-- END SITE-BRANDING -->
+
+        </header>
+        <!-- END SITE-HEADER -->
+
+        <!-- SITE-CONTENT -->
+        <div id="content" class="site-content">
+
+            <!-- PRIMARY -->
+            <div id="primary" class="content-area">
+
+                <!-- MAIN -->
+                <main id="main" class="site-main" role="main">
+
+                    <!-- SLIDESHOW -->
+                    <section id="wdp_slideshow" class="carousel slide wdp_slideshow_fade" data-ride="carousel">
+
+                        <!-- <ul class="carousel-inner wdp_slideshow_inner">
+                        <li class="active item"><img src="demo/slide-1.jpg" alt="" class="img-responsive"></li>
+                        <li class="item"><img src="demo/slide-2.jpg" alt="" class="img-responsive"></li>
+                        <li class="item"><img src="demo/slide-3.jpg" alt="" class="img-responsive"></li>
+                    </ul>                -->
+
+                    </section>
+                    <!-- END SLIDESHOW -->
+
+                    <!-- SPLASH -->
+                    <section id="wdp_splash">
+
+                        <div class="container">
+
+                            <div class="row">
+
+                                <div class="col-lg-5 center-block wdp_float_none wdp_splash_inner">
+
+                                    <div class="wdp_splash_hearts center-block wdp_float_none">
+                                        <p class="wdp_splash_couple_ini">S &amp; S</p>
+                                    </div>
+
+                                    <p class="wdp_splash_date" style="font-size:34px;">14<sup>th</sup> Nov 2018</p>
+
+                                    <p class="wdp_splash_text">We are getting married!</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+                    <!-- END SPLASH -->
+
+
+                    <!-- COUNTDOWN -->
+                    <section id="countdown" class="text-center wdp_margin_top_6">
+
+                        <div class="container wdp_section_title">
+                            <h2>The Countdown begins!</h2>
+                            <p>We are counting down</p>
+                        </div>
+
+                        <div class="container wdp_margin_top_4">
+                            <div class="count-parts">
+                                <div class="count-part">
+                                    <div class="lable">Day(s)</div>
+                                    <div class="count" id="dayscount"></div>
+                                </div>
+                                <div class="count-part">
+                                    <div class="lable">Hr(s)</div>
+                                    <div class="count" id="hrscount"></div>
+                                </div>
+                                <div class="count-part">
+                                    <div class="lable">Min(s)</div>
+                                    <div class="count" id="minscount"></div>
+                                </div>
+                                <div class="count-part">
+                                    <div class="lable">Sec(s)</div>
+                                    <div class="count" id="secscount"></div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row wdp_countdown_item_inner">
+
+                                <script>
+                                    TargetDate = "07/22/2017 10:00 AM";
+                                    FinishMessage = "<div class='countdown_end'>The Knot has been tied... thanks for stopping by though!</div>";
+                                    CountActive = true;
+                                    BackColor = "transparent";
+                                    ForeColor = "inherit";
+                                    CountStepper = -1;
+                                    LeadingZero = false;
+                                    DisplayFormat = "<div class='wdp_countdown_item'><p><span class='wdp_countdown_int'>%%D%%</span> Days</p></div><div class='wdp_countdown_item'><p><span class='wdp_countdown_int'>%%H%%</span> Hours</p></div><div class='wdp_countdown_item'><p><span class='wdp_countdown_int'>%%M%%</span> Minutes</p></div><div class='wdp_countdown_item'><p><span class='wdp_countdown_int'>%%S%%</span> Seconds</p></div>";
+                                </script>
+                                <script src="js/countdown.js?ver=1.1"></script>
+
+                            </div> -->
+
+                        </div>
+
+                    </section>
+                    <!-- END COUNTDOWN -->
+
+                    <!-- HOME EVENTS -->
+                    <section id="wdp_home_events" class="text-center wdp_margin_top_10">
+
+                        <div class="container wdp_section_title">
+                            <h2>The Wedding Events</h2>
+                            <p>Most awaited moment of our life</p>
+                        </div>
+
+                        <div class="container">
+
+                            <div class="row">
+
+                                <div class="wdp_home_event_container">
+
+                                    <div class="wdp_home_event_item wdp_margin_top_4">
+
+                                        <h4 class="wdp_event_title">Wedding</h4>
+
+                                        <div class="clearfix wdp_margin_top_4">
+
+                                            <div class="wdp_event_date">
+                                                <p><span class="lead"><i class="fa fa-calendar"></i></span> Nov
+                                                    <span class="lead">14th</span></p>
+                                            </div>
+
+                                            <div class="wdp_event_time">
+                                                <p><i class="fa fa-clock-o"></i> 6.00 am to 7.30 am</p>
+                                            </div>
+
+                                            <div class="wdp_event_location">
+                                                <p><i class="fa fa-map-marker"></i> Kadamba Vaneswarar, Kulithalai
+                                                    Kadambar Kovil St, Kulithalai, Tamil Nadu-639104, 04323 225 228</p>
+                                            </div>
+
+                                        </div>
+
+                                        <a href='https://maps.google.com/?cid=4140251016607054597' target="black" class="btn wdp_btn wdp_margin_top_4"><i
+                                                class="fa fa-map-marker"></i> Locate & Navigate</a>
+
+
+                                    </div>
+                                    <div class="wdp_home_event_item wdp_margin_top_4">
+
+                                        <h4 class="wdp_event_title">Wedding Reception 1</h4>
+
+                                        <div class="clearfix wdp_margin_top_4">
+
+                                            <div class="wdp_event_date">
+                                                <p><span class="lead"><i class="fa fa-calendar"></i></span> Nov
+                                                    <span class="lead">14th</span></p>
+                                            </div>
+
+                                            <div class="wdp_event_time">
+                                                <p><i class="fa fa-clock-o"></i> 7.30 am to 10.30 am</p>
+                                            </div>
+
+                                            <div class="wdp_event_location">
+                                                <p><i class="fa fa-map-marker"></i> Lakshmi Mahal A/C, Musiri, Tamil
+                                                    Nadu 621211</p>
+                                            </div>
+
+                                        </div>
+
+                                        <a href='https://goo.gl/maps/ZdihaM335gz' target="black" class="btn wdp_btn wdp_margin_top_4"><i
+                                                class="fa fa-map-marker"></i> Locate & Navigate</a>
+
+
+                                    </div>
+                                    <div class="wdp_home_event_item wdp_margin_top_4">
+
+                                        <h4 class="wdp_event_title">Wedding Reception 2</h4>
+
+                                        <div class="clearfix wdp_margin_top_4">
+
+                                            <div class="wdp_event_date">
+                                                <p><span class="lead"><i class="fa fa-calendar"></i></span> Nov
+                                                    <span class="lead">18th</span></p>
+                                            </div>
+
+                                            <div class="wdp_event_time">
+                                                <p><i class="fa fa-clock-o"></i> 6.30 pm to 9.00 pm</p>
+                                            </div>
+
+                                            <div class="wdp_event_location">
+                                                <p><i class="fa fa-map-marker"></i>NT Mahal,Near N. R. Congress Office,
+                                                    East Coast Road, 100 Feet Main Road, Ellaipillaichavady, Anna
+                                                    Nagar, Puducherry-605005, 0413 220 1080</p>
+                                            </div>
+
+                                        </div>
+
+                                        <a href='https://maps.google.com/?cid=8456102969523986501' target="black" class="btn wdp_btn wdp_margin_top_4"><i
+                                                class="fa fa-map-marker"></i> Locate & Navigate</a>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </section>
+                    <!-- END HOME EVENTS -->
+
+                    <!-- CONTACT BAR -->
+                    <section id="wdp_contact_bar" class="text-center wdp_margin_top_10">
+
+                        <div class="container wdp_section_title">
+                            <h2>Contact Us</h2>
+                            <p>Get in touch with us directly</p>
+                        </div>
+
+                        <div class="wdp_contact_bar_inner">
+
+                            <div class="container">
+
+                                <div class="wdp_contact_bar_address">
+                                    <p class="lead"><i class="fa fa-map-marker"></i> 5/208, Azhagaptti Road,
+                                        Thirumurugan Nagar, Musiri, Trichy, Tamilnadu - 621 211
+                                    </p>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <p class="wdp_contact_bar_phone"><i class="fa fa-phone"></i>
+                                            <a href="tel:9865624221" style="color:white">9865624221</a> /
+                                            <a href="tel:7406999887" style="color:white">7406999887</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="mailto:ibtsrini@gmail.com" class="wdp_contact_bar_mail"><i class="fa fa-envelope"></i>
+                                            ibtsrini@gmail.com</a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+                    <!-- END CONTACT BAR -->
+
+                </main><!-- END MAIN -->
+
+            </div><!-- END PRIMARY -->
+
+        </div>
+        <!-- END SITE-CONTENT -->
+
+    </div>
+    <!-- END PAGE -->
+
+    <script>
+        if (typeof jQuery == 'undefined') {
+            document.write(unescape("%3Cscript src='js/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+        }
+    </script>
+    <!-- END JQUERY JS -->
+
+    <!-- JQUERY MIGRATE JS -->
+    <script src="js/jquery-migrate.js?ver=1.2.1"></script>
+    <!-- END JQUERY MIGRATE JS -->
+
+    <!-- WDP PRELOADER JS -->
+    <script src="js/wdp-preloader.js?ver=1.1"></script>
+    <!-- END WDP PRELOADER JS -->
+
+    <!-- BOOTSTRAP JS -->
+    <script src="js/bootstrap.js?ver=3.3.6"></script>
+    <!-- END BOOTSTRAP JS -->
+
+    <!-- SCROLLREVEAL JS -->
+    <script src="js/scrollreveal.js?ver=3.1.4"></script>
+    <!-- END SCROLLREVEAL JS -->
+
+    <!-- WDP SCROLLREVEAL JS -->
+    <script src="js/wdp-scrollreveal.js?ver=1.1"></script>
+    <!-- END WDP SCROLLREVEAL JS -->
+
+    <!-- SWIPER JS -->
+    <script src="js/swiper.jquery.js?ver=3.3.1"></script>
+    <!-- END SWIPER JS -->
+
+    <!-- WDP SWIPER -->
+    <script src="js/wdp-swiper.js?ver=1.1"></script>
+    <!-- END WDP SWIPER -->
+
+    <!-- FANCY SELECT JS -->
+    <script src="js/fancySelect.js?ver=1.4.0"></script>
+    <!-- END FANCY SELECT JS -->
+
+    <!-- FORM JS -->
+    <script src="js/jquery.form.js?ver=3.5"></script>
+    <!-- END FORM JS -->
+
+    <!-- WDP RSVP FORM -->
+    <script src="js/wdp-rsvp-form.js?ver=1.1"></script>
+    <!-- END WDP RSVP FORM -->
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-80633130-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Nov 14, 2018 06:00:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            // Get todays date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now an the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Output the result in an element with id="demo"
+            document.getElementById("dayscount").innerHTML = days;
+            document.getElementById("hrscount").innerHTML = hours;
+            document.getElementById("minscount").innerHTML = minutes;
+            document.getElementById("secscount").innerHTML = seconds;
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                // document.getElementByClass("demo").innerHTML = "Done";
+                document.getElementById("time").hidden = true;
+                document.getElementById("days").innerHTML = "Done";
+            }
+        }, 1000);
+
+        $(document).ready(function () {
+            $(".auto-scroll").click(function (event) {
+                $('html, body').animate({ scrollTop: '+=300px' }, 800);
+            });
+        });
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+                // alert("near bottom!");
+                $(".auto-scroll").hide('slow');
+            }
+        });
+    </script>
+</body>
+
+</html>

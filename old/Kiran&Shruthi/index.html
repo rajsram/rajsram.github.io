@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="http://www.srajs.com/Kiran&Shruthi/love.png">
+    <meta property="og:description" content="Wedding ceremony invitation details , you can navigate and contact from this page">
+    <title>Kiran Weds Shruthi</title>
+    <link rel="icon" sizes="16x16 32x32 64x64" type="image/png" href="love.png">
+    <link rel="shortcut icon" sizes="16x16 32x32 64x64" type="image/png" href="love.png">
+    <link rel="apple-touch-icon" sizes="16x16 32x32 64x64" type="image/png" href="love.png">
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="animate.css">
+    <style>
+        a {
+            visibility: hidden;
+        }
+
+        .demo {
+            position: fixed;
+            top: 15%;
+            width: 100%;
+        }
+
+        p {
+            margin: 0;
+            text-align: center;
+            color: white;
+            background: -webkit-linear-gradient(#f622ff, #E91E63, #000000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #days {
+            font-size: 40px;
+        }
+
+        #time {
+            font-size: 30px;
+        }
+
+        #love,
+        span {
+            padding-top: 10px;
+            font-size: 35px;
+            font-weight: bolder;
+            /* opacity: 0.2; */
+            font-style: italic;
+        }
+
+        html {
+            background: url(bg.jpg) no-repeat center center fixed;
+            /* -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover; */
+            background-size: cover;
+            height: 100%;
+        }
+
+        sup {
+            vertical-align: super;
+            font-size: smaller;
+        }
+
+        .wed>p {
+            font-size: 12px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
+
+</head>
+
+<body style="height:97%">
+    <div style="height:60%;">
+        <p id="love">Kiran
+            <img src="2-2-love.png" style="height: 75px;"> Shruthi
+        </p>
+        <div class="demo">
+            <p id="days"></p>
+            <p id="time"></p>
+            <hr>
+            <div class="wed">
+                <p>Reception On
+                    <b>2
+                        <sup>nd</sup> Jun 2018</b> 7.00 pm onwards</p>
+                <p>Wedding On
+                    <b>3
+                        <sup>rd</sup> Jun 2018</b> between 8.30 am to 9.00 am</p>
+                <hr>
+                <p>“Life is Beautiful, with life partner its most Beautiful.”
+                </p>
+            </div>
+            <div style="display: block;">
+                <img src="mobile.png" style="height:25px;"> Ramesh Babu
+                <a href="tel:8722268930" style="visibility: visible;font-size: 12px;">
+                    8722268930</a>
+                    <br>
+                    <img src="mobile.png" style="height:25px;"> Arun
+                <a href="tel:9066450143" style="visibility: visible;font-size: 12px;">
+                    9066450143</a>,
+                <a href="tel:8217025524" style="visibility: visible;font-size: 12px;">
+                    8217025524</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="map" style="height:40%; opacity: 0.8;"></div>
+    <script>         
+        $('#love').addClass('animated zoomInUp');
+        xyz();
+        function xyz() {
+            var a = setTimeout(function () {
+                $('#love').removeClass('zoomInUp');
+                var y = setTimeout(function () {
+                    $('#love').addClass('zoomInUp');
+                    xyz();
+                }, 3000)
+            }, 2000)
+        }
+
+
+
+        // Set the date we're counting down to
+        var countDownDate = new Date("Jun 03, 2018 09:00:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            // Get todays date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now an the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            var dys = days === 1 ? "Day" : "Days";
+            var hr = hours === 1 ? "Hr" : "Hrs";
+            var min = minutes === 1 ? "Min" : "Mins";
+            var sec = seconds === 1 ? "Sec" : "Secs";
+            // Output the result in an element with id="demo"
+            document.getElementById("days").innerHTML = "<b>" + days + "</b> " + dys;
+            document.getElementById("time").innerHTML = "<b>" + hours + "</b> " + hr + " <b>"
+                + minutes + "</b> " + min + " <b>" + seconds + "</b> " + sec;
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                // document.getElementByClass("demo").innerHTML = "Done";
+                document.getElementById("time").hidden = true;
+                document.getElementById("days").innerHTML = "Done";
+            }
+        }, 1000);
+
+        var map, infoWindow;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 13.4121071, lng: 76.1612997 },
+                zoom: 8
+            });
+            infoWindow = new google.maps.InfoWindow;
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Location found.');
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                }, function () {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent("<b>Sri Seetharama Kalyana Mandira, Banavara</b> <br> <u>Click for Directions</u>");
+            infoWindow.open(map);
+        }
+        $(window).bind("load", function () {
+            $('.gm-style-iw').on('click', function () {
+                window.open('http://maps.google.co.in/maps?q=Sri Seetharama Kalyana Mandira, Banavara', '_blank');
+            })
+        });
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUitDPD4qunc9phOZsuV9DB4JrQhoOB6A&callback=initMap">
+    </script>
+</body>
+
+</html>
