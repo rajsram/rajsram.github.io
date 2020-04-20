@@ -1,0 +1,39 @@
+<!-- <router-outlet></router-outlet> -->
+<div class="app">
+  <mat-toolbar color="primary">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">event</mat-icon>
+    <span style="margin-left: 10px;">
+      Wedding Web Apply
+    </span>
+  </mat-toolbar>
+  <div class="form-container">
+    <form class="flex-group" formGroupName="applyForm">
+      <div class="flex-item">
+        <mat-form-field class="example-full-width">
+          <mat-label>Groom/Bride Name</mat-label>
+          <input matInput formControlName="groomBrideName">
+        </mat-form-field>
+      </div>
+      <div class="flex-item">
+        <mat-form-field class="example-full-width">
+          <mat-label>Bride/GroomName</mat-label>
+          <input matInput formControlName="brideGroomName">
+        </mat-form-field>
+      </div>
+      <div class="flex-item">
+        <mat-form-field>
+          <mat-label>Wedding Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="weddingDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="flex-item">
+          <mat-label>Wedding Time</mat-label>
+          <!-- <input matInput formControlName="weddingTime"> -->
+          <input [ngxTimepicker]="picker" formControlName="weddingTime">
+          <ngx-material-timepicker #picker></ngx-material-timepicker>
+      </div>
+    </form>
+  </div>
+</div>
