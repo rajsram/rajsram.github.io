@@ -7,7 +7,7 @@
     </span>
   </mat-toolbar>
   <div class="form-container">
-    <form formGroupName="applyForm">
+    <form [formGroup]="applyForm">
       <div class="flex-group">
         <div class="flex-item">
           <mat-form-field class="example-full-width">
@@ -36,6 +36,18 @@
             <ngx-material-timepicker #timePicker></ngx-material-timepicker>
           </mat-form-field>
         </div>
+        <div class="flex-item">
+          <mat-form-field class="example-full-width">
+            <mat-label>Mobile(s)[use comma ',' for multiple]</mat-label>
+            <input matInput formControlName="mobile">
+          </mat-form-field>
+        </div>
+        <div class="flex-item">
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+        </div>
       </div>
       <div class="events">
         <header>
@@ -45,45 +57,49 @@
           </button>
         </header>
         <div class="flex-group events-container">
-          <div class="flex-item event-container" *ngFor="let event of applyForm.get('events')['controls']; let i=index">
-            <button mat-mini-fab type="button" color="warn" class="remove-event" (click)="remveEvent(i)">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <mat-form-field class="event-name">
-              <mat-label>Event Name</mat-label>
-              <input matInput formControlName="event.title">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <mat-label>Event Date</mat-label>
-              <input matInput [matDatepicker]="epicker" (click)="epicker.open()" formControlName="weddingDate">
-              <mat-datepicker-toggle matSuffix [for]="epicker"></mat-datepicker-toggle>
-              <mat-datepicker touchUi #epicker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="half-width">
-              <mat-label>From</mat-label>
-              <input matInput readonly [ngxTimepicker]="ftimePicker" formControlName="weddingTime">
-              <ngx-material-timepicker #ftimePicker></ngx-material-timepicker>
-            </mat-form-field>
-            <mat-form-field class="half-width">
-              <mat-label>To</mat-label>
-              <input matInput readonly [ngxTimepicker]="ttimePicker" formControlName="weddingTime">
-              <ngx-material-timepicker #ttimePicker></ngx-material-timepicker>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <mat-label>Address</mat-label>
-              <textarea matInput rows="2"></textarea>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <mat-label>location Url</mat-label>
-              <input matInput type="url" formControlName="event.locationUrl">
-            </mat-form-field>
-          </div>
+          <form [formGroup]="events">
+            <div class="flex-item event-container" *ngFor=" let event of events.controls;let i = index"
+              [formGroupName]="i">
+              <button mat-mini-fab type="button" color="warn" class="remove-event" (click)="remveEvent(i)">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <mat-form-field class="event-name">
+                <mat-label>Event Name</mat-label>
+                <input matInput formControlName="title">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Event Date</mat-label>
+                <input matInput [matDatepicker]="epicker" (click)="epicker.open()" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="epicker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #epicker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="half-width">
+                <mat-label>From</mat-label>
+                <input matInput readonly [ngxTimepicker]="ftimePicker" formControlName="from">
+                <ngx-material-timepicker #ftimePicker></ngx-material-timepicker>
+              </mat-form-field>
+              <mat-form-field class="half-width">
+                <mat-label>To</mat-label>
+                <input matInput readonly [ngxTimepicker]="ttimePicker" formControlName="to">
+                <ngx-material-timepicker #ttimePicker></ngx-material-timepicker>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Address</mat-label>
+                <textarea matInput rows="2"  formControlName="address"></textarea>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>location Url</mat-label>
+                <input matInput type="url" formControlName="locationUrl">
+              </mat-form-field>
+            </div>
+          </form>
         </div>
       </div>
 
       <div class="frmbtns">
         <button mat-raised-button type="reset">Reset</button>
-        <button mat-raised-button type="button" (click)="applySubmit()" color="primary">Apply</button>
+        <button mat-raised-button type="button" [disabled]="applyForm.invalid || events.invalid" (click)="applySubmit()"
+          color="primary">Apply</button>
       </div>
     </form>
   </div>

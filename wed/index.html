@@ -17,7 +17,7 @@ Version : 1.1
     <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <title>Srini Weds Sindu - 14,18 Nov 2020</title>
+    <title>Wedding</title>
 
     <!-- GOOGLE FONTS-->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa%7CScope+One%7CTangerine:700" rel="stylesheet">
@@ -223,8 +223,7 @@ Version : 1.1
                                         <p class="wdp_splash_couple_ini" id="coupleIni">ini</p>
                                     </div>
 
-                                    <p class="wdp_splash_date" id="weddingDate" style="font-size:34px;">14<sup>th</sup>
-                                        Nov 2020</p>
+                                    <p class="wdp_splash_date" id="weddingDate" style="font-size:34px;"></p>
 
                                     <p class="wdp_splash_text">We are getting married!</p>
                                 </div>
@@ -412,74 +411,20 @@ Version : 1.1
 
     </script>
     <script>
-        var data = {
-            groomBrideName: 'Srini',
-            brideGroomName: 'Sindu',
-            weddingDateTime: new Date("Nov 14, 2020 06:00:00"),
-            events: [{
-                title: 'Wedding',
-                from: new Date("Nov 14, 2020 06:00:00"),
-                to: new Date("Nov 14, 2020 07:30:00"),
-                address: ' Kadamba Vaneswarar, Kulithalai Kadambar Kovil St, Kulithalai, Tamil Nadu-639104, 04323 225 228',
-                locationUrl: 'https://maps.google.com/?cid=4140251016607054597'
-            },
-            {
-                title: 'Wedding Reception 1',
-                from: new Date("Nov 14, 2020 07:30:00"),
-                to: new Date("Nov 14, 2020 10:30:00"),
-                address: 'Lakshmi Mahal A/C, Musiri, Tamil Nadu 621211',
-                locationUrl: 'https://goo.gl/maps/ZdihaM335gz'
-            },
-            {
-                title: 'Wedding Reception 2',
-                from: new Date("Nov 18, 2020 18:30:00"),
-                to: new Date("Nov 18, 2020 21:00:00"),
-                address: 'NT Mahal,Near N. R. Congress Office, East Coast Road, 100 Feet Main Road, Ellaipillaichavady, Anna Nagar, Puducherry-605005, 0413 220 1080',
-                locationUrl: 'https://maps.google.com/?cid=8456102969523986501'
-            }],
-            mobiles: ['9865624221', '7406999887'],
-            email: 'ibtsrini@gmail.com'
-        }
+        var url = window.location.href;
+        var couple = url.split('?')[1];
+        var data;
+        $.getJSON("./data/" + couple + ".json", function (json) {
+            data = json;
+            loadData();
+        });
 
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-        // Set the date we're counting down to
-        var countDownDate = data.weddingDateTime.getTime();
-
-        // Update the count down every 1 second
-        var x = setInterval(function () {
-
-            // Get todays date and time
-            var now = new Date().getTime();
-
-            // Find the distance between now an the count down date
-            var distance = countDownDate - now;
-
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            // Output the result in an element with id="demo"
-            document.getElementById("dayscount").innerHTML = days;
-            document.getElementById("hrscount").innerHTML = hours;
-            document.getElementById("minscount").innerHTML = minutes;
-            document.getElementById("secscount").innerHTML = seconds;
-
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                // document.getElementByClass("demo").innerHTML = "Done";
-                document.getElementById("time").hidden = true;
-                document.getElementById("days").innerHTML = "Done";
-            }
-        }, 1000);
 
         $(document).ready(function () {
             $(".auto-scroll").click(function (event) {
                 $('html, body').animate({ scrollTop: '+=300px' }, 800);
             });
-            loadData();
         });
 
         $(window).scroll(function () {
@@ -490,7 +435,41 @@ Version : 1.1
         });
 
         function loadData() {
-            let wdt = data.weddingDateTime;
+
+            // Set the date we're counting down to
+            var countDownDate = new Date(data.weddingDateTime).getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function () {
+
+                // Get todays date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now an the count down date
+                var distance = countDownDate > now ? countDownDate - now : now - countDownDate;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                // Output the result in an element with id="demo"
+                document.getElementById("dayscount").innerHTML = days;
+                document.getElementById("hrscount").innerHTML = hours;
+                document.getElementById("minscount").innerHTML = minutes;
+                document.getElementById("secscount").innerHTML = seconds;
+
+                // If the count down is over, write some text 
+                if (distance < 0) {
+                    clearInterval(x);
+                    // document.getElementByClass("demo").innerHTML = "Done";
+                    document.getElementById("time").hidden = true;
+                    document.getElementById("days").innerHTML = "Done";
+                }
+            }, 1000);
+
+
+            let wdt = new Date(data.weddingDateTime);
             document.title = data.groomBrideName + ' Weds ' + data.brideGroomName + ', ' + wdt.getDate() + dateSup(wdt.getDate()) + ' ' + months[wdt.getMonth()] + ' ' + (wdt.getYear() + 1900);
             $('#groomBrideName').html(data.groomBrideName);
             $('#brideGroomName').html(data.brideGroomName);
@@ -515,6 +494,8 @@ Version : 1.1
             let eventhtml = '';
             for (let i = 0; i < data.events.length; i++) {
                 let event = data.events[i];
+                let from = new Date(event.from);
+                let to = new Date(event.to);
                 eventhtml += `
                                     <div class="wdp_home_event_item wdp_margin_top_4">
 
@@ -524,12 +505,12 @@ Version : 1.1
 
                                             <div class="wdp_event_date">
                                                 <p><span class="lead"><i class="fa fa-calendar"></i></span> 
-                                                `+ months[event.from.getMonth()] + `
-                                                    <span class="lead">`+ event.from.getDate() + `<sup>` + dateSup(event.from.getDate()) + `</sup></span></p>
+                                                `+ months[from.getMonth()] + `
+                                                    <span class="lead">`+ from.getDate() + `<sup>` + dateSup(from.getDate()) + `</sup></span></p>
                                             </div>
 
                                             <div class="wdp_event_time">
-                                                <p><i class="fa fa-clock-o"></i> `+ formatAMPM(event.from) + ` to ` + formatAMPM(event.to) + `</p>
+                                                <p><i class="fa fa-clock-o"></i> `+ formatAMPM(from) + ` to ` + formatAMPM(to) + `</p>
                                             </div>
 
                                             <div class="wdp_event_location">

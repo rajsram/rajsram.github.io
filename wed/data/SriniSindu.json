@@ -1,0 +1,33 @@
+{
+    "groomBrideName": "Srini",
+    "brideGroomName": "Sindu",
+    "weddingDateTime": "2018-11-14T00:30:00.000Z",
+    "events": [
+        {
+            "title": "Wedding",
+            "from": "2018-11-14T00:30:00.000Z",
+            "to": "2018-11-14T02:00:00.000Z",
+            "address": " Kadamba Vaneswarar, Kulithalai Kadambar Kovil St, Kulithalai, Tamil Nadu-639104, 04323 225 228",
+            "locationUrl": "https://maps.google.com/?cid=4140251016607054597"
+        },
+        {
+            "title": "Wedding Reception 1",
+            "from": "2018-11-14T02:00:00.000Z",
+            "to": "2018-11-14T05:00:00.000Z",
+            "address": "Lakshmi Mahal A/C, Musiri, Tamil Nadu 621211",
+            "locationUrl": "https://goo.gl/maps/ZdihaM335gz"
+        },
+        {
+            "title": "Wedding Reception 2",
+            "from": "2018-11-18T13:00:00.000Z",
+            "to": "2018-11-18T15:30:00.000Z",
+            "address": "NT Mahal,Near N. R. Congress Office, East Coast Road, 100 Feet Main Road, Ellaipillaichavady, Anna Nagar, Puducherry-605005, 0413 220 1080",
+            "locationUrl": "https://maps.google.com/?cid=8456102969523986501"
+        }
+    ],
+    "mobiles": [
+        "9865624221",
+        "7406999887"
+    ],
+    "email": "ibtsrini@gmail.com"
+}
