@@ -501,7 +501,7 @@ Version : 1.1
             link.setAttribute('name', 'description');
             link.content = data.groomBrideName + ' Weds ' + data.brideGroomName + ', ' +
                 wdt.getDate() + dateSup(wdt.getDate()) + ' ' + months[wdt.getMonth()] + ' ' +
-                (wdt.getYear() + 1900) + ', Welcome friends & family...';
+                (wdt.getYear() + 1900) + ', Welcome friends and family...';
             document.getElementsByTagName('head')[0].appendChild(link);
 
             $('#groomBrideName').html(data.groomBrideName);
@@ -522,9 +522,10 @@ Version : 1.1
             $('#emailId').html(`<a href="mailto:` + data.email + `" class="wdp_contact_bar_mail"><i
                                                 class="fa fa-envelope"></i>
                                             `+ data.email + `</a>`);
-            $('#shareWhatsapp').attr('href', `whatsapp://send?text=` + link.content + `
-                                            For more visit url : `+ window.location.href + ` ` +
-                encodeURIComponent(window.location.origin + window.location.pathname + `images/hearts.png`));
+            let image = window.location.origin + window.location.pathname + 'images/hearts.png';
+            $('#shareWhatsapp').attr('href', 'whatsapp://send?text=' + link.content +
+                'For more visit url : ' + window.location.href +
+                encodeURIComponent(image));
         }
         function loadEvents() {
             let eventhtml = '';

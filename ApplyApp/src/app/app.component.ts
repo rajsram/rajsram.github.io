@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     });
     console.log(wedData);
     let a = document.createElement('a');
-    a.href = 'mailto:srajesh0111@gmail.com?subject=Wedding Page Application&body=' + JSON.stringify(wedData);
+    a.href = 'mailto:RajeshSivasankaran@outlook.com?subject=Wedding Page Application&body=' + JSON.stringify(wedData);
     a.click();
   }
 
