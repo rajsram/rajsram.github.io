@@ -14,12 +14,12 @@ export class AppComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
     this.applyForm = this.fb.group({
-      groomBrideName: ['', Validators.required],
-      brideGroomName: ['', Validators.required],
+      groomBrideName: ['', Validators.required, Validators.min(3)],
+      brideGroomName: ['', Validators.required, Validators.min(3)],
       weddingDate: [new Date(), Validators.required],
       weddingTime: ['12:00 AM', Validators.required],
       mobile: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]
     });
     this.events = this.fb.array([
       this.event()

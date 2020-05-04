@@ -45,7 +45,7 @@
         <div class="flex-item">
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email">
+            <input matInput type="email" formControlName="email">
           </mat-form-field>
         </div>
       </div>
@@ -56,8 +56,8 @@
             <mat-icon>add</mat-icon>
           </button>
         </header>
-        <div class="flex-group events-container">
-          <form [formGroup]="events">
+        <div class="events-container">
+          <form [formGroup]="events" class="flex-group">
             <div class="flex-item event-container" *ngFor=" let event of events.controls;let i = index"
               [formGroupName]="i">
               <button mat-mini-fab type="button" color="warn" class="remove-event" (click)="remveEvent(i)">
@@ -85,10 +85,10 @@
               </mat-form-field>
               <mat-form-field class="example-full-width">
                 <mat-label>Address</mat-label>
-                <textarea matInput rows="2"  formControlName="address"></textarea>
+                <textarea matInput rows="2" formControlName="address"></textarea>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <mat-label>location Url</mat-label>
+                <mat-label>Google Map location Url (e.g. https://goo.gl/maps/bxDujCmgMn7rLCNm9)</mat-label>
                 <input matInput type="url" formControlName="locationUrl">
               </mat-form-field>
             </div>
@@ -97,9 +97,11 @@
       </div>
 
       <div class="frmbtns">
-        <button mat-raised-button type="reset">Reset</button>
+        <p>Apply button enable once enter all input.</p>
+        <!-- <button mat-raised-button type="reset">Reset</button> -->
         <button mat-raised-button type="button" [disabled]="applyForm.invalid || events.invalid" (click)="applySubmit()"
           color="primary">Apply</button>
+        <p>On apply, Email opens up just send.</p>
       </div>
     </form>
   </div>

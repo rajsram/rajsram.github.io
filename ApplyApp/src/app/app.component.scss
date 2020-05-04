@@ -51,7 +51,7 @@
                     margin       : 10px !important;
                     padding      : 15px;
                     min-width    : 300px;
-                    max-width    : 480px;
+                    max-width    : 440px;
 
                     .remove-event {
                         float: right;
@@ -71,6 +71,12 @@
 
         .frmbtns {
             text-align: center;
+
+            p {
+                font-size: 12px;
+                margin   : 0;
+                color    : gray;
+            }
 
             button {
                 margin: 15px;

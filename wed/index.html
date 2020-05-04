@@ -14,9 +14,9 @@ Version : 1.1
     <meta name="HandheldFriendly" content="True">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <meta name="description" content="" />
-    <meta name="keywords" content="">
-    <meta name="author" content="">
+    <!-- <meta name="description" content="" /> -->
+    <meta name="keywords" content="Wedding,Web,Invitation">
+    <meta name="author" content="Rajesh">
     <title>Wedding</title>
 
     <!-- GOOGLE FONTS-->
@@ -317,23 +317,48 @@ Version : 1.1
                             <p>Get in touch</p>
                         </div>
 
-                        <div class="wdp_contact_bar_inner">
+                        <div class="wdp_contact_bar_inner" style="padding: 20px 0;">
 
                             <div class="container">
                                 <div class="row">
 
                                     <div class="col-sm-6">
-                                        <p class="wdp_contact_bar_phone"><i class="fa fa-phone"></i>
+                                        <div class="wdp_contact_bar_phone"><i class="fa fa-phone"></i>
                                             <span id="mobiles">
 
                                             </span>
-                                        </p>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6" id="emailId">
                                     </div>
-
+                                    <div class="hidden-md">
+                                        <i class="fa fa-whatsapp"></i>
+                                        <a id="shareWhatsapp">
+                                            Click to share it in whatsApp</a>
+                                    </div>
                                 </div>
 
+                            </div>
+                            <div class="for-similar" style="margin-top: 25px;">
+                                <div>For similar web, contact.</div>
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <i class="fa fa-phone"></i>
+                                        <span id="mobiles">
+                                            <a href="tel:8838357016" style="color:white">8838357016</a>/
+                                            <a href="tel:9786146414" style="color:white">9786146414</a>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6" id="emailId">
+                                        <a href="mailto:RajeshSivasankaran@outlook.com" class="wdp_contact_bar_mail"><i
+                                                class="fa fa-envelope"></i>
+                                            RajeshSivasankaran@outlook.com</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="https://rajsram.github.io/applyapp" target="_blank">Click here to apply</a>
+                                </div>
                             </div>
 
                         </div>
@@ -471,6 +496,14 @@ Version : 1.1
 
             let wdt = new Date(data.weddingDateTime);
             document.title = data.groomBrideName + ' Weds ' + data.brideGroomName + ', ' + wdt.getDate() + dateSup(wdt.getDate()) + ' ' + months[wdt.getMonth()] + ' ' + (wdt.getYear() + 1900);
+
+            var link = document.createElement('meta');
+            link.setAttribute('name', 'description');
+            link.content = data.groomBrideName + ' Weds ' + data.brideGroomName + ', ' +
+                wdt.getDate() + dateSup(wdt.getDate()) + ' ' + months[wdt.getMonth()] + ' ' +
+                (wdt.getYear() + 1900) + ', Welcome friends & family...';
+            document.getElementsByTagName('head')[0].appendChild(link);
+
             $('#groomBrideName').html(data.groomBrideName);
             $('#brideGroomName').html(data.brideGroomName);
             $('#coupleIni').html(data.groomBrideName.slice(0, 1) + ' &amp; ' + data.brideGroomName.slice(0, 1));
@@ -488,7 +521,10 @@ Version : 1.1
             $('#mobiles').html(mobiles);
             $('#emailId').html(`<a href="mailto:` + data.email + `" class="wdp_contact_bar_mail"><i
                                                 class="fa fa-envelope"></i>
-                                            `+ data.email + `</a>`)
+                                            `+ data.email + `</a>`);
+            $('#shareWhatsapp').attr('href', `whatsapp://send?text=` + link.content + `
+                                            For more visit url : `+ window.location.href + ` ` +
+                encodeURIComponent(window.location.origin + window.location.pathname + `images/hearts.png`));
         }
         function loadEvents() {
             let eventhtml = '';
