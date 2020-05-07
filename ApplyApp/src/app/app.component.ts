@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Time } from '@angular/common';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Wedding } from './model';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +10,10 @@ import { Wedding } from './model';
 export class AppComponent implements OnInit {
   applyForm: FormGroup;
   events: FormArray;
-  constructor(private fb: FormBuilder) { }
+  showRefImage = false;
+  constructor(private fb: FormBuilder) {
+
+  }
   ngOnInit(): void {
     this.applyForm = this.fb.group({
       groomBrideName: ['', Validators.required, Validators.min(3)],
@@ -19,7 +21,7 @@ export class AppComponent implements OnInit {
       weddingDate: [new Date(), Validators.required],
       weddingTime: ['12:00 AM', Validators.required],
       mobile: ['', Validators.required],
-      email: ['', Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]
+      email: ['', Validators.required]
     });
     this.events = this.fb.array([
       this.event()
@@ -74,7 +76,7 @@ export class AppComponent implements OnInit {
       from: ['12:00 AM', Validators.required],
       to: ['12:00 AM', Validators.required],
       address: ['', Validators.required],
-      locationUrl: ['', Validators.required]
+      locationUrl: ['']
     });
   }
 
@@ -84,5 +86,10 @@ export class AppComponent implements OnInit {
 
   remveEvent(i: number) {
     this.events.removeAt(i);
+  }
+
+  openMap(eventIndex: number) {
+    let eves = this.events.value as any[];
+    window.open('https://www.google.co.in/maps?q=' + eves[eventIndex].address, "_blank");
   }
 }

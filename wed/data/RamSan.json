@@ -1,0 +1,26 @@
+{
+    "groomBrideName": "Ramesh",
+    "brideGroomName": "Sangeetha",
+    "weddingDateTime": "2018-10-19T00:30:00.000Z",
+    "mobiles": [
+        "8098742331",
+        "9786146414"
+    ],
+    "email": "rajram84@gmail.com",
+    "events": [
+        {
+            "title": "Wedding",
+            "address": "Paalvanna Nadhar Temple, Palacode, TamilNadu",
+            "locationUrl": "",
+            "from": "2018-10-19T00:30:00.000Z",
+            "to": "2018-10-19T01:30:00.000Z"
+        },
+        {
+            "title": "Reception",
+            "address": "SGR Marriage hall, Rayakottai, Krishnagiri, TamilNadu",
+            "locationUrl": "",
+            "from": "2018-10-21T18:30:00.000Z",
+            "to": "2018-10-22T09:30:00.000Z"
+        }
+    ]
+}

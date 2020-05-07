@@ -5,6 +5,7 @@
     <span style="margin-left: 10px;">
       Wedding Web Apply
     </span>
+    <a class="ref-link" (click)="showRefImage=true">Reference</a>
   </mat-toolbar>
   <div class="form-container">
     <form [formGroup]="applyForm">
@@ -39,7 +40,7 @@
         <div class="flex-item">
           <mat-form-field class="example-full-width">
             <mat-label>Mobile(s)[use comma ',' for multiple]</mat-label>
-            <input matInput formControlName="mobile">
+            <input placeholder="e.g. 9876543210,8097654321" matInput formControlName="mobile">
           </mat-form-field>
         </div>
         <div class="flex-item">
@@ -84,13 +85,14 @@
                 <ngx-material-timepicker #ttimePicker></ngx-material-timepicker>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <mat-label>Address</mat-label>
-                <textarea matInput rows="2" formControlName="address"></textarea>
+                <mat-label>Full Address</mat-label>
+                <textarea placeholder="e.g. ABC Mahal, Area, City, State" matInput rows="2"
+                  formControlName="address"></textarea>
               </mat-form-field>
-              <mat-form-field class="example-full-width">
+              <!-- <mat-form-field class="example-full-width">
                 <mat-label>Google Map location Url (e.g. https://goo.gl/maps/bxDujCmgMn7rLCNm9)</mat-label>
                 <input matInput type="url" formControlName="locationUrl">
-              </mat-form-field>
+              </mat-form-field> -->
             </div>
           </form>
         </div>
@@ -104,5 +106,15 @@
         <p>On apply, Email opens up just send.</p>
       </div>
     </form>
+  </div>
+</div>
+<div class="ref-image-container" *ngIf="showRefImage">
+  <div class="ref-image">
+    <div class="header">
+      Reference <a (click)="showRefImage=false">Close</a>
+    </div>
+    <div class="image-container">
+      <img src="./../assets/WeddApplyExample.png">
+    </div>
   </div>
 </div>

@@ -334,7 +334,7 @@ Version : 1.1
                                     </div>
                                     <div class="hidden-md">
                                         <i style="color: lightgreen;" class="fa fa-whatsapp"></i>
-                                        <a id="shareWhatsapp" style="color:#ccc;display: initial">
+                                        <a id="shareWhatsapp" style="color:#fff;display: initial">
                                             Click to share it in whatsApp</a>
                                     </div>
                                 </div>
@@ -358,7 +358,9 @@ Version : 1.1
                                     </div>
                                 </div>
                                 <div>
-                                    <a href="https://rajsram.github.io/applyapp" target="_blank">Click here to apply</a>
+                                    <i class="fa fa-pencil-square-o"></i>
+                                    <a style="color: #fff;" href="https://rajsram.github.io/applyapp"
+                                        target="_blank">Click here to apply</a>
                                 </div>
                             </div>
 
@@ -533,6 +535,7 @@ Version : 1.1
                 let event = data.events[i];
                 let from = new Date(event.from);
                 let to = new Date(event.to);
+                let location = event.locationUrl ? event.locationUrl : 'https://www.google.co.in/maps?q=' + event.address;
                 eventhtml += `
                                     <div class="wdp_home_event_item wdp_margin_top_4">
 
@@ -556,7 +559,7 @@ Version : 1.1
 
                                         </div>
 
-                                        <a href='`+ event.locationUrl + `' target="black"
+                                        <a href='`+ location + `' target="black"
                                             class="btn wdp_btn wdp_margin_top_4"><i class="fa fa-map-marker"></i> Locate
                                             & Navigate</a>
 
