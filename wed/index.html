@@ -310,6 +310,15 @@ Version : 1.1
                     </section>
                     <!-- END HOME EVENTS -->
 
+                    <!-- NOTE BAR -->
+                    <section id="wdp_note_bar" class="text-center wdp_margin_top_10">
+
+                        <div class="container wdp_section_title">
+                            <h2>Note</h2>
+                            <p id="welcomeNote">A perfect relationship isn’t ever actually perfect. It’s just that both people never give up.</p>
+                        </div>
+                    </section>
+
                     <!-- CONTACT BAR -->
                     <section id="wdp_contact_bar" class="text-center wdp_margin_top_10">
 
@@ -528,6 +537,7 @@ Version : 1.1
             let image = window.location.origin + window.location.pathname + 'images/hearts.png';
             $('#shareWhatsapp').attr('href', 'whatsapp://send?text=' + link.content +
                 'For more visit url : ' + window.location.href);
+                $('#welcomeNote').html(data.note);
         }
         function loadEvents() {
             let eventhtml = '';

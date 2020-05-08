@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
       weddingDate: [new Date(), Validators.required],
       weddingTime: ['12:00 AM', Validators.required],
       mobile: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', Validators.required],
+      note: ['']
     });
     this.events = this.fb.array([
       this.event()
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
     wedData.weddingDateTime = this.mergeDateTime(wed.weddingDate, wed.weddingTime);
     wedData.mobiles = wed.mobile.split(',');
     wedData.email = wed.email;
+    wedData.note = wed.note;
     wedData.events = [];
     eves.forEach((e: any) => {
       wedData.events.push({

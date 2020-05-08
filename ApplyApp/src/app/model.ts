@@ -4,6 +4,7 @@ export class Wedding {
     weddingDateTime: Date;
     mobiles: string[];
     email: string;
+    note: string;
     events: WeddingEvent[];
 }
 export class WeddingEvent {
