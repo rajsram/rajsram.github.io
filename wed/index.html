@@ -49,6 +49,7 @@ Version : 1.1
     <!-- WDP STYLE SKIN -->
     <!-- For Default Skin -->
     <link rel="stylesheet" href="css/skin/wdp-skin-default.css?ver=1.1">
+    <link rel="stylesheet" href="css/loader.css">
 
     <!-- For Turquoise Skin -->
     <!--<link rel="icon" href="images/turquoise/favicon.ico">
@@ -113,7 +114,7 @@ Version : 1.1
             display: flex;
             text-align: center;
             width: 310px;
-            margin-left: calc(50% - 155px);
+            margin-left: calc(50% - 150px);
         }
 
         .count-part {
@@ -156,6 +157,10 @@ Version : 1.1
             border-left: 15px solid transparent;
             border-right: 15px solid transparent;
             border-top: 7px solid #ec365a;
+        }
+
+        sub {
+            font-size: 8px;
         }
     </style>
 </head>
@@ -241,45 +246,31 @@ Version : 1.1
                     <section id="countdown" class="text-center wdp_margin_top_6">
 
                         <div class="container wdp_section_title">
-                            <h2>The Countdown begins!</h2>
-                            <p>We are counting down</p>
+                            <h2 id="time_h2">The Countdown begins!</h2>
+                            <p id="time_p">We are counting down</p>
                         </div>
 
                         <div class="container wdp_margin_top_4">
                             <div class="count-parts">
-                                <div class="count-part">
-                                    <div class="lable">Day(s)</div>
-                                    <div class="count" id="dayscount"></div>
-                                </div>
-                                <div class="count-part">
-                                    <div class="lable">Hr(s)</div>
-                                    <div class="count" id="hrscount"></div>
-                                </div>
-                                <div class="count-part">
-                                    <div class="lable">Min(s)</div>
-                                    <div class="count" id="minscount"></div>
-                                </div>
-                                <div class="count-part">
-                                    <div class="lable">Sec(s)</div>
-                                    <div class="count" id="secscount"></div>
+                                <div class="counter">
+                                    <div id="timeloader" class="c100 p0 big">
+                                        <span>
+                                            <span id="dayscount"></span>
+                                            <sub>Days</sub>
+                                            <span id="hrscount"></span>
+                                            <sub>Hours</sub>
+                                            <span id="minscount"></span>
+                                            <sub>Mins</sub>
+                                            <span id="secscount"></span>
+                                            <sub>Secs</sub>
+                                        </span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- <div class="row wdp_countdown_item_inner">
-
-                                <script>
-                                    TargetDate = "07/22/2017 10:00 AM";
-                                    FinishMessage = "<div class='countdown_end'>The Knot has been tied... thanks for stopping by though!</div>";
-                                    CountActive = true;
-                                    BackColor = "transparent";
-                                    ForeColor = "inherit";
-                                    CountStepper = -1;
-                                    LeadingZero = false;
-                                    DisplayFormat = "<div class='wdp_countdown_item'><p><span class='wdp_countdown_int'>%%D%%</span> Days</p></div><div class='wdp_countdown_item'><p><span class='wdp_countdown_int'>%%H%%</span> Hours</p></div><div class='wdp_countdown_item'><p><span class='wdp_countdown_int'>%%M%%</span> Minutes</p></div><div class='wdp_countdown_item'><p><span class='wdp_countdown_int'>%%S%%</span> Seconds</p></div>";
-                                </script>
-                                <script src="js/countdown.js?ver=1.1"></script>
-
-                            </div> -->
 
                         </div>
 
@@ -315,7 +306,8 @@ Version : 1.1
 
                         <div class="container wdp_section_title">
                             <h2>Note</h2>
-                            <p id="welcomeNote">A perfect relationship isn’t ever actually perfect. It’s just that both people never give up.</p>
+                            <p id="welcomeNote">A perfect relationship isn’t ever actually perfect. It’s just that both
+                                people never give up.</p>
                         </div>
                     </section>
 
@@ -476,6 +468,11 @@ Version : 1.1
             // Set the date we're counting down to
             var countDownDate = new Date(data.weddingDateTime).getTime();
 
+            var _days = 0;
+            var _hours = 0;
+            var _minutes = 0;
+            var _seconds = 0;
+            var _per = 0;
             // Update the count down every 1 second
             var x = setInterval(function () {
 
@@ -491,20 +488,31 @@ Version : 1.1
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 // Output the result in an element with id="demo"
-                document.getElementById("dayscount").innerHTML = days;
-                document.getElementById("hrscount").innerHTML = hours;
-                document.getElementById("minscount").innerHTML = minutes;
-                document.getElementById("secscount").innerHTML = seconds;
-
-                // If the count down is over, write some text 
-                if (distance < 0) {
-                    clearInterval(x);
-                    // document.getElementByClass("demo").innerHTML = "Done";
-                    document.getElementById("time").hidden = true;
-                    document.getElementById("days").innerHTML = "Done";
+                if (_days != days) {
+                    document.getElementById("dayscount").innerHTML = days;
+                    _days = days;
+                }
+                if (_hours != hours) {
+                    document.getElementById("hrscount").innerHTML = hours < 10 ? '0' + hours : hours;
+                    _hours = hours;
+                }
+                if (_minutes != minutes) {
+                    document.getElementById("minscount").innerHTML = minutes < 10 ? '0' + minutes : minutes;
+                    _minutes = minutes;
+                }
+                if (_seconds != seconds) {
+                    document.getElementById("secscount").innerHTML = seconds < 10 ? '0' + seconds : seconds;
+                    var per = Math.round((seconds / 60) * 100);
+                    document.getElementById('timeloader').classList.replace('p' + _per, 'p' + per);
+                    _seconds = seconds;
+                    _per = per;
                 }
             }, 1000);
 
+            if (countDownDate < new Date().getTime()) {
+                document.getElementById("time_h2").innerHTML = "The Celebration from!";
+                document.getElementById("time_p").innerHTML = "We are enjoying...";
+            }
 
             let wdt = new Date(data.weddingDateTime);
             document.title = data.groomBrideName + ' Weds ' + data.brideGroomName + ', ' + wdt.getDate() + dateSup(wdt.getDate()) + ' ' + months[wdt.getMonth()] + ' ' + (wdt.getYear() + 1900);
@@ -537,7 +545,7 @@ Version : 1.1
             let image = window.location.origin + window.location.pathname + 'images/hearts.png';
             $('#shareWhatsapp').attr('href', 'whatsapp://send?text=' + link.content +
                 'For more visit url : ' + window.location.href);
-                $('#welcomeNote').html(data.note);
+            $('#welcomeNote').html(data.note);
         }
         function loadEvents() {
             let eventhtml = '';
