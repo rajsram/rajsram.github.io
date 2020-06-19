@@ -1,0 +1,27 @@
+{
+    "groomBrideName": "Mani",
+    "brideGroomName": "Anbu",
+    "weddingDateTime": "2019-02-10T03:30:00.000Z",
+    "mobiles": [
+        "9360770396",
+        "7406768006"
+    ],
+    "email": "manikandan561991@gmail.com",
+    "note": "",
+    "events": [
+        {
+            "title": "Reception ",
+            "address": "SVV Thirumana Mandapam, krishnagiri ",
+            "locationUrl": "",
+            "from": "2019-02-09T13:30:00.000Z",
+            "to": "2019-02-09T16:30:00.000Z"
+        },
+        {
+            "title": "Wedding",
+            "address": "SVV Thirumana Mandapam, krishnagiri",
+            "locationUrl": "",
+            "from": "2019-02-10T03:30:00.000Z",
+            "to": "2019-02-10T04:30:00.000Z"
+        }
+    ]
+}
