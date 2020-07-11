@@ -1,0 +1,14 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+  <mat-drawer #drawer [mode]="'over'">Menus</mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar color="primary">
+      <mat-icon aria-hidden="false" (click)="drawer.toggle()" aria-label="Example home icon">menu</mat-icon>
+      <span style="margin-left: 10px;">
+        Tractor App
+      </span>
+    </mat-toolbar>
+    <div class="main-container">
+      <app-entry></app-entry>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

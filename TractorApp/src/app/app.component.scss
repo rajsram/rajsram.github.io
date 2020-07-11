@@ -1,0 +1,12 @@
+mat-drawer-container,mat-drawer-content{
+    height: 100%;
+}
+
+mat-drawer{
+    width: 175px;
+}
+
+.main-container {
+    height: calc(100% - 64px);
+    overflow-y: auto;
+}
