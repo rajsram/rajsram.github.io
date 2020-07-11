@@ -16,10 +16,10 @@ Version : 1.1
     <meta name="HandheldFriendly" content="True">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <meta name="theme-color" content="#5f5eaa">
-    <meta name="msapplication-TileColor" content="#5f5eaa">
-    <meta name="msapplication-navbutton-color" content="#5f5eaa">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#5f5eaa">
+    <meta name="theme-color" content="#ec365a">
+    <meta name="msapplication-TileColor" content="#ec365a">
+    <meta name="msapplication-navbutton-color" content="#ec365a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#ec365a">
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -625,10 +625,25 @@ Version : 1.1
             navigator.serviceWorker.register('service-worker.js')
                 .then(function (reg) {
                     console.log("Yes, it did.");
+                    installToAndroid();
                 }).catch(function (err) {
                     console.log("No it didn't. This happened:", err)
                 });
         }
+
+        const installToAndroid = async () => {
+            dispatch(showAndroidPromptDownload(false));
+            deferredPrompt.prompt(); // Wait for the user to respond to the prompt
+            const choiceResult = await deferredPrompt.userChoice;
+
+            if (choiceResult.outcome === "accepted") {
+                console.log("User accepted the PWA prompt");
+            } else {
+                closeAndroidPromptWithoutDownload();
+                console.log("User dismissed the PWA prompt");
+            }
+            dispatch(setAndroidDeferredPrompt(null));
+        };
     </script>
 </body>
 
