@@ -13,10 +13,12 @@ Version : 1.1
     <link rel="apple-touch-icon" href="images/hearts.png">
 
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="HandheldFriendly" content="True">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="theme-color" content="#EC365A">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <meta name="description" content="Web wedding invitation location and time and contact" />
     <meta name="keywords" content="Wedding,Web,Invitation">
@@ -610,6 +612,18 @@ Version : 1.1
             minutes = minutes < 10 ? '0' + minutes : minutes;
             var strTime = hours + ':' + minutes + ' ' + ampm;
             return strTime;
+        }      
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            console.log("Will the service worker register?");
+            navigator.serviceWorker.register('service-worker.js')
+                .then(function (reg) {
+                    console.log("Yes, it did.");
+                }).catch(function (err) {
+                    console.log("No it didn't. This happened:", err)
+                });
         }
     </script>
 </body>
