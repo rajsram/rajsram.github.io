@@ -42,6 +42,7 @@ export class ListComponent implements OnInit {
   clearEntries() {
     if (confirm('Are you sure you want to clear all entries?')) {
       if (confirm('Really!, you want to clear all entries?')) {
+        this.downloadJson();
         this.entryService.clearEntries();
         this.entries = [];
       }
