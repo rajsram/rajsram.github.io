@@ -43,6 +43,7 @@ export class EntryComponent implements OnInit {
       Amount: ['', [Validators.required, Validators.min(1)]],
       Paid: ['']
     });
+    this.amount = 0;
   }
 
   addEntry() {
