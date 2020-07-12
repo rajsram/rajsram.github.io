@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EntryService } from '../service/entry.service';
+import { EntryModel } from '../model/entry.model';
 
 @Component({
   selector: 'app-list',
@@ -6,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-
-  constructor() { }
+  entries: EntryModel[];
+  constructor(private entryService: EntryService) {
+    this.entries = entryService.getEntries().reverse();
+  }
 
   ngOnInit(): void {
   }

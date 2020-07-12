@@ -1,17 +1,29 @@
 <mat-drawer-container class="example-container" [hasBackdrop]="true">
-  <mat-drawer #drawer [mode]="'over'">Menus</mat-drawer>
+  <mat-drawer #drawer [mode]="'over'">
+    <mat-list role="list">
+      <mat-list-item role="listitem">Manu</mat-list-item>
+    </mat-list>
+    <mat-selection-list #menus [multiple]="false">
+      <mat-list-option *ngFor="let menu of menuList" [value]="menu" (click)="drawer.toggle()">
+        {{menu}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-drawer>
   <mat-drawer-content>
     <mat-toolbar color="primary">
       <mat-icon aria-hidden="false" (click)="drawer.toggle()" aria-label="Example home icon">menu</mat-icon>
       <span style="margin-left: 10px;">
-        Tractor App
+        Tractor App/{{menus.selectedOptions.selected[0]?.value?
+          menus.selectedOptions.selected[0]?.value:'Entry'}}
       </span>
     </mat-toolbar>
     <div class="main-container">
-      <app-entry></app-entry>
+      <app-entry *ngIf="menus.selectedOptions.selected[0]?.value === 'Entry' ||
+      !(menus.selectedOptions.selected[0]?.value)"></app-entry>
+      <app-list *ngIf="menus.selectedOptions.selected[0]?.value === 'List'"></app-list>
     </div>
     <div class="footer">
-     {{year}} © <a href="https://rajsram.github.io/" target="_blank">Rajs</a>
+      {{year}} © <a href="https://rajsram.github.io/" target="_blank">Rajs</a>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

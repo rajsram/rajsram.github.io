@@ -18,7 +18,7 @@
         }
 
         .flex-item.half {
-            min-width: 155px;
+            min-width: 145px;
             max-width: 50%;
             margin   : 0 10px;
             flex     : 1;
@@ -32,6 +32,12 @@
 
 .amount {
     text-align: center;
+
+    .total {
+        font-size   : 22px;
+        font-weight : bold;
+        margin-right: 35px;
+    }
 }
 
 .buttons {
