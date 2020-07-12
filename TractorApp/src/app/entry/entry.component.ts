@@ -97,13 +97,20 @@ export class EntryComponent implements OnInit {
       let fm = this.getMinutes(data.FromTime);
       let th = this.getHours(data.ToTime);
       let tm = this.getMinutes(data.ToTime);
-      if (fh === th) {
+      if (fh > th || (fh === th && fm > tm)) {
+        this.entryForm.patchValue({
+          Hours: 0,
+          Minutes: 0,
+          Amount: 0
+        });
+        return;
+      } else if (fh === th) {
         this.entryForm.patchValue({
           Hours: 0,
           Minutes: tm - fm
         });
       } else if (fh < th) {
-        if (fm < tm) {
+        if (fm <= tm) {
           this.entryForm.patchValue({
             Hours: th - fh,
             Minutes: tm - fm
@@ -115,8 +122,8 @@ export class EntryComponent implements OnInit {
           });
         }
       }
+      this.calcAmount();
     }
-    this.calcAmount();
   }
 
   getHours(date: string) {

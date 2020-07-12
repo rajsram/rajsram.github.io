@@ -11,4 +11,5 @@ export class EntryModel {
     Minutes: number;
     Amount: number;
     Paid: number;
+    Deleted: boolean = false;
 }
