@@ -64,6 +64,8 @@ export class EntryComponent implements OnInit {
     let entires = this.entryService.getEntries();
     entires.push(entry)
     this.entryService.setEntries(entires);
+    alert('Saved Successfully..')
+    this.setForm();
   }
 
   setKalappai(event) {
