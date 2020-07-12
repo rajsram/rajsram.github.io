@@ -7,6 +7,11 @@ mat-drawer{
 }
 
 .main-container {
-    height: calc(100% - 64px);
+    height: calc(100% - 80px);
     overflow-y: auto;
+}
+
+.footer {
+    font-size: 14px;
+    margin-left: 14px;
 }

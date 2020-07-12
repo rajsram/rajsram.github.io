@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-entry',
@@ -16,40 +17,36 @@ export class EntryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setForm();
+  }
+
+  setForm() {
     this.entryForm = this.fb.group({
       Date: [new Date(), Validators.required],
-      Name: ['', Validators.required, Validators.min(3)],
+      Name: ['', [Validators.required, Validators.minLength(3)]],
       Mobile: [''],
       Kalappai: ['', Validators.required],
       FromTime: [''],
       ToTime: [''],
-      Hours: ['', Validators.required],
-      Minutes: ['', Validators.required],
-      Amount: ['', Validators.required]
+      Hours: [''],
+      Minutes: [''],
+      Amount: ['', [Validators.required, Validators.min(1)]]
     });
   }
 
   addEntry() {
-
+    let guid = (Guid.create() as any).value;
   }
 
   calcAmount() {
     let data = this.entryForm.value;
-    let time = data.Hours + (data.Minutes / 60);
-    switch (data.Kalappai) {
-      case '1': {
-        let ha = 700;
-        this.amount = ha * time;
-        break;
-      }
-      case '2': {
-        let ha = 800;
-        this.amount = ha * time;
-      }
-      case '3': {
-        let ha = 900;
-        this.amount = ha * time;
-      }
+    if (data.Hours != undefined && data.Minutes != undefined && data.Kalappai != undefined) {
+      let time = +data.Hours + (data.Minutes / 60);
+      let amt = +data.Kalappai;
+      this.amount = Math.floor(amt * time);
+      this.entryForm.patchValue({
+        Amount: this.amount
+      });
     }
   }
 
@@ -72,6 +69,7 @@ export class EntryComponent implements OnInit {
         });
       }
     }
+    this.calcAmount();
   }
 
   getHours(date: string) {
