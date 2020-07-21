@@ -13,12 +13,24 @@ import { ListComponent } from './list/list.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { PaymentComponent } from './payment/payment.component';
+import { ExpenseComponent } from './expense/expense.component';
+import { IncomeComponent } from './income/income.component';
+import { StorageComponent } from './storage/storage.component';
+import { NgxIndexedDBModule } from 'ngx-indexed-db';
+import { dbConfig } from './db.config';
+import { AccountsComponent } from './accounts/accounts.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     EntryComponent,
-    ListComponent
+    ListComponent,
+    PaymentComponent,
+    ExpenseComponent,
+    IncomeComponent,
+    StorageComponent,
+    AccountsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +40,7 @@ import { environment } from '../environments/environment';
     NgxMaterialTimepickerModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxIndexedDBModule.forRoot(dbConfig),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

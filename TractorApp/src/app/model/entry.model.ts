@@ -1,5 +1,5 @@
 export class EntryModel {
-    Guid: string;
+    EntryGuid: string;
     Date: Date;
     Name: string;
     Mobile: number;
@@ -10,6 +10,5 @@ export class EntryModel {
     Hours: number;
     Minutes: number;
     Amount: number;
-    Paid: number;
-    Deleted: boolean = false;
+    Settled: boolean;
 }

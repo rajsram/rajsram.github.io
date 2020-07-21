@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container" [hasBackdrop]="true">
   <mat-drawer #drawer [mode]="'over'">
     <mat-list role="list">
-      <mat-list-item role="listitem">Manu</mat-list-item>
+      <mat-list-item role="listitem" class="menu-header mat-toolbar mat-primary">Menu</mat-list-item>
     </mat-list>
     <mat-selection-list #menus [multiple]="false">
       <mat-list-option *ngFor="let menu of menuList" [value]="menu" (click)="drawer.toggle()">
@@ -20,7 +20,12 @@
     <div class="main-container">
       <app-entry *ngIf="menus.selectedOptions.selected[0]?.value === 'Entry' ||
       !(menus.selectedOptions.selected[0]?.value)"></app-entry>
-      <app-list *ngIf="menus.selectedOptions.selected[0]?.value === 'List'"></app-list>
+      <app-payment *ngIf="menus.selectedOptions.selected[0]?.value === 'Payment'"></app-payment>
+      <app-expense *ngIf="menus.selectedOptions.selected[0]?.value === 'Expense'"></app-expense>
+      <app-income *ngIf="menus.selectedOptions.selected[0]?.value === 'Income'"></app-income>
+      <app-list *ngIf="menus.selectedOptions.selected[0]?.value === 'EntryList'"></app-list>
+      <app-accounts *ngIf="menus.selectedOptions.selected[0]?.value === 'Accounts'"></app-accounts>
+      <app-storage *ngIf="menus.selectedOptions.selected[0]?.value === 'Storage'"></app-storage>
     </div>
     <div class="footer">
       {{year}} © <a href="https://rajsram.github.io/" target="_blank">Rajs</a>

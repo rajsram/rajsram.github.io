@@ -1,17 +1,33 @@
-mat-drawer-container,mat-drawer-content{
+mat-drawer-container,
+mat-drawer-content {
     height: 100%;
 }
 
-mat-drawer{
+mat-drawer {
     width: 175px;
 }
 
+mat-list-option {
+    box-shadow: inset -1px -1px 8px 0px;
+    text-align: center;
+}
+
 .main-container {
-    height: calc(100% - 80px);
+    height    : calc(100% - 80px);
     overflow-y: auto;
 }
 
 .footer {
-    font-size: 14px;
+    font-size  : 14px;
     margin-left: 14px;
+}
+
+::ng-deep .mat-list-base {
+    padding-top: 0 !important;
+}
+
+::ng-deep .menu-header {
+    height     : 55px !important;
+    font-weight: bold !important;
+    color      : #fff !important;
 }

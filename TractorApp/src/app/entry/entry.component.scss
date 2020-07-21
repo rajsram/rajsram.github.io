@@ -1,35 +1,3 @@
-.form-container {
-    padding: 10px;
-
-    form .flex-group {
-        display        : flex;
-        justify-content: space-evenly;
-        flex-wrap      : wrap;
-        width          : 100%;
-
-        .flex-item.full {
-            min-width: 330px;
-            margin   : 0 10px;
-            flex     : 1;
-
-            .mat-form-field {
-                width: 100%;
-            }
-        }
-
-        .flex-item.half {
-            min-width: 145px;
-            max-width: 50%;
-            margin   : 0 10px;
-            flex     : 1;
-
-            .mat-form-field {
-                width: 100%;
-            }
-        }
-    }
-}
-
 .amount {
     text-align: center;
 
@@ -40,8 +8,7 @@
     }
 }
 
-.buttons {
-    display        : flex;
-    justify-content: space-evenly;
-    margin-top     : 27px;
+.paid-input {
+    max-width   : 80px;
+    margin-right: 10px;
 }

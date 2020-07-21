@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Guid } from 'guid-typescript';
 import { EntryModel } from '../model/entry.model';
-import { EntryService } from '../service/entry.service';
+import { StorageService } from '../storage/storage.service';
+import { PaymentModel } from '../model/payment-model';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
 
 @Component({
   selector: 'app-entry',
@@ -20,7 +22,7 @@ export class EntryComponent implements OnInit {
   ]
 
   constructor(private fb: FormBuilder,
-    private entryService: EntryService) {
+    private dbService: NgxIndexedDBService) {
 
   }
 
@@ -41,32 +43,49 @@ export class EntryComponent implements OnInit {
       Hours: [''],
       Minutes: [''],
       Amount: ['', [Validators.required, Validators.min(1)]],
-      Paid: ['']
+      Paid: [''],
+      Settled: [false]
     });
     this.amount = 0;
   }
 
   addEntry() {
     let guid = (Guid.create() as any).value;
-    let fromData = this.entryForm.value;
+    let formData = this.entryForm.value;
     let entry: EntryModel = new EntryModel();
-    entry.Guid = guid;
-    entry.Name = fromData.Name;
-    entry.Mobile = fromData.Mobile;
-    entry.Date = fromData.Date;
-    entry.Kalappai = fromData.Kalappai;
-    entry.KalappaiAmount = fromData.KalappaiAmount;
-    entry.FromTime = fromData.FromTime;
-    entry.ToTime = fromData.ToTime;
-    entry.Hours = fromData.Hours;
-    entry.Minutes = fromData.Minutes;
-    entry.Amount = fromData.Amount;
-    entry.Paid = fromData.Paid;
-    let entires = this.entryService.getEntries();
-    entires.push(entry)
-    this.entryService.setEntries(entires);
-    alert('Saved Successfully..')
-    this.setForm();
+    entry.EntryGuid = guid;
+    entry.Name = formData.Name;
+    entry.Mobile = formData.Mobile;
+    entry.Date = formData.Date;
+    entry.Kalappai = formData.Kalappai;
+    entry.KalappaiAmount = formData.KalappaiAmount;
+    entry.FromTime = formData.FromTime;
+    entry.ToTime = formData.ToTime;
+    entry.Hours = formData.Hours;
+    entry.Minutes = formData.Minutes;
+    entry.Amount = formData.Amount;
+    entry.Settled = formData.Settled;
+
+    this.dbService.add('Entry', entry).then(() => {
+      if (formData.Paid !== '' && formData.Paid > 0) {
+        let payment = new PaymentModel();
+        payment.PaymentGuid = (Guid.create() as any).value;
+        payment.EntryGuid = entry.EntryGuid;
+        payment.Date = entry.Date;
+        payment.Amount = formData.Paid;
+        this.dbService.add('Payment', payment).then(() => {
+          alert('Saved Successfully..')
+          this.setForm();
+        }, error => {
+          console.log(error);
+        })
+      } else {
+        alert('Saved Successfully..')
+        this.setForm();
+      }
+    }, error => {
+      console.log(error);
+    });
   }
 
   setKalappai(event) {
