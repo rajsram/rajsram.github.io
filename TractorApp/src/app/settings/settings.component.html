@@ -1,0 +1,16 @@
+<div class="import-data">
+    <button mat-raised-button class="full-width" (click)="fileImpot.click()">
+        <mat-icon>restore_page</mat-icon>Import Data <span class="filename">{{fileName}}</span>
+    </button>
+    <input style="display: none;" #fileImpot type='file' (change)="importData($event)">
+</div>
+<div class="export-data">
+    <button mat-raised-button class="full-width"  (click)="exportData()">
+        <mat-icon>get_app</mat-icon>Export Data
+    </button>
+</div>
+<div class="clear-data">
+    <button mat-raised-button class="full-width" (click)="clearData()">
+        <mat-icon>delete</mat-icon>Clear Data
+    </button>
+</div>

@@ -16,10 +16,10 @@ import { environment } from '../environments/environment';
 import { PaymentComponent } from './payment/payment.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { IncomeComponent } from './income/income.component';
-import { StorageComponent } from './storage/storage.component';
 import { NgxIndexedDBModule } from 'ngx-indexed-db';
 import { dbConfig } from './db.config';
-import { AccountsComponent } from './accounts/accounts.component'
+import { AccountsComponent } from './accounts/accounts.component';
+import { SettingsComponent } from './settings/settings.component'
 
 @NgModule({
   declarations: [
@@ -29,8 +29,8 @@ import { AccountsComponent } from './accounts/accounts.component'
     PaymentComponent,
     ExpenseComponent,
     IncomeComponent,
-    StorageComponent,
-    AccountsComponent
+    AccountsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

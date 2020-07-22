@@ -2,7 +2,7 @@
     [ngStyle]="{'background-color': entry.Settled?'lightgreen':entry.Paid == 0? 'pink' : 'initial'}">
     <mat-card-content>
         <div class="data-item">
-            <label>Date:</label><span>{{entry.Date | date: 'dd/MM/yyyy, h:mm a'}}</span>
+            <label>Date:</label><span>{{entry.Date | date: 'dd/MM/yyyy, hh:mm a'}}</span>
         </div>
         <div class="data-item">
             <label>Name:</label><span>{{entry.Name}}</span>
@@ -24,15 +24,30 @@
         </div>
         <div class="data-item">
             <label>Total Time:</label><span>
-                <span *ngIf="entry.Hours != ''">{{entry.Hours}}Hrs</span>
-                <span *ngIf="entry.Minutes != ''">{{entry.Minutes}}Mins</span>
+                <span *ngIf="entry.Hours != ''">{{entry.Hours}}<sub>Hrs</sub></span>
+                <span *ngIf="entry.Minutes != ''">&ensp;{{entry.Minutes}}<sub>Mins</sub></span>
             </span>
         </div>
         <div class="data-item">
             <label>Amount:</label><span>₹{{entry.Amount}}</span>
         </div>
         <div class="data-item">
-            <label>Paid:</label><span>₹{{entry.Paid}}</span>
+            <mat-expansion-panel hideToggle style="background-color: transparent;">
+                <mat-expansion-panel-header style="background-color: transparent;">
+                    <mat-panel-title>
+                        Paid:
+                    </mat-panel-title>
+                    <mat-panel-description style="font-weight: bold;color: #000;">
+                        ₹{{entry.Paid}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="payments">
+                    <div class="payment" *ngFor="let payment of entry.Payments" style="display: flex;">
+                        <div style="width: 150px;">{{payment.Date | date: 'dd/MM/yyyy, hh:mm a'}}</div>
+                        <div style="width: 50px; text-align: right;"><span>{{payment.Amount}}</span></div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
         </div>
     </mat-card-content>
     <mat-card-actions>
@@ -41,13 +56,3 @@
         <button mat-stroked-button *ngIf="!entry.Settled" (click)="settle(entry)">Settle</button>
     </mat-card-actions>
 </mat-card>
-<button mat-mini-fab color="accent" (click)="fileImpot.click()" class="importbtn" aria-label="import">
-    <mat-icon>restore_page</mat-icon>
-</button>
-<input style="display: none;" #fileImpot type='file' (change)="importEntries($event)">
-<button mat-mini-fab color="primary" (click)="downloadJson()" class="exportbtn" aria-label="export">
-    <mat-icon>get_app</mat-icon>
-</button>
-<button mat-mini-fab color="warn" (click)="clearEntries()" class="clearbtn" aria-label="Clear Records">
-    <mat-icon>delete</mat-icon>
-</button>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Guid } from 'guid-typescript';
 import { EntryModel } from '../model/entry.model';
-import { StorageService } from '../storage/storage.service';
 import { PaymentModel } from '../model/payment-model';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 

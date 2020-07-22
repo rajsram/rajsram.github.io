@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'TractorApp';
   year = (new Date()).getFullYear();
   menuList: string[] = ['Entry', 'EntryList',
-    'Expense', 'Income', 'Accounts', 'Storage'];
+    'Expense', 'Income', 'Accounts', 'Settings'];
   home = 'Entry';
 }
