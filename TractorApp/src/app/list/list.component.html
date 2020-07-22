@@ -1,4 +1,5 @@
-<mat-card class="example-card" *ngFor="let entry of entries">
+<mat-card class="example-card" *ngFor="let entry of entries"
+    [ngStyle]="{'background-color': entry.Settled?'lightgreen':entry.Paid == 0? 'pink' : 'initial'}">
     <mat-card-content>
         <div class="data-item">
             <label>Date:</label><span>{{entry.Date | date: 'dd/MM/yyyy, h:mm a'}}</span>
@@ -6,23 +7,26 @@
         <div class="data-item">
             <label>Name:</label><span>{{entry.Name}}</span>
         </div>
-        <div class="data-item">
+        <div class="data-item" *ngIf="entry.Mobile != ''">
             <label>Mobile:</label><span><a href="tel:{{entry.Mobile}}">{{entry.Mobile}}</a></span>
         </div>
         <div class="data-item">
             <label>Kalappai:</label><span>{{entry.Kalappai}}</span>
         </div>
         <div class="data-item">
-            <label>KalappaiAmount:</label><span>{{entry.KalappaiAmount}}</span>
+            <label>Amount/hr:</label><span>{{entry.KalappaiAmount}}</span>
         </div>
-        <div class="data-item">
+        <div class="data-item" *ngIf="entry.FromTime != ''">
             <label>FromTime:</label><span>{{entry.FromTime}}</span>
         </div>
-        <div class="data-item">
+        <div class="data-item" *ngIf="entry.ToTime != ''">
             <label>ToTime:</label><span>{{entry.ToTime}}</span>
         </div>
         <div class="data-item">
-            <label>Total Time:</label><span>{{entry.Hours}}:{{entry.Minutes}}</span>
+            <label>Total Time:</label><span>
+                <span *ngIf="entry.Hours != ''">{{entry.Hours}}Hrs</span>
+                <span *ngIf="entry.Minutes != ''">{{entry.Minutes}}Mins</span>
+            </span>
         </div>
         <div class="data-item">
             <label>Amount:</label><span>₹{{entry.Amount}}</span>
@@ -32,7 +36,9 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button color="warn" (click)="delete(entry)">Delete</button>
+        <button mat-stroked-button color="warn" (click)="delete(entry)">Delete</button>
+        <button mat-stroked-button *ngIf="!entry.Settled" color="primary" (click)="addPayment(entry)">Payment</button>
+        <button mat-stroked-button *ngIf="!entry.Settled" (click)="settle(entry)">Settle</button>
     </mat-card-actions>
 </mat-card>
 <button mat-mini-fab color="accent" (click)="fileImpot.click()" class="importbtn" aria-label="import">

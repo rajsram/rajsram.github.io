@@ -1,3 +1,5 @@
+import { PaymentModel } from './payment-model';
+
 export class EntryModel {
     EntryGuid: string;
     Date: Date;
@@ -10,5 +12,7 @@ export class EntryModel {
     Hours: number;
     Minutes: number;
     Amount: number;
+    Paid: number;
     Settled: boolean;
+    Payments: PaymentModel[];
 }
