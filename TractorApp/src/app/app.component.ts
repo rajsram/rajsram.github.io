@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'TractorApp';
   year = (new Date()).getFullYear();
-  menuList: string[] = ['Entry', 'EntryList',
-    'Expense', 'Income', 'Accounts', 'Settings'];
+  menuList: string[] = ['Entry', 'Expense', 'Income', 'Accounts', 'Settings'];
   home = 'Entry';
 }

@@ -1,4 +1,7 @@
-<div class="form-container">
+<button mat-icon-button class="top-icon-button" (click)="showList=!showList" aria-label="List-Entry">
+    <mat-icon>{{showList ? 'post_add' : 'list' }}</mat-icon>
+</button>
+<div class="form-container" *ngIf="!showList">
     <form [formGroup]="entryForm">
         <div class="flex-group">
             <div class="flex-item full">
@@ -89,3 +92,5 @@
     </form>
 
 </div>
+
+<app-list *ngIf="showList"></app-list>

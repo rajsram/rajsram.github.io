@@ -20,7 +20,9 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.dbService.getAll('Entry').then((entries: EntryModel[]) => {
-      this.entries = entries;
+      this.entries = entries.sort((a, b) => a.Date.toUTCString()
+        .localeCompare(b.Date.toUTCString()))
+        .reverse();
       this.loadPayments();
     }, error => {
       console.log(error);

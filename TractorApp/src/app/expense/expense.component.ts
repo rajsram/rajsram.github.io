@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { ExpenseModel } from '../model/expense.model';
 import { Guid } from 'guid-typescript';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-expense',
@@ -11,6 +12,10 @@ import { Guid } from 'guid-typescript';
 })
 export class ExpenseComponent implements OnInit {
   expenseForm: FormGroup;
+  showList: boolean;
+  displayedColumns = ['Date', 'Particular', 'Amount'];
+  expenses: ExpenseModel[] = [];
+  @ViewChild('expensesTable') expensesTable: MatTable<any>;
   constructor(private fb: FormBuilder,
     private dbService: NgxIndexedDBService) { }
 
@@ -31,11 +36,25 @@ export class ExpenseComponent implements OnInit {
     expense.Date = formData.Date;
     expense.Particular = formData.Particular;
     expense.Amount = formData.Amount;
-    this.dbService.add('Expense', expense).then(() => {  
+    this.dbService.add('Expense', expense).then(() => {
       alert('Expense Added Successfully..');
       this.setForm();
     }, error => {
       console.log(error);
     });
+  }
+  switchView() {
+    if (!this.showList) {
+      this.dbService.getAll('Expense').then(
+        (expenses: ExpenseModel[]) => {
+          this.expenses = expenses.sort((a, b) => a.Date.toUTCString()
+          .localeCompare(b.Date.toUTCString()))
+          .reverse();
+          this.expensesTable.renderRows();
+        }, error => {
+          console.log(error);
+        });
+    }
+    this.showList = !this.showList;
   }
 }

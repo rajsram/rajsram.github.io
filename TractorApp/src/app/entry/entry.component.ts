@@ -11,7 +11,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db';
   styleUrls: ['./entry.component.scss']
 })
 export class EntryComponent implements OnInit {
-
+  showList: boolean;
   entryForm: FormGroup;
   amount: number = 0;
   kalappai = [
@@ -28,7 +28,7 @@ export class EntryComponent implements OnInit {
   ngOnInit(): void {
     this.setForm();
   }
-
+  
   setForm() {
     this.entryForm = this.fb.group({
       Date: [new Date(), Validators.required],

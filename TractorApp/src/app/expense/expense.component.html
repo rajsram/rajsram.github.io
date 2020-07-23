@@ -1,4 +1,7 @@
-<div class="form-container">
+<button mat-icon-button class="top-icon-button" (click)="switchView()" aria-label="List-Entry">
+    <mat-icon>{{showList ? 'post_add' : 'list' }}</mat-icon>
+</button>
+<div class="form-container" *ngIf="!showList">
     <form [formGroup]="expenseForm">
         <div class="flex-group">
             <div class="flex-item full">
@@ -29,4 +32,30 @@
         </div>
     </form>
 
+</div>
+
+<div class="table-container mat-elevation-z8" *ngIf="showList">
+    <table mat-table #expensesTable style="width: 100%;" [dataSource]="expenses">
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.Date | date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <!-- Particular Column -->
+        <ng-container matColumnDef="Particular">
+            <th mat-header-cell *matHeaderCellDef> Particular </th>
+            <td mat-cell *matCellDef="let element"> {{element.Particular}} </td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="Amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element" class="amount"> {{element.Amount}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 </div>
