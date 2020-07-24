@@ -51,12 +51,15 @@ export class AccountsComponent implements OnInit {
                 }
               }, error => {
                 console.log(error);
+                alert(error.message);
               });
           }, error => {
             console.log(error);
+            alert(error.message);
           });
       }, error => {
         console.log(error);
+        alert(error.message);
       })
   }
 
@@ -72,6 +75,7 @@ export class AccountsComponent implements OnInit {
           this.accountsTable.renderRows();
         }, error => {
           console.log(error);
+          alert(error.message);
         });
     });
   }

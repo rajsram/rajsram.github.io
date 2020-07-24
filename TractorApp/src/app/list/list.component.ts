@@ -26,6 +26,7 @@ export class ListComponent implements OnInit {
       this.loadPayments();
     }, error => {
       console.log(error);
+      alert(error.message);
     });
   }
 
@@ -40,6 +41,7 @@ export class ListComponent implements OnInit {
           })
         }, error => {
           console.log(error);
+          alert(error.message);
         });
     });
   }
@@ -64,6 +66,7 @@ export class ListComponent implements OnInit {
       },
       error => {
         console.log(error);
+        alert(error.message);
       }
     );
   }
@@ -73,28 +76,31 @@ export class ListComponent implements OnInit {
     if (index > -1) {
       if (confirm('Are you sure you want to delete?')) {
         this.dbService.getByIndex('Payment', 'EntryGuid', entry.EntryGuid).then(
-          payment => {
-            console.log(payment);
-            // this.dbService.delete('Payment', payment.).then(
-            //   () => {
+          (payments: PaymentModel[]) => {
+            payments.forEach(p => {
+              this.dbService.delete('Payment', p.PaymentGuid).then(
+                () => {
 
-            //   },
-            //   error => {
-            //     console.log(error);
-            //   } );
+                },
+                error => {
+                  console.log(error);
+                  alert(error.message);
+                });
+            })
+            this.dbService.delete('Entry', entry.EntryGuid).then(
+              () => {
+
+              },
+              error => {
+                console.log(error);
+                alert(error.message);
+              });
           },
           error => {
             console.log(error);
+            alert(error.message);
           }
         );
-        // this.dbService.delete('Entry', entry.EntryGuid).then(
-        //   () => {
-
-        //   },
-        //   error => {
-        //     console.log(error);
-        //   }
-        // );
       }
     }
   }

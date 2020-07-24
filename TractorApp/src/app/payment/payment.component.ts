@@ -31,6 +31,7 @@ export class PaymentComponent implements OnInit {
       this.dialogRef.close(this.data);
     }, error => {
       console.log(error);
+      alert(error.message);
     })
   }
 }

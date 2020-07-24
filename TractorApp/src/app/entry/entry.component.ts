@@ -77,6 +77,7 @@ export class EntryComponent implements OnInit {
           this.setForm();
         }, error => {
           console.log(error);
+          alert(error.message);
         })
       } else {
         alert('Saved Successfully..')
@@ -84,6 +85,7 @@ export class EntryComponent implements OnInit {
       }
     }, error => {
       console.log(error);
+      alert(error.message);
     });
   }
 

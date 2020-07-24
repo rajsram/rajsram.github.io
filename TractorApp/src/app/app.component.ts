@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker'
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,9 @@ export class AppComponent {
   year = (new Date()).getFullYear();
   menuList: string[] = ['Entry', 'Expense', 'Income', 'Accounts', 'Settings'];
   home = 'Entry';
+  constructor(update: SwUpdate) {
+    update.available.subscribe(e => {
+      update.activateUpdate().then(() => { document.location.reload(); });
+    });
+  }
 }

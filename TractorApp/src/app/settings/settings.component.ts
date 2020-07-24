@@ -27,24 +27,28 @@ export class SettingsComponent implements OnInit {
       this.dbService.add('Entry', ie).then(() => {
       }, error => {
         console.log(error);
+        alert(error.message);
       });
     });
     data.payments.forEach(pay => {
       this.dbService.add('Payment', pay).then(() => {
       }, error => {
         console.log(error);
+        alert(error.message);
       });
     });
     data.incomes.forEach(inc => {
       this.dbService.add('Income', inc).then(() => {
       }, error => {
         console.log(error);
+        alert(error.message);
       });
     });
     data.expenses.forEach(ex => {
       this.dbService.add('Expense', ex).then(() => {
       }, error => {
         console.log(error);
+        alert(error.message);
       });
     });
   }
@@ -60,15 +64,19 @@ export class SettingsComponent implements OnInit {
                 alert('Data cleared.');
               }, error => {
                 console.log(error);
+                alert(error.message);
               });
             }, error => {
               console.log(error);
+              alert(error.message);
             });
           }, error => {
             console.log(error);
+            alert(error.message);
           });
         }, error => {
           console.log(error);
+          alert(error.message);
         });
       }
     }
