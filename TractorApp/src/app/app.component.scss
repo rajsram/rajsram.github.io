@@ -20,6 +20,14 @@ mat-list-option {
 .footer {
     font-size  : 14px;
     margin-left: 14px;
+
+    span.version {
+        position : absolute;
+        right    : 4px;
+        font-size: 10px;
+        color    : grey;
+        bottom   : 4px;
+    }
 }
 
 ::ng-deep .mat-list-base {
