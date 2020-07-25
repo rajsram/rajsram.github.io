@@ -11,7 +11,7 @@ export class AppComponent {
   year = (new Date()).getFullYear();
   menuList: string[] = ['Entry', 'Expense', 'Income', 'Accounts', 'Settings'];
   home = 'Entry';
-  version = '1.1';
+  version = '1.1.1';
   constructor(update: SwUpdate) {
     update.available.subscribe(e => {
       update.activateUpdate().then(() => { document.location.reload(); });
