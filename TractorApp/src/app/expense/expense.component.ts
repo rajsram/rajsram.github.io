@@ -4,6 +4,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { ExpenseModel } from '../model/expense.model';
 import { Guid } from 'guid-typescript';
 import { MatTable } from '@angular/material/table';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-expense',
@@ -17,7 +18,8 @@ export class ExpenseComponent implements OnInit {
   expenses: ExpenseModel[] = [];
   @ViewChild('expensesTable') expensesTable: MatTable<any>;
   constructor(private fb: FormBuilder,
-    private dbService: NgxIndexedDBService) { }
+    private dbService: NgxIndexedDBService,
+    private dataService: DataService) { }
 
   ngOnInit(): void {
     this.setForm();
@@ -48,8 +50,7 @@ export class ExpenseComponent implements OnInit {
     if (!this.showList) {
       this.dbService.getAll('Expense').then(
         (expenses: ExpenseModel[]) => {
-          this.expenses = expenses.sort((a, b) => a.Date.toISOString()
-            .localeCompare(b.Date.toISOString())).reverse();
+          this.expenses = this.dataService.orderByDateDesc(expenses);
           this.expensesTable.renderRows();
         }, error => {
           console.log(error);

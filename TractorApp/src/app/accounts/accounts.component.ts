@@ -105,12 +105,6 @@ export class AccountsComponent implements OnInit {
     const utc2 = Date.UTC(toDate.getFullYear(), toDate.getMonth(), toDate.getDate());
     return Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24));
   }
-
-  orderByDateDesc(list: any[]) {
-    list = list.sort((a, b) => a.Date.toISOString().localeCompare(b.Date.toISOString()));
-    return list.reverse();
-  }
-
   dayData(data: any[]) {
     return this.dataService.dateFilter(data, this.fromDate, this.toDate);
   }

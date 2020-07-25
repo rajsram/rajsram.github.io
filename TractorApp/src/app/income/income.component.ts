@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Guid } from 'guid-typescript';
 import { MatTable } from '@angular/material/table';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-income',
@@ -17,7 +18,8 @@ export class IncomeComponent implements OnInit {
   incomes: IncomeModel[] = [];
   @ViewChild('incomesTable') incomesTable: MatTable<any>;
   constructor(private fb: FormBuilder,
-    private dbService: NgxIndexedDBService) { }
+    private dbService: NgxIndexedDBService,
+    private dataService: DataService) { }
 
   ngOnInit(): void {
     this.setForm();
@@ -50,9 +52,7 @@ export class IncomeComponent implements OnInit {
     if (!this.showList) {
       this.dbService.getAll('Income').then(
         (incomes: IncomeModel[]) => {
-          this.incomes = incomes.sort((a, b) => a.Date.toISOString()
-          .localeCompare(b.Date.toISOString()))
-          .reverse();
+          this.incomes = this.dataService.orderByDateDesc(incomes);
           this.incomesTable.renderRows();
         }, error => {
           console.log(error);
