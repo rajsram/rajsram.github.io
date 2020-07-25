@@ -6,6 +6,7 @@ import { EntryModel } from '../model/entry.model';
 import { MatTable } from '@angular/material/table';
 import { ExpenseModel } from '../model/expense.model';
 import { IncomeModel } from '../model/income.model';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-accounts',
@@ -16,7 +17,12 @@ export class AccountsComponent implements OnInit {
   displayedColumns = ['Date', 'Particular', 'Credit', 'Debit'];
   accounts: AccountsModel[] = [];
   @ViewChild('accountsTable') accountsTable: MatTable<any>;
-  constructor(private dbService: NgxIndexedDBService) { }
+  totalIncome = 0;
+  totalExpense = 0;
+  fromDate = new Date();
+  toDate = new Date();
+  constructor(private dbService: NgxIndexedDBService,
+    private dataService: DataService) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -30,25 +36,9 @@ export class AccountsComponent implements OnInit {
           (expenses: ExpenseModel[]) => {
             this.dbService.getAll('Income').then(
               (incomes: IncomeModel[]) => {
-                payments = this.orderByDateDesc(payments);
-                expenses = this.orderByDateDesc(expenses);
-                incomes = this.orderByDateDesc(incomes);
-                let dates = [];
-                if (payments.length > 0)
-                  dates.push({ Date: payments[0].Date }, { Date: payments[payments.length - 1].Date });
-                if (expenses.length > 0)
-                  dates.push({ Date: expenses[0].Date }, { Date: expenses[expenses.length - 1].Date });
-                if (incomes.length > 0)
-                  dates.push({ Date: incomes[0].Date }, { Date: incomes[incomes.length - 1].Date });
-                dates = this.orderByDateDesc(dates);
-                let daysCount = this.daysDifference(dates[dates.length - 1].Date, dates[0].Date);
-                for (let i = 0; i < daysCount; i++) {
-                  let cDate = dates[0].Date;
-                  cDate.setDate(cDate.getDate() - i);
-                  if (expenses.length > 0) { this.addExpenses(cDate, expenses); }
-                  if (payments.length > 0) { this.addPayments(cDate, payments); }
-                  if (incomes.length > 0) { this.addIncomes(cDate, incomes); }
-                }
+                if (expenses.length > 0) { this.addExpenses(expenses); }
+                if (payments.length > 0) { this.addPayments(payments); }
+                if (incomes.length > 0) { this.addIncomes(incomes); }
               }, error => {
                 console.log(error);
                 alert(error.message);
@@ -63,45 +53,46 @@ export class AccountsComponent implements OnInit {
       })
   }
 
-  addPayments(date: Date, payments: PaymentModel[]) {
-    this.dayData(date, payments).forEach(pay => {
-      this.dbService.getByID('Entry', pay.EntryGuid).then(
-        (entry: EntryModel) => {
-          let payment = new AccountsModel();
-          payment.Date = pay.Date;
-          payment.Particular = entry.Name;
-          payment.Credit = pay.Amount.toString();
-          this.accounts.push(payment);
-          this.accountsTable.renderRows();
-        }, error => {
-          console.log(error);
-          alert(error.message);
-        });
-    });
+  addPayments(payments: PaymentModel[]) {
+    this.dayData(payments).forEach(
+      pay => {
+        this.dbService.getByID('Entry', pay.EntryGuid).then(
+          (entry: EntryModel) => {
+            let payment = new AccountsModel();
+            payment.Date = pay.Date;
+            payment.Particular = entry.Name;
+            payment.Credit = pay.Amount.toString();
+            this.totalIncome += pay.Amount;
+            this.accounts.push(payment);
+            this.accountsTable.renderRows();
+          }, error => {
+            console.log(error);
+            alert(error.message);
+          });
+      });
   }
 
-  addIncomes(date: Date, incomes: IncomeModel[]) {
-    this.dayData(date, incomes).forEach(
+  addIncomes(incomes: IncomeModel[]) {
+    this.dayData(incomes).forEach(
       (income: IncomeModel) => {
         let aIncome = new AccountsModel();
         aIncome.Date = income.Date;
         aIncome.Particular = income.Particular;
         aIncome.Credit = income.Amount.toString();
+        this.totalIncome += income.Amount;
         this.accounts.push(aIncome);
         this.accountsTable.renderRows();
       });
   }
 
-  addExpenses(date: Date, expenses: ExpenseModel[]) {
-    console.log(expenses);
-    let exps = this.dayData(date, expenses);
-    console.log(exps);
-    exps.forEach(
+  addExpenses(expenses: ExpenseModel[]) {
+    this.dayData(expenses).forEach(
       (expense: ExpenseModel) => {
         let aExp = new AccountsModel();
         aExp.Date = expense.Date;
         aExp.Particular = expense.Particular;
         aExp.Debit = expense.Amount.toString();
+        this.totalExpense += expense.Amount;
         this.accounts.push(aExp);
         this.accountsTable.renderRows();
       });
@@ -116,12 +107,11 @@ export class AccountsComponent implements OnInit {
   }
 
   orderByDateDesc(list: any[]) {
-    list = list.sort((a, b) => a.Date.toLocaleDateString().localeCompare(b.Date.toLocaleDateString()));
+    list = list.sort((a, b) => a.Date.toISOString().localeCompare(b.Date.toISOString()));
     return list.reverse();
   }
 
-  dayData(day: Date, data: any[]) {
-    data = data.filter(p => p.Date.toLocaleDateString() === day.toLocaleDateString());
-    return data;
+  dayData(data: any[]) {
+    return this.dataService.dateFilter(data, this.fromDate, this.toDate);
   }
 }

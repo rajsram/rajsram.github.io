@@ -48,9 +48,8 @@ export class ExpenseComponent implements OnInit {
     if (!this.showList) {
       this.dbService.getAll('Expense').then(
         (expenses: ExpenseModel[]) => {
-          this.expenses = expenses.sort((a, b) => a.Date.toUTCString()
-          .localeCompare(b.Date.toUTCString()))
-          .reverse();
+          this.expenses = expenses.sort((a, b) => a.Date.toISOString()
+            .localeCompare(b.Date.toISOString())).reverse();
           this.expensesTable.renderRows();
         }, error => {
           console.log(error);

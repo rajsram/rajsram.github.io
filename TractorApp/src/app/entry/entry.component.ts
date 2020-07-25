@@ -28,7 +28,7 @@ export class EntryComponent implements OnInit {
   ngOnInit(): void {
     this.setForm();
   }
-  
+
   setForm() {
     this.entryForm = this.fb.group({
       Date: [new Date(), Validators.required],

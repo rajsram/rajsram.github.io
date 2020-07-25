@@ -4,7 +4,8 @@
       <mat-list-item role="listitem" class="menu-header mat-toolbar mat-primary">Menu</mat-list-item>
     </mat-list>
     <mat-selection-list #menus [multiple]="false">
-      <mat-list-option *ngFor="let menu of menuList" [value]="menu" (click)="drawer.toggle()">
+      <mat-list-option *ngFor="let menu of menuList" [value]="menu"
+        (click)="drawer.toggle();page = menus.selectedOptions.selected[0]?.value;">
         {{menu}}
       </mat-list-option>
     </mat-selection-list>
@@ -13,17 +14,15 @@
     <mat-toolbar color="primary">
       <mat-icon aria-hidden="false" (click)="drawer.toggle()" aria-label="Example home icon">menu</mat-icon>
       <span style="margin-left: 10px;">
-        Tractor App/{{menus.selectedOptions.selected[0]?.value?
-          menus.selectedOptions.selected[0]?.value:'Entry'}}
+        Tractor App > {{page}}
       </span>
     </mat-toolbar>
     <div class="main-container">
-      <app-entry *ngIf="menus.selectedOptions.selected[0]?.value === 'Entry' ||
-      !(menus.selectedOptions.selected[0]?.value)"></app-entry>
-      <app-expense *ngIf="menus.selectedOptions.selected[0]?.value === 'Expense'"></app-expense>
-      <app-income *ngIf="menus.selectedOptions.selected[0]?.value === 'Income'"></app-income>
-      <app-accounts *ngIf="menus.selectedOptions.selected[0]?.value === 'Accounts'"></app-accounts>
-      <app-settings *ngIf="menus.selectedOptions.selected[0]?.value === 'Settings'"></app-settings>
+      <app-entry *ngIf="page === 'Entry'"></app-entry>
+      <app-expense *ngIf="page === 'Expense'"></app-expense>
+      <app-income *ngIf="page === 'Income'"></app-income>
+      <app-accounts *ngIf="page === 'Accounts'"></app-accounts>
+      <app-settings *ngIf="page === 'Settings'"></app-settings>
     </div>
     <div class="footer">
       {{year}} © <a href="https://rajsram.github.io/" target="_blank">Rajs</a>

@@ -1,58 +1,67 @@
-<mat-card class="example-card" *ngFor="let entry of entries"
-    [ngStyle]="{'background-color': entry.Settled?'lightgreen':entry.Paid == 0? 'pink' : 'initial'}">
-    <mat-card-content>
-        <div class="data-item">
-            <label>Date:</label><span>{{entry.Date | date: 'dd/MM/yyyy, hh:mm a'}}</span>
-        </div>
-        <div class="data-item">
-            <label>Name:</label><span>{{entry.Name}}</span>
-        </div>
-        <div class="data-item" *ngIf="entry.Mobile != ''">
-            <label>Mobile:</label><span><a href="tel:{{entry.Mobile}}">{{entry.Mobile}}</a></span>
-        </div>
-        <div class="data-item">
-            <label>Kalappai:</label><span>{{entry.Kalappai}}</span>
-        </div>
-        <div class="data-item">
-            <label>Amount/hr:</label><span>{{entry.KalappaiAmount}}</span>
-        </div>
-        <div class="data-item" *ngIf="entry.FromTime != ''">
-            <label>FromTime:</label><span>{{entry.FromTime}}</span>
-        </div>
-        <div class="data-item" *ngIf="entry.ToTime != ''">
-            <label>ToTime:</label><span>{{entry.ToTime}}</span>
-        </div>
-        <div class="data-item">
-            <label>Total Time:</label><span>
-                <span *ngIf="entry.Hours != ''">{{entry.Hours}}<sub>Hrs</sub></span>
-                <span *ngIf="entry.Minutes != ''">&ensp;{{entry.Minutes}}<sub>Mins</sub></span>
-            </span>
-        </div>
-        <div class="data-item">
-            <label>Amount:</label><span>₹{{entry.Amount}}</span>
-        </div>
-        <div class="data-item">
-            <mat-expansion-panel hideToggle style="background-color: transparent;">
-                <mat-expansion-panel-header style="background-color: transparent;">
-                    <mat-panel-title>
-                        Paid:
-                    </mat-panel-title>
-                    <mat-panel-description style="font-weight: bold;color: #000;">
-                        ₹{{entry.Paid}}
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <div class="payments">
-                    <div class="payment" *ngFor="let payment of entry.Payments" style="display: flex;">
-                        <div style="width: 150px;">{{payment.Date | date: 'dd/MM/yyyy, hh:mm a'}}</div>
-                        <div style="width: 50px; text-align: right;"><span>{{payment.Amount}}</span></div>
+<div class="search">
+    <mat-form-field style="min-width: 300px;" class="example-full-width">
+        <mat-label><mat-icon>search</mat-icon> Name</mat-label>
+        <input matInput [(ngModel)]="searchName">
+    </mat-form-field>
+</div>
+<div class="entries-list">
+    <mat-card class="example-card" *ngFor="let entry of entries | nameFilter: searchName"
+        [ngStyle]="{'background-color': entry.Settled?'lightgreen':entry.Paid == 0? 'pink' : 'initial'}">
+        <mat-card-content>
+            <div class="data-item">
+                <label>Date:</label><span>{{entry.Date | date: 'dd/MM/yyyy, hh:mm a'}}</span>
+            </div>
+            <div class="data-item">
+                <label>Name:</label><span>{{entry.Name}}</span>
+            </div>
+            <div class="data-item" *ngIf="entry.Mobile != ''">
+                <label>Mobile:</label><span><a href="tel:{{entry.Mobile}}">{{entry.Mobile}}</a></span>
+            </div>
+            <div class="data-item">
+                <label>Kalappai:</label><span>{{entry.Kalappai}}</span>
+            </div>
+            <div class="data-item">
+                <label>Amount/hr:</label><span>{{entry.KalappaiAmount}}</span>
+            </div>
+            <div class="data-item" *ngIf="entry.FromTime != ''">
+                <label>FromTime:</label><span>{{entry.FromTime}}</span>
+            </div>
+            <div class="data-item" *ngIf="entry.ToTime != ''">
+                <label>ToTime:</label><span>{{entry.ToTime}}</span>
+            </div>
+            <div class="data-item">
+                <label>Total Time:</label><span>
+                    <span *ngIf="entry.Hours != ''">{{entry.Hours}}<sub>Hrs</sub></span>
+                    <span *ngIf="entry.Minutes != ''">&ensp;{{entry.Minutes}}<sub>Mins</sub></span>
+                </span>
+            </div>
+            <div class="data-item">
+                <label>Amount:</label><span>₹{{entry.Amount}}</span>
+            </div>
+            <div class="data-item">
+                <mat-expansion-panel hideToggle style="background-color: transparent;">
+                    <mat-expansion-panel-header style="background-color: transparent;">
+                        <mat-panel-title>
+                            Paid:
+                        </mat-panel-title>
+                        <mat-panel-description style="font-weight: bold;color: #000;">
+                            ₹{{entry.Paid}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="payments">
+                        <div class="payment" *ngFor="let payment of entry.Payments" style="display: flex;">
+                            <div style="width: 150px;">{{payment.Date | date: 'dd/MM/yyyy, hh:mm a'}}</div>
+                            <div style="width: 50px; text-align: right;"><span>{{payment.Amount}}</span></div>
+                        </div>
                     </div>
-                </div>
-            </mat-expansion-panel>
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-stroked-button color="warn" (click)="delete(entry)">Delete</button>
-        <button mat-stroked-button *ngIf="!entry.Settled" color="primary" (click)="addPayment(entry)">Payment</button>
-        <button mat-stroked-button *ngIf="!entry.Settled" (click)="settle(entry)">Settle</button>
-    </mat-card-actions>
-</mat-card>
+                </mat-expansion-panel>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button color="warn" (click)="delete(entry)">Delete</button>
+            <button mat-stroked-button *ngIf="!entry.Settled" color="primary"
+                (click)="addPayment(entry)">Payment</button>
+            <button mat-stroked-button *ngIf="!entry.Settled" (click)="settle(entry)">Settle</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

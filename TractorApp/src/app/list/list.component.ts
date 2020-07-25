@@ -4,6 +4,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { PaymentModel } from '../model/payment-model';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentComponent } from '../payment/payment.component';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-list',
@@ -13,16 +14,16 @@ import { PaymentComponent } from '../payment/payment.component';
 export class ListComponent implements OnInit {
   entries: EntryModel[] = [];
   paymentlist: PaymentModel[] = [];
+  searchName = '';
   constructor(
     private dbService: NgxIndexedDBService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private dataService: DataService) {
   }
 
   ngOnInit(): void {
     this.dbService.getAll('Entry').then((entries: EntryModel[]) => {
-      this.entries = entries.sort((a, b) => a.Date.toString()
-        .localeCompare(b.Date.toString()))
-        .reverse();
+      this.entries = this.dataService.orderByDateDesc(entries);
       this.loadPayments();
     }, error => {
       console.log(error);
@@ -59,6 +60,14 @@ export class ListComponent implements OnInit {
   }
 
   settle(entry: EntryModel) {
+    if ((entry.Amount - entry.Paid) > 100) {
+      if (confirm('Amount is ₹' + entry.Amount + ' and paid ₹' + entry.Paid + ', really settled?')) {
+        this.settleEntry(entry);
+      }
+    } else { this.settleEntry(entry); }
+  }
+
+  settleEntry(entry: EntryModel) {
     entry.Settled = true;
     this.dbService.update('Entry', entry).then(
       () => {

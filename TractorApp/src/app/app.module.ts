@@ -19,7 +19,8 @@ import { IncomeComponent } from './income/income.component';
 import { NgxIndexedDBModule } from 'ngx-indexed-db';
 import { dbConfig } from './db.config';
 import { AccountsComponent } from './accounts/accounts.component';
-import { SettingsComponent } from './settings/settings.component'
+import { SettingsComponent } from './settings/settings.component';
+import { NameFilterPipe } from './pipes/name-filter.pipe'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SettingsComponent } from './settings/settings.component'
     ExpenseComponent,
     IncomeComponent,
     AccountsComponent,
-    SettingsComponent
+    SettingsComponent,
+    NameFilterPipe
   ],
   imports: [
     BrowserModule,

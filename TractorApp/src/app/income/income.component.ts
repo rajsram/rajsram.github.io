@@ -50,8 +50,8 @@ export class IncomeComponent implements OnInit {
     if (!this.showList) {
       this.dbService.getAll('Income').then(
         (incomes: IncomeModel[]) => {
-          this.incomes = incomes.sort((a, b) => a.Date.toUTCString()
-          .localeCompare(b.Date.toUTCString()))
+          this.incomes = incomes.sort((a, b) => a.Date.toISOString()
+          .localeCompare(b.Date.toISOString()))
           .reverse();
           this.incomesTable.renderRows();
         }, error => {
