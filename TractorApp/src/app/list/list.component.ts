@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
   entries: EntryModel[] = [];
   paymentlist: PaymentModel[] = [];
   searchName = '';
+  isAll: false;
   constructor(
     private dbService: NgxIndexedDBService,
     public dialog: MatDialog,

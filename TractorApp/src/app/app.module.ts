@@ -20,7 +20,7 @@ import { NgxIndexedDBModule } from 'ngx-indexed-db';
 import { dbConfig } from './db.config';
 import { AccountsComponent } from './accounts/accounts.component';
 import { SettingsComponent } from './settings/settings.component';
-import { NameFilterPipe } from './pipes/name-filter.pipe'
+import { NameFilterPipe } from './pipes/name-filter.pipe';
 
 @NgModule({
   declarations: [

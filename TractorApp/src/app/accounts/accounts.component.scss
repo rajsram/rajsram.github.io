@@ -1,1 +1,14 @@
 @import '../../table-styles.scss';
+
+.filters {
+    font-size: 10px;
+}
+
+::ng-deep .mat-radio-button {
+    margin: 0 4px;
+}
+
+::ng-deep .mat-form-field {
+    width : 69px;
+    margin: 5px 10px 0;
+}

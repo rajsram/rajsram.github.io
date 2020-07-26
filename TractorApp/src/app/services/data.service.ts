@@ -18,10 +18,10 @@ export class DataService {
   }
 
   dateFilter(list: any[], fromDate: Date, toDate: Date) {
-    fromDate = new Date(fromDate.toLocaleDateString());
-    toDate = new Date(toDate.toLocaleDateString());
-    list = list.filter(p => new Date(new Date(p.Date).toLocaleDateString()) >= fromDate
-      && new Date(new Date(p.Date).toLocaleDateString()) <= toDate);
+    fromDate = new Date(fromDate.toDateString());
+    toDate = new Date(toDate.toDateString());
+    list = list.filter(p => new Date(new Date(p.Date).toDateString()) >= fromDate
+      && new Date(new Date(p.Date).toDateString()) <= toDate);
     return list;
   }
 }

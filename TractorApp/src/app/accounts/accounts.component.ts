@@ -16,11 +16,16 @@ import { DataService } from '../services/data.service';
 export class AccountsComponent implements OnInit {
   displayedColumns = ['Date', 'Particular', 'Credit', 'Debit'];
   accounts: AccountsModel[] = [];
+  entries: EntryModel[] = [];
+  payments: PaymentModel[] = [];
+  expenses: ExpenseModel[] = [];
+  incomes: IncomeModel[] = [];
   @ViewChild('accountsTable') accountsTable: MatTable<any>;
   totalIncome = 0;
   totalExpense = 0;
   fromDate = new Date();
   toDate = new Date();
+  isRun = '1';
   constructor(private dbService: NgxIndexedDBService,
     private dataService: DataService) { }
 
@@ -30,50 +35,93 @@ export class AccountsComponent implements OnInit {
 
   loadData() {
     this.accounts = [];
-    this.dbService.getAll('Payment').then(
-      (payments: PaymentModel[]) => {
-        this.dbService.getAll('Expense').then(
-          (expenses: ExpenseModel[]) => {
-            this.dbService.getAll('Income').then(
-              (incomes: IncomeModel[]) => {
-                if (expenses.length > 0) { this.addExpenses(expenses); }
-                if (payments.length > 0) { this.addPayments(payments); }
-                if (incomes.length > 0) { this.addIncomes(incomes); }
-              }, error => {
-                console.log(error);
-                alert(error.message);
-              });
-          }, error => {
-            console.log(error);
-            alert(error.message);
-          });
+    this.dbService.getAll('Income').then(
+      (incomes: IncomeModel[]) => {
+        this.incomes = incomes;
+        this.addIncomes();
       }, error => {
         console.log(error);
         alert(error.message);
-      })
-  }
-
-  addPayments(payments: PaymentModel[]) {
-    this.dayData(payments).forEach(
-      pay => {
-        this.dbService.getByID('Entry', pay.EntryGuid).then(
-          (entry: EntryModel) => {
-            let payment = new AccountsModel();
-            payment.Date = pay.Date;
-            payment.Particular = entry.Name;
-            payment.Credit = pay.Amount.toString();
-            this.totalIncome += pay.Amount;
-            this.accounts.push(payment);
-            this.accountsTable.renderRows();
+      });
+    this.dbService.getAll('Expense').then(
+      (expenses: ExpenseModel[]) => {
+        this.expenses = expenses;
+        this.addExpenses();
+      }, error => {
+        console.log(error);
+        alert(error.message);
+      });
+    this.dbService.getAll('Entry').then(
+      (entries: EntryModel[]) => {
+        this.entries = entries;
+        if (this.isRun == '1') { this.addEntries(); }
+        this.dbService.getAll('Payment').then(
+          (payments: PaymentModel[]) => {
+            this.payments = payments;
+            if (this.isRun == '0') { this.addPayments(); }
           }, error => {
             console.log(error);
             alert(error.message);
-          });
+          })
+      }, error => {
+        console.log(error);
+        alert(error.message);
       });
   }
 
-  addIncomes(incomes: IncomeModel[]) {
-    this.dayData(incomes).forEach(
+  fromDateChange() {
+    if (this.fromDate > this.toDate) {
+      this.toDate = this.fromDate;
+      this.filterData();
+    }
+  }
+  toDateChange() {
+    if (this.fromDate > this.toDate) {
+      this.fromDate = this.toDate;
+      this.filterData();
+    }
+  }
+
+  filterData() {
+    this.accounts = [];
+    this.totalExpense = this.totalIncome = 0
+    this.accountsTable.renderRows();
+    if (this.isRun == '1') { this.addEntries(); } else { this.addPayments() }
+    this.addIncomes();
+    this.addExpenses();
+  }
+
+  addEntries() {
+    this.dayData(this.entries).forEach(
+      (entry: EntryModel) => {
+        let eIncome = new AccountsModel();
+        eIncome.Date = entry.Date;
+        eIncome.Particular = entry.Name;
+        eIncome.Credit = entry.Amount.toString();
+        this.totalIncome += entry.Amount;
+        this.accounts.push(eIncome);
+        this.accountsTable.renderRows();
+      });
+  }
+
+  addPayments() {
+    this.dayData(this.payments).forEach(
+      (pay: PaymentModel) => {
+        let entry = this.entries.find(e => e.EntryGuid === pay.EntryGuid);
+        if (entry) {
+          let payment = new AccountsModel();
+          payment.Date = pay.Date;
+          payment.Particular = entry.Name;
+          payment.Credit = pay.Amount.toString();
+          this.totalIncome += pay.Amount;
+          this.accounts.push(payment);
+          this.accountsTable.renderRows();
+        }
+      });
+  }
+
+  addIncomes() {
+    this.dayData(this.incomes).forEach(
       (income: IncomeModel) => {
         let aIncome = new AccountsModel();
         aIncome.Date = income.Date;
@@ -85,8 +133,8 @@ export class AccountsComponent implements OnInit {
       });
   }
 
-  addExpenses(expenses: ExpenseModel[]) {
-    this.dayData(expenses).forEach(
+  addExpenses() {
+    this.dayData(this.expenses).forEach(
       (expense: ExpenseModel) => {
         let aExp = new AccountsModel();
         aExp.Date = expense.Date;
@@ -99,8 +147,8 @@ export class AccountsComponent implements OnInit {
   }
 
   daysDifference(fromDate: Date, toDate: Date): number {
-    fromDate = new Date(fromDate.toLocaleDateString());
-    toDate = new Date(toDate.toLocaleDateString());
+    fromDate = new Date(fromDate.toDateString());
+    toDate = new Date(toDate.toDateString());
     const utc1 = Date.UTC(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate());
     const utc2 = Date.UTC(toDate.getFullYear(), toDate.getMonth(), toDate.getDate());
     return Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24));
