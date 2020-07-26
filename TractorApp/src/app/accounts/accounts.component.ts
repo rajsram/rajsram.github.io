@@ -35,6 +35,7 @@ export class AccountsComponent implements OnInit {
 
   loadData() {
     this.accounts = [];
+    this.totalExpense = 0; this.totalIncome = 0;
     this.dbService.getAll('Income').then(
       (incomes: IncomeModel[]) => {
         this.incomes = incomes;
@@ -72,19 +73,19 @@ export class AccountsComponent implements OnInit {
   fromDateChange() {
     if (this.fromDate > this.toDate) {
       this.toDate = this.fromDate;
-      this.filterData();
     }
+    this.filterData();
   }
   toDateChange() {
     if (this.fromDate > this.toDate) {
       this.fromDate = this.toDate;
-      this.filterData();
     }
+    this.filterData();
   }
 
   filterData() {
     this.accounts = [];
-    this.totalExpense = this.totalIncome = 0
+    this.totalExpense = 0; this.totalIncome = 0;
     this.accountsTable.renderRows();
     if (this.isRun == '1') { this.addEntries(); } else { this.addPayments() }
     this.addIncomes();

@@ -1,18 +1,18 @@
-<button mat-icon-button class="top-icon-button" (click)="loadData()" aria-label="Refresh">
+<button mat-icon-button class="top-icon-button" (click)="filterData()" aria-label="Refresh">
   <mat-icon>refresh</mat-icon>
 </button>
 <div class="filters">
   <mat-form-field class="example-full-width">
     <mat-label>From Date</mat-label>
     <input matInput [matDatepicker]="picker" (click)="picker.open()" [(ngModel)]="fromDate"
-    (ngModelChange)="fromDateChange()">
+    (ngModelChange)="fromDateChange()" readonly>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label> To Date</mat-label>
     <input matInput [matDatepicker]="picker1" (click)="picker1.open()" [(ngModel)]="toDate"
-    (ngModelChange)="toDateChange()">
+    (ngModelChange)="toDateChange()" readonly>
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker touchUi #picker1></mat-datepicker>
   </mat-form-field>

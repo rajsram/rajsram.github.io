@@ -23,8 +23,12 @@ export class SettingsComponent implements OnInit {
     this.fileName = file.name;
     const fileContent = await this.readFileContent(file);
     let data: TractorDataModel = JSON.parse(fileContent);
+    let totalCount = data.entries.length + data.expenses.length + data.incomes.length + data.payments.length;
+    let importedCount = 0;
     data.entries.forEach(ie => {
       this.dbService.add('Entry', ie).then(() => {
+        importedCount++;
+        this.checkComplete(totalCount, importedCount);
       }, error => {
         console.log(error);
         alert(error.message);
@@ -32,6 +36,8 @@ export class SettingsComponent implements OnInit {
     });
     data.payments.forEach(pay => {
       this.dbService.add('Payment', pay).then(() => {
+        importedCount++;
+        this.checkComplete(totalCount, importedCount);
       }, error => {
         console.log(error);
         alert(error.message);
@@ -39,6 +45,8 @@ export class SettingsComponent implements OnInit {
     });
     data.incomes.forEach(inc => {
       this.dbService.add('Income', inc).then(() => {
+        importedCount++;
+        this.checkComplete(totalCount, importedCount);
       }, error => {
         console.log(error);
         alert(error.message);
@@ -46,11 +54,20 @@ export class SettingsComponent implements OnInit {
     });
     data.expenses.forEach(ex => {
       this.dbService.add('Expense', ex).then(() => {
+        importedCount++;
+        this.checkComplete(totalCount, importedCount);
       }, error => {
         console.log(error);
         alert(error.message);
       });
     });
+  }
+
+  checkComplete(tot: number, ent: number) {
+    if (tot === ent) {
+      alert('Import Completed!');
+      this.fileName = '';
+    }
   }
 
   clearData() {
@@ -116,6 +133,7 @@ export class SettingsComponent implements OnInit {
     document.body.appendChild(element);
     element.click(); // simulate click
     document.body.removeChild(element);
+    alert('File exported...');
   }
 
   readFileContent(file: File): Promise<string> {
