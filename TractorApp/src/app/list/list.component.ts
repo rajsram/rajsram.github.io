@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { EntryModel } from '../model/entry.model';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { PaymentModel } from '../model/payment-model';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentComponent } from '../payment/payment.component';
 import { DataService } from '../services/data.service';
+import { PersonModel } from '../model/person.model';
 
 @Component({
   selector: 'app-list',
@@ -12,10 +13,12 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  persons: PersonModel[] = [];
   entries: EntryModel[] = [];
   paymentlist: PaymentModel[] = [];
   searchName = '';
   isAll: false;
+  @Output() personEntry: EventEmitter<string> = new EventEmitter<string>();
   constructor(
     private dbService: NgxIndexedDBService,
     public dialog: MatDialog,
@@ -23,29 +26,54 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dbService.getAll('Entry').then((entries: EntryModel[]) => {
-      this.entries = this.dataService.orderByDateDesc(entries);
+    this.dbService.getAll('Person').then((persons: PersonModel[]) => {
+      this.persons = persons;
+      this.loadEntries();
       this.loadPayments();
     }, error => {
       console.log(error);
-      alert(error.message);
+      alert(error);
+    });
+  }
+
+  loadEntries() {
+    this.persons.forEach((person: PersonModel) => {
+      person.Amount = 0;
+      this.dbService.getAllByIndex('Entry', 'PersonGuid', IDBKeyRange.only(person.PersonGuid))
+        .then((entries: EntryModel[]) => {
+          person.Entries = entries;
+          if (entries.findIndex(se => !se.Settled) < 0)
+            person.Settled = true;
+          entries.forEach(e => {
+            if (!e.Settled)
+              person.Amount += e.Amount;
+          })
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
     });
   }
 
   loadPayments() {
-    this.entries.forEach(entry => {
-      entry.Paid = 0;
-      this.dbService.getAllByIndex('Payment', 'EntryGuid', IDBKeyRange.only(entry.EntryGuid))
+    this.persons.forEach((person: PersonModel) => {
+      person.Paid = 0;
+      this.dbService.getAllByIndex('Payment', 'PersonGuid', IDBKeyRange.only(person.PersonGuid))
         .then((payments: PaymentModel[]) => {
-          entry.Payments = payments;
+          person.Payments = payments;
           payments.forEach(payment => {
-            entry.Paid += payment.Amount;
+            if (payment.New)
+              person.Paid += payment.Amount;
           })
         }, error => {
           console.log(error);
-          alert(error.message);
+          alert(error);
         });
     });
+  }
+
+  addEntry(person: PersonModel) {
+    this.personEntry.emit(person.PersonGuid);
   }
 
   addPayment(entry) {
@@ -60,25 +88,48 @@ export class ListComponent implements OnInit {
     });
   }
 
-  settle(entry: EntryModel) {
-    if ((entry.Amount - entry.Paid) > 100) {
-      if (confirm('Amount is ₹' + entry.Amount + ' and paid ₹' + entry.Paid + ', really settled?')) {
-        this.settleEntry(entry);
+  settle(person: PersonModel) {
+    if ((person.Amount - person.Paid) > 100) {
+      if (confirm('Amount is ₹' + person.Amount + ' and paid ₹' + person.Paid + ', really settled?')) {
+        this.settleEntry(person);
       }
-    } else { this.settleEntry(entry); }
+    } else { this.settleEntry(person); }
   }
 
-  settleEntry(entry: EntryModel) {
-    entry.Settled = true;
-    this.dbService.update('Entry', entry).then(
-      () => {
-        alert('Payment Settled!');
-      },
-      error => {
-        console.log(error);
-        alert(error.message);
-      }
-    );
+  settleEntry(person: PersonModel) {
+    let tot = person.Entries.length + person.Payments.length;
+    let com = 0;
+    person.Entries.forEach(e => {
+      e.Settled = true;
+      this.dbService.update('Entry', e).then(
+        () => {
+          com++;
+          if (tot === com) {
+            person.Settled = true;
+            alert('Payment Settled!');
+          }
+        },
+        error => {
+          console.log(error);
+          alert(error);
+        });
+    });
+    person.Payments.forEach(p => {
+      p.New = false;
+      this.dbService.update('Payment', p).then(
+        () => {
+          com++;
+          if (tot === com) {
+            person.Settled = true;
+            alert('Payment Settled!');
+          }
+        },
+        error => {
+          console.log(error);
+          alert(error);
+        });
+    });
+
   }
 
   delete(entry: EntryModel) {
@@ -94,7 +145,7 @@ export class ListComponent implements OnInit {
                 },
                 error => {
                   console.log(error);
-                  alert(error.message);
+                  alert(error);
                 });
             })
             this.dbService.delete('Entry', entry.EntryGuid).then(
@@ -103,12 +154,12 @@ export class ListComponent implements OnInit {
               },
               error => {
                 console.log(error);
-                alert(error.message);
+                alert(error);
               });
           },
           error => {
             console.log(error);
-            alert(error.message);
+            alert(error);
           }
         );
       }

@@ -5,23 +5,34 @@
     <form [formGroup]="entryForm">
         <div class="flex-group">
             <div class="flex-item full">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Date</mat-label>
-                    <input matInput [matDatepicker]="picker" (click)="picker.open()" formControlName="Date" required>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
-            <div class="flex-item full">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Name</mat-label>
+                <!-- <mat-form-field class="example-full-width">
+                    <mat-label>Name, Address</mat-label>
                     <input matInput formControlName="Name" required>
+                </mat-form-field> -->
+
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Name, Address" aria-label="Name" matInput formControlName="Name"
+                        required [matAutocomplete]="auto" [(ngModel)]="searchName">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                        (optionSelected)="personSelect($event)">
+                        <mat-option *ngFor="let person of persons | nameFilter: searchName" [value]="person.Name">
+                            {{person.Name}}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
             </div>
             <div class="flex-item full">
                 <mat-form-field class="example-full-width">
                     <mat-label>Mobile</mat-label>
                     <input matInput type="number" formControlName="Mobile" max="9999999999">
+                </mat-form-field>
+            </div>
+            <div class="flex-item full">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker" (click)="picker.open()" formControlName="Date" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
                 </mat-form-field>
             </div>
             <div class="flex-item half">
@@ -93,4 +104,4 @@
 
 </div>
 
-<app-list *ngIf="showList"></app-list>
+<app-list *ngIf="showList" (personEntry)="setPerson($event);showList=!showList"></app-list>

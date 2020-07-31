@@ -7,6 +7,7 @@ import { MatTable } from '@angular/material/table';
 import { ExpenseModel } from '../model/expense.model';
 import { IncomeModel } from '../model/income.model';
 import { DataService } from '../services/data.service';
+import { PersonModel } from '../model/person.model';
 
 @Component({
   selector: 'app-accounts',
@@ -16,6 +17,7 @@ import { DataService } from '../services/data.service';
 export class AccountsComponent implements OnInit {
   displayedColumns = ['Date', 'Particular', 'Credit', 'Debit'];
   accounts: AccountsModel[] = [];
+  persons: PersonModel[] = [];
   entries: EntryModel[] = [];
   payments: PaymentModel[] = [];
   expenses: ExpenseModel[] = [];
@@ -42,7 +44,7 @@ export class AccountsComponent implements OnInit {
         this.addIncomes();
       }, error => {
         console.log(error);
-        alert(error.message);
+        alert(error);
       });
     this.dbService.getAll('Expense').then(
       (expenses: ExpenseModel[]) => {
@@ -50,24 +52,31 @@ export class AccountsComponent implements OnInit {
         this.addExpenses();
       }, error => {
         console.log(error);
-        alert(error.message);
+        alert(error);
       });
-    this.dbService.getAll('Entry').then(
-      (entries: EntryModel[]) => {
-        this.entries = entries;
-        if (this.isRun == '1') { this.addEntries(); }
-        this.dbService.getAll('Payment').then(
-          (payments: PaymentModel[]) => {
-            this.payments = payments;
-            if (this.isRun == '0') { this.addPayments(); }
-          }, error => {
-            console.log(error);
-            alert(error.message);
-          })
-      }, error => {
-        console.log(error);
-        alert(error.message);
-      });
+    this.dbService.getAll('Person').then((persons: PersonModel[]) => {
+      this.persons = persons;
+      this.dbService.getAll('Entry').then(
+        (entries: EntryModel[]) => {
+          this.entries = entries;
+          if (this.isRun == '1') { this.addEntries(); }
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
+      this.dbService.getAll('Payment').then(
+        (payments: PaymentModel[]) => {
+          this.payments = payments;
+          if (this.isRun == '0') { this.addPayments(); }
+        }, error => {
+          console.log(error);
+          alert(error);
+        })
+    }, error => {
+      console.log(error);
+      alert(error);
+    });
+
   }
 
   fromDateChange() {
@@ -95,24 +104,27 @@ export class AccountsComponent implements OnInit {
   addEntries() {
     this.dayData(this.entries).forEach(
       (entry: EntryModel) => {
-        let eIncome = new AccountsModel();
-        eIncome.Date = entry.Date;
-        eIncome.Particular = entry.Name;
-        eIncome.Credit = entry.Amount.toString();
-        this.totalIncome += entry.Amount;
-        this.accounts.push(eIncome);
-        this.accountsTable.renderRows();
+        let person = this.persons.find(p => p.PersonGuid === entry.PersonGuid);
+        if (person) {
+          let eIncome = new AccountsModel();
+          eIncome.Date = entry.Date;
+          eIncome.Particular = person.Name;
+          eIncome.Credit = entry.Amount.toString();
+          this.totalIncome += entry.Amount;
+          this.accounts.push(eIncome);
+          this.accountsTable.renderRows();
+        }
       });
   }
 
   addPayments() {
     this.dayData(this.payments).forEach(
       (pay: PaymentModel) => {
-        let entry = this.entries.find(e => e.EntryGuid === pay.EntryGuid);
-        if (entry) {
+        let person = this.persons.find(p => p.PersonGuid === pay.PersonGuid);
+        if (person) {
           let payment = new AccountsModel();
           payment.Date = pay.Date;
-          payment.Particular = entry.Name;
+          payment.Particular = person.Name;
           payment.Credit = pay.Amount.toString();
           this.totalIncome += pay.Amount;
           this.accounts.push(payment);

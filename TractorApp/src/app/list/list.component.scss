@@ -26,8 +26,37 @@
             margin-right: 5px;
         }
 
-        span {
+        .data {
             font-weight: bold;
         }
+
+        .amount {
+            text-align: right;
+        }
     }
+}
+
+.entries,
+.payments {
+
+    .entry,
+    .payment {
+        border       : 0.5px solid lightgray;
+        border-radius: 5px;
+        margin       : 4px 0;
+        padding      : 5px;
+    }
+}
+
+::ng-deep mat-expansion-panel-header {
+    background-color: rgb(144 144 144 / 10%) !important;
+}
+
+::ng-deep .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0px 0px 7px 0px grey !important;
+}
+
+::ng-deep .mat-card-actions .mat-stroked-button {
+    margin: 0 !important;
+    margin-left: 5px !important;
 }

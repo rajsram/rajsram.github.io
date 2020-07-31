@@ -43,7 +43,7 @@ export class ExpenseComponent implements OnInit {
       this.setForm();
     }, error => {
       console.log(error);
-      alert(error.message);
+      alert(error);
     });
   }
   switchView() {
@@ -54,7 +54,7 @@ export class ExpenseComponent implements OnInit {
           this.expensesTable.renderRows();
         }, error => {
           console.log(error);
-          alert(error.message);
+          alert(error);
         });
     }
     this.showList = !this.showList;

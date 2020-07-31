@@ -5,6 +5,7 @@ import { EntryModel } from '../model/entry.model';
 import { PaymentModel } from '../model/payment-model';
 import { IncomeModel } from '../model/income.model';
 import { ExpenseModel } from '../model/expense.model';
+import { PersonModel } from '../model/person.model';
 
 @Component({
   selector: 'app-settings',
@@ -13,6 +14,7 @@ import { ExpenseModel } from '../model/expense.model';
 })
 export class SettingsComponent implements OnInit {
   fileName: string = '';
+  importedCount = 0;
   constructor(private dbService: NgxIndexedDBService) { }
 
   ngOnInit(): void {
@@ -23,48 +25,94 @@ export class SettingsComponent implements OnInit {
     this.fileName = file.name;
     const fileContent = await this.readFileContent(file);
     let data: TractorDataModel = JSON.parse(fileContent);
-    let totalCount = data.entries.length + data.expenses.length + data.incomes.length + data.payments.length;
-    let importedCount = 0;
-    data.entries.forEach(ie => {
-      this.dbService.add('Entry', ie).then(() => {
-        importedCount++;
-        this.checkComplete(totalCount, importedCount);
-      }, error => {
-        console.log(error);
-        alert(error.message);
+    let totalCount = data.persons.length + data.entries.length + data.expenses.length
+      + data.incomes.length + data.payments.length;
+    this.importedCount = 0;
+    if (data.persons.length > 0)
+      data.persons.forEach(p => {
+        this.dbService.getByID('Person', p.PersonGuid).then(e => {
+          if (!e) {
+            this.dbService.add('Person', p).then(() => {
+              this.checkComplete(totalCount);
+            }, error => {
+              console.log(error);
+              alert(error);
+            });
+          } else { this.checkComplete(totalCount); }
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
       });
-    });
-    data.payments.forEach(pay => {
-      this.dbService.add('Payment', pay).then(() => {
-        importedCount++;
-        this.checkComplete(totalCount, importedCount);
-      }, error => {
-        console.log(error);
-        alert(error.message);
+    if (data.entries.length > 0)
+      data.entries.forEach(ie => {
+        this.dbService.getByID('Entry', ie.EntryGuid).then(e => {
+          if (!e) {
+            this.dbService.add('Entry', ie).then(() => {
+              this.checkComplete(totalCount);
+            }, error => {
+              console.log(error);
+              alert(error);
+            });
+          } else { this.checkComplete(totalCount); }
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
       });
-    });
-    data.incomes.forEach(inc => {
-      this.dbService.add('Income', inc).then(() => {
-        importedCount++;
-        this.checkComplete(totalCount, importedCount);
-      }, error => {
-        console.log(error);
-        alert(error.message);
+    if (data.payments.length > 0)
+      data.payments.forEach(pay => {
+        this.dbService.getByID('Payment', pay.PaymentGuid).then(e => {
+          if (!e) {
+            this.dbService.add('Payment', pay).then(() => {
+              this.checkComplete(totalCount);
+            }, error => {
+              console.log(error);
+              alert(error);
+            });
+          } else { this.checkComplete(totalCount); }
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
       });
-    });
-    data.expenses.forEach(ex => {
-      this.dbService.add('Expense', ex).then(() => {
-        importedCount++;
-        this.checkComplete(totalCount, importedCount);
-      }, error => {
-        console.log(error);
-        alert(error.message);
+    if (data.incomes.length > 0)
+      data.incomes.forEach(inc => {
+        this.dbService.getByID('Income', inc.IncomeGuid).then(e => {
+          if (!e) {
+            this.dbService.add('Income', inc).then(() => {
+              this.checkComplete(totalCount);
+            }, error => {
+              console.log(error);
+              alert(error);
+            });
+          } else { this.checkComplete(totalCount); }
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
       });
-    });
+    if (data.expenses.length > 0)
+      data.expenses.forEach(ex => {
+        this.dbService.getByID('Expense', ex.ExpenseGuid).then(e => {
+          if (!e) {
+            this.dbService.add('Expense', ex).then(() => {
+              this.checkComplete(totalCount);
+            }, error => {
+              console.log(error);
+              alert(error);
+            });
+          } else { this.checkComplete(totalCount); }
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
+      });
   }
 
-  checkComplete(tot: number, ent: number) {
-    if (tot === ent) {
+  checkComplete(tot: number) {
+    this.importedCount++;
+    if (tot === this.importedCount) {
       alert('Import Completed!');
       this.fileName = '';
     }
@@ -73,43 +121,53 @@ export class SettingsComponent implements OnInit {
   clearData() {
     if (confirm('Are you sure you want to clear all entries?')) {
       if (confirm('Really!, you want to clear all entries?')) {
-        this.exportData();
-        this.dbService.clear('Entry').then(() => {
-          this.dbService.clear('Payment').then(() => {
-            this.dbService.clear('Income').then(() => {
-              this.dbService.clear('Expense').then(() => {
-                alert('Data cleared.');
-              }, error => {
-                console.log(error);
-                alert(error.message);
-              });
-            }, error => {
-              console.log(error);
-              alert(error.message);
-            });
-          }, error => {
-            console.log(error);
-            alert(error.message);
-          });
-        }, error => {
-          console.log(error);
-          alert(error.message);
-        });
+        this.exportData(true);
       }
     }
   }
 
-  exportData() {
+  clearDataAfterBackup() {
+    this.dbService.clear('Entry').then(() => {
+      this.dbService.clear('Payment').then(() => {
+        this.dbService.clear('Income').then(() => {
+          this.dbService.clear('Expense').then(() => {
+            alert('Data cleared.');
+          }, error => {
+            console.log(error);
+            alert(error);
+          });
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
+      }, error => {
+        console.log(error);
+        alert(error);
+      });
+    }, error => {
+      console.log(error);
+      alert(error);
+    });
+  }
+
+  exportData(clear = false) {
     let data = new TractorDataModel();
-    this.dbService.getAll('Entry').then((entries: EntryModel[]) => {
-      data.entries = entries;
-      this.dbService.getAll('Payment').then((payments: PaymentModel[]) => {
-        data.payments = payments;
-        this.dbService.getAll('Income').then((incomes: IncomeModel[]) => {
-          data.incomes = incomes;
-          this.dbService.getAll('Expense').then((expenses: ExpenseModel[]) => {
-            data.expenses = expenses;
-            this.exportFile(data);
+    this.dbService.getAll('Person').then((persons: PersonModel[]) => {
+      data.persons = persons;
+      this.dbService.getAll('Entry').then((entries: EntryModel[]) => {
+        data.entries = entries;
+        this.dbService.getAll('Payment').then((payments: PaymentModel[]) => {
+          data.payments = payments;
+          this.dbService.getAll('Income').then((incomes: IncomeModel[]) => {
+            data.incomes = incomes;
+            this.dbService.getAll('Expense').then((expenses: ExpenseModel[]) => {
+              data.expenses = expenses;
+              this.exportFile(data);
+              if (clear)
+                this.clearDataAfterBackup();
+            }, error => {
+              console.log(error);
+            });
           }, error => {
             console.log(error);
           });

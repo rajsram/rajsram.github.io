@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EntryModel } from '../model/entry.model';
 import { PaymentModel } from '../model/payment-model';
 import { Guid } from 'guid-typescript';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
+import { PersonModel } from '../model/person.model';
 
 @Component({
   selector: 'app-payment',
@@ -13,7 +13,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db';
 export class PaymentComponent implements OnInit {
   payment: PaymentModel = new PaymentModel();
   constructor(public dialogRef: MatDialogRef<PaymentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: EntryModel,
+    @Inject(MAT_DIALOG_DATA) public data: PersonModel,
     private dbService: NgxIndexedDBService) {
     this.payment.Date = new Date();
   }
@@ -23,7 +23,7 @@ export class PaymentComponent implements OnInit {
 
   addPayment() {
     this.payment.PaymentGuid = (Guid.create() as any).value;
-    this.payment.EntryGuid = this.data.EntryGuid;
+    this.payment.PersonGuid = this.data.PersonGuid;
     this.dbService.add('Payment', this.payment).then(() => {
       alert('Payment Added Successfully..')
       this.data.Paid += this.payment.Amount;
@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit {
       this.dialogRef.close(this.data);
     }, error => {
       console.log(error);
-      alert(error.message);
+      alert(error);
     })
   }
 }

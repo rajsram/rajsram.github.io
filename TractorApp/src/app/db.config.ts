@@ -17,18 +17,21 @@ export const dbConfig: DBConfig = {
     name: 'TractorAccountsDb',
     version: 1,
     objectStoresMeta: [{
+        store: 'Person',
+        storeConfig: { keyPath: 'PersonGuid', autoIncrement: false, options: { unique: true } },
+        storeSchema: [
+            { name: 'Name', keypath: 'Name', options: { unique: true } },
+            { name: 'Mobile', keypath: 'Mobile', options: { unique: false } }
+        ]
+    }, {
         store: 'Entry',
         storeConfig: { keyPath: 'EntryGuid', autoIncrement: false, options: { unique: true } },
         storeSchema: [
-            { name: 'Name', keypath: 'Name', options: { unique: false } },
+            { name: 'PersonGuid', keypath: 'PersonGuid', options: { unique: false } },
             { name: 'Date', keypath: 'Date', options: { unique: false } },
-            { name: 'Mobile', keypath: 'Mobile', options: { unique: false } },
             { name: 'Kalappai', keypath: 'Kalappai', options: { unique: false } },
-            { name: 'KalappaiAmount', keypath: 'KalappaiAmount', options: { unique: false } },
-            { name: 'FromTime', keypath: 'FromTime', options: { unique: false } },
-            { name: 'ToTime', keypath: 'ToTime', options: { unique: false } },
-            { name: 'Hours', keypath: 'Hours', options: { unique: false } },
-            { name: 'Minutes', keypath: 'Minutes', options: { unique: false } },
+            { name: 'HrAmount', keypath: 'HrAmount', options: { unique: false } },
+            { name: 'Time', keypath: 'Time', options: { unique: false } },
             { name: 'Amount', keypath: 'Amount', options: { unique: false } },
             { name: 'Settled', keypath: 'Settled', options: { unique: false } }
         ]
@@ -36,9 +39,10 @@ export const dbConfig: DBConfig = {
         store: 'Payment',
         storeConfig: { keyPath: 'PaymentGuid', autoIncrement: false, options: { unique: true } },
         storeSchema: [
-            { name: 'EntryGuid', keypath: 'EntryGuid', options: { unique: false } },
+            { name: 'PersonGuid', keypath: 'PersonGuid', options: { unique: false } },
             { name: 'Date', keypath: 'Date', options: { unique: false } },
             { name: 'Amount', keypath: 'Amount', options: { unique: false } },
+            { name: 'New', keypath: 'New', options: { unique: false } }
         ]
     }, {
         store: 'Expense',

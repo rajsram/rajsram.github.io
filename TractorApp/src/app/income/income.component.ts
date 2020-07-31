@@ -43,7 +43,7 @@ export class IncomeComponent implements OnInit {
       this.setForm();
     }, error => {
       console.log(error);
-      alert(error.message);
+      alert(error);
     });
   }
 
@@ -56,7 +56,7 @@ export class IncomeComponent implements OnInit {
           this.incomesTable.renderRows();
         }, error => {
           console.log(error);
-          alert(error.message);
+          alert(error);
         });
     }
     this.showList = !this.showList;
