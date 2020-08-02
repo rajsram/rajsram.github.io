@@ -5,19 +5,18 @@
   <mat-form-field class="example-full-width">
     <mat-label>From Date</mat-label>
     <input matInput [matDatepicker]="picker" (click)="picker.open()" [(ngModel)]="fromDate"
-    (ngModelChange)="fromDateChange()" readonly>
+      (ngModelChange)="fromDateChange()" readonly>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label> To Date</mat-label>
     <input matInput [matDatepicker]="picker1" (click)="picker1.open()" [(ngModel)]="toDate"
-    (ngModelChange)="toDateChange()" readonly>
+      (ngModelChange)="toDateChange()" readonly>
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker touchUi #picker1></mat-datepicker>
   </mat-form-field>
-  <mat-radio-group aria-labelledby="run" color="primary" [(ngModel)]="isRun"
-  (ngModelChange)="filterData()">
+  <mat-radio-group aria-labelledby="run" color="primary" [(ngModel)]="isRun" (ngModelChange)="filterData()">
     <mat-radio-button value="1">Run</mat-radio-button>
     <mat-radio-button value="0">Collect</mat-radio-button>
   </mat-radio-group>
@@ -29,14 +28,16 @@
     <ng-container matColumnDef="Date">
       <th mat-header-cell *matHeaderCellDef> Date </th>
       <td mat-cell *matCellDef="let element"> {{element.Date | date: 'dd/MM/yyyy'}} </td>
-      <td mat-footer-cell *matFooterCellDef></td>
+      <td mat-footer-cell *matFooterCellDef>Total</td>
     </ng-container>
 
     <!-- Particular Column -->
     <ng-container matColumnDef="Particular">
       <th mat-header-cell *matHeaderCellDef> Particular </th>
       <td mat-cell *matCellDef="let element"> {{element.Particular}} </td>
-      <td mat-footer-cell *matFooterCellDef> Total </td>
+      <td mat-footer-cell *matFooterCellDef>{{
+        totalIncome < totalExpense ? 'Loss: '+(totalExpense-totalIncome)
+        : 'Profit: '+(totalIncome-totalExpense)}}</td>
     </ng-container>
 
     <!-- Credit Column -->
