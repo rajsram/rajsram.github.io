@@ -87,6 +87,7 @@ export class EntryComponent implements OnInit {
       person.Name = formData.Name;
       person.Mobile = formData.Mobile;
       this.dbService.add('Person', person).then(() => {
+        this.persons.push(person);
         this.saveEntry(person.PersonGuid);
       }, e => {
         console.log(e);

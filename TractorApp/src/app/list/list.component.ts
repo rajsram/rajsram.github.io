@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaymentComponent } from '../payment/payment.component';
 import { DataService } from '../services/data.service';
 import { PersonModel } from '../model/person.model';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-list',
@@ -18,6 +19,7 @@ export class ListComponent implements OnInit {
   paymentlist: PaymentModel[] = [];
   searchName = '';
   isAll: false;
+  editPersonGuid = '';
   @Output() personEntry: EventEmitter<string> = new EventEmitter<string>();
   constructor(
     private dbService: NgxIndexedDBService,
@@ -26,6 +28,10 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
     this.dbService.getAll('Person').then((persons: PersonModel[]) => {
       this.persons = persons;
       this.loadEntries();
@@ -132,37 +138,96 @@ export class ListComponent implements OnInit {
 
   }
 
-  delete(entry: EntryModel) {
-    let index = this.entries.findIndex(e => e.EntryGuid === entry.EntryGuid);
-    if (index > -1) {
-      if (confirm('Are you sure you want to delete?')) {
-        this.dbService.getByIndex('Payment', 'EntryGuid', entry.EntryGuid).then(
-          (payments: PaymentModel[]) => {
-            payments.forEach(p => {
-              this.dbService.delete('Payment', p.PaymentGuid).then(
-                () => {
+  updatePerson(person: PersonModel) {
+    this.dbService.update('Person', person).then(() => {
+      alert('Updated succesfully.');
+      this.editPersonGuid = '';
+    },
+      error => {
+        console.log(error);
+        alert(error);
+      })
+  }
+  personEditCancel(person: PersonModel, guid = '') {
+    this.dbService.getByID('Person', person.PersonGuid).then(
+      (_person: PersonModel) => {
+        person.Name = _person.Name;
+        person.Mobile = _person.Mobile;
+        this.editPersonGuid = guid;
+      }, error => {
+        alert(error);
+      });
+  }
 
-                },
-                error => {
-                  console.log(error);
-                  alert(error);
-                });
-            })
-            this.dbService.delete('Entry', entry.EntryGuid).then(
-              () => {
+  cancelPersonEdit(newEditPersonGuid) {
+    let person = this.persons.find(p => p.PersonGuid == this.editPersonGuid);
+    this.personEditCancel(person, newEditPersonGuid);
+  }
 
-              },
-              error => {
-                console.log(error);
-                alert(error);
-              });
-          },
-          error => {
-            console.log(error);
-            alert(error);
-          }
-        );
+  delete(person: PersonModel) {
+    if (confirm('Are you sure you want to delete?')) {
+      let counts = person.Entries.length + person.Payments.length;
+      let comp = 0
+      person.Entries.forEach(async e => {
+        await this.deleteEntry(e, true);
+        comp++;
+        this.checkComp(counts, comp);
+      });
+      person.Payments.forEach(async p => {
+        await this.deletePayment(p, true);
+        comp++;
+        this.checkComp(counts, comp);
+      });
+    }
+  }
+
+  checkComp(tot: number, comp: number) {
+    if (tot === comp) {
+      alert('Deleted successfully.');
+      this.loadData();
+    }
+  }
+
+  async deleteEntry(entry: EntryModel, mul = false) {
+    if (!mul) {
+      if (!confirm('Are you sure you want to delete Entry?')) {
+        return;
       }
     }
+    await this.dbService.delete('Entry', entry.EntryGuid).then(
+      () => {
+        if (mul)
+          return 1;
+        else {
+          alert('Entry Deleted.');
+          this.loadData();
+        }
+
+      },
+      error => {
+        console.log(error);
+        alert(error);
+      });
+  }
+
+  async deletePayment(p: PaymentModel, mul = false) {
+    if (!mul) {
+      if (!confirm('Are you sure you want to delete Payment?')) {
+        return;
+      }
+    }
+    await this.dbService.delete('Payment', p.PaymentGuid).then(
+      () => {
+        if (mul)
+          return 1;
+        else {
+          alert('Payment Deleted.');
+          this.loadData();
+        }
+      },
+      error => {
+        console.log(error);
+        alert(error);
+      });
   }
 }

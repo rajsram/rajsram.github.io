@@ -10,16 +10,32 @@
     </mat-checkbox>
 </div>
 <div class="entries-list">
-    <div *ngFor="let person of persons | nameFilter: searchName">
+    <div *ngFor="let person of persons | nameFilter: searchName; index as i">
         <mat-card class="example-card" *ngIf=" !person.Settled || isAll"
-            [ngStyle]="{'background-color': person.Settled?'lightgreen':person.Paid == 0? 'pink' : 'initial'}">
+            [ngStyle]="{'background-color': person.Settled?'initial':person.Paid == 0? 'gray' : 'lightgray'}">
             <mat-card-content>
+                <span class="edit-save" *ngIf="editPersonGuid != person.PersonGuid"
+                    (click)="editPersonGuid == ''? editPersonGuid = person.PersonGuid : cancelPersonEdit(person.PersonGuid)">
+                    <mat-icon>edit</mat-icon>
+                </span>
+                <span class="edit-save" *ngIf="editPersonGuid == person.PersonGuid" (click)="updatePerson(person)">
+                    <mat-icon>save</mat-icon>
+                </span>
+                <span class="edit-cancel" *ngIf="editPersonGuid == person.PersonGuid"
+                    (click)="personEditCancel(person)">
+                    <mat-icon>cancel</mat-icon>
+                </span>
                 <div class="data-item">
-                    <label>Name:</label><span class="data">{{person.Name}}</span>
+                    <label>Name:</label><span class="data"
+                        *ngIf="editPersonGuid != person.PersonGuid">{{person.Name}}</span>
+                    <input class="person-edit-input" matInput [(ngModel)]="person.Name"
+                        *ngIf="editPersonGuid == person.PersonGuid">
                 </div>
-                <div class="data-item" *ngIf="person.Mobile != ''">
-                    <label>Mobile:</label><span class="data"><a
+                <div class="data-item">
+                    <label>Mobile:</label><span class="data" *ngIf="editPersonGuid != person.PersonGuid"><a
                             href="tel:{{person.Mobile}}">{{person.Mobile}}</a></span>
+                    <input class="person-edit-input" matInput type="number" [(ngModel)]="person.Mobile" max="9999999999"
+                        *ngIf="editPersonGuid == person.PersonGuid">
                 </div>
                 <div class="data-item">
                     <mat-expansion-panel hideToggle style="background-color: transparent;">
@@ -46,6 +62,9 @@
                                             &ensp;{{entry.Time.minutes}}<sub>Mins</sub></span>
                                     </div>
                                     <div class="amount data" style="width: 50px;"><span>{{entry.Amount}}</span></div>
+                                    <span class="delete-entry" (click)="deleteEntry(entry)">
+                                        <mat-icon>delete</mat-icon>
+                                    </span>
                                 </div>
 
                             </div>
@@ -67,6 +86,9 @@
                                 [ngStyle]="{'background-color': payment.New?'initial' : 'lightgreen'}">
                                 <div style="width: 200px;">{{payment.Date | date: 'dd/MM/yyyy, hh:mm a'}}</div>
                                 <div class="amount data" style="width: 50px;"><span>{{payment.Amount}}</span></div>
+                                <span class="delete-entry"  (click)="deletePayment(payment)">
+                                    <mat-icon>delete</mat-icon>
+                                </span>
                             </div>
                         </div>
                     </mat-expansion-panel>

@@ -41,7 +41,7 @@
 
     .entry,
     .payment {
-        border       : 0.5px solid lightgray;
+        border       : 0.5px solid;
         border-radius: 5px;
         margin       : 4px 0;
         padding      : 5px;
@@ -57,6 +57,28 @@
 }
 
 ::ng-deep .mat-card-actions .mat-stroked-button {
-    margin: 0 !important;
+    margin     : 0 !important;
     margin-left: 5px !important;
+}
+
+.edit-save {
+    position: absolute;
+    right   : 16px;
+}
+
+span.edit-cancel {
+    position: absolute;
+    right   : 15px;
+    top     : 45px;
+}
+
+.person-edit-input {
+    width        : 225px;
+    border-bottom: 0.5px solid;
+}
+
+span.delete-entry {
+    position: absolute;
+    right   : 12px;
+    color   : red;
 }
