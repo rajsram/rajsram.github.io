@@ -1,0 +1,86 @@
+{
+  "configVersion": 1,
+  "timestamp": 1598161909163,
+  "index": "/tractor/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/tractor/favicon.ico",
+        "/tractor/index.html",
+        "/tractor/main.4bf13827c1150d8d7b80.js",
+        "/tractor/manifest.webmanifest",
+        "/tractor/polyfills.a4021de53358bb0fec14.js",
+        "/tractor/runtime.e227d1a0e31cbccbf8ec.js",
+        "/tractor/styles.8eba41e2496086ab57e7.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/tractor/assets/icon/tractor165x165.png",
+        "/tractor/assets/icon/tractor330x330.png",
+        "/tractor/assets/icons/icon-128x128.png",
+        "/tractor/assets/icons/icon-144x144.png",
+        "/tractor/assets/icons/icon-152x152.png",
+        "/tractor/assets/icons/icon-192x192.png",
+        "/tractor/assets/icons/icon-384x384.png",
+        "/tractor/assets/icons/icon-512x512.png",
+        "/tractor/assets/icons/icon-75x75.png",
+        "/tractor/assets/icons/icon-96x96.png",
+        "/tractor/assets/icons/tractor330x330.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/tractor/assets/icon/tractor165x165.png": "65813a7dbc04e6b50230ed07401941cfc835bafe",
+    "/tractor/assets/icon/tractor330x330.png": "989edfb6f2e1335a61d13d0564dafda5c4779d35",
+    "/tractor/assets/icons/icon-128x128.png": "9fbd610da1b026ca2848ed39b33ee0ead9cf778a",
+    "/tractor/assets/icons/icon-144x144.png": "26f0c2947d226588a95b30752e4637b7cf91923b",
+    "/tractor/assets/icons/icon-152x152.png": "955077ec3ef3733757e59d5ddeff6d53f8b1dafa",
+    "/tractor/assets/icons/icon-192x192.png": "01e90e018f9d3b140e224a96983f88dfb4bdc8f3",
+    "/tractor/assets/icons/icon-384x384.png": "0b38a26121d3e63d9c5751d99c100da8600c0ba7",
+    "/tractor/assets/icons/icon-512x512.png": "01c5dceaff821921f8b111283be657024b2d5158",
+    "/tractor/assets/icons/icon-75x75.png": "820f66aa15fc172baffe99815c609aaf5af1bc8c",
+    "/tractor/assets/icons/icon-96x96.png": "ebdc00c595d9900925beca587765b7b612cd6485",
+    "/tractor/assets/icons/tractor330x330.png": "95583a6bb689ee0690558b70db1f059ed7f06295",
+    "/tractor/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/tractor/index.html": "0fa31ec5904fea785bf7ead23d14811e4d4a7ec0",
+    "/tractor/main.4bf13827c1150d8d7b80.js": "f0c1fdfb3b9cbb0ef4ee68c898d121d90bff70a7",
+    "/tractor/manifest.webmanifest": "31f954b042ada757953210c0a7c6a2f504629197",
+    "/tractor/polyfills.a4021de53358bb0fec14.js": "b47435a9ef2a4829f2f9dfd35599bde3614981b1",
+    "/tractor/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/tractor/styles.8eba41e2496086ab57e7.css": "4ee38b50e74d70b560e31a6c9823efa678224c8b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
