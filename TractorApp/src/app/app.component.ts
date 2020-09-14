@@ -9,7 +9,7 @@ import { SwUpdate } from '@angular/service-worker'
 export class AppComponent {
   title = 'TractorApp';
   year = (new Date()).getFullYear();
-  menuList: string[] = ['Entry', 'Expense', 'Income', 'Accounts', 'Settings'];
+  menuList: string[] = ['Entry', 'Driver', 'Expense', 'Income', 'Accounts', 'Settings'];
   page = this.menuList[0];
   version = '2.0';
   constructor(update: SwUpdate) {

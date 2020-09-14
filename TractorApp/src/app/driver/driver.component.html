@@ -1,0 +1,67 @@
+<button mat-icon-button class="top-icon-button" (click)="switchView()" aria-label="List-Entry">
+    <mat-icon>{{showList ? 'post_add' : 'list' }}</mat-icon>
+</button>
+<div class="form-container" *ngIf="!showList">
+    <form [formGroup]="driverForm">
+        <div class="flex-group">
+            <div class="flex-item full">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker" (click)="picker.open()" formControlName="Date" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="flex-item full">
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Name, Address" aria-label="Name" matInput formControlName="Name"
+                        required [matAutocomplete]="auto" [(ngModel)]="searchName">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                        (optionSelected)="personSelect($event)">
+                        <mat-option *ngFor="let person of persons | nameFilter: searchName" [value]="person.Name">
+                            {{person.Name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+            <div class="flex-item half">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Amount (₹)</mat-label>
+                    <input matInput type="number" formControlName="Amount" min="0" required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-buttons">
+            <button mat-raised-button (click)="setForm()" color="warn">Reset</button>
+            <button mat-raised-button color="primary" [disabled]="driverForm.invalid"
+                (click)="addDrive()">Add</button>
+        </div>
+    </form>
+
+</div>
+
+<div class="table-container mat-elevation-z8" *ngIf="showList">
+    <table mat-table #drivesTable style="width: 100%;" [dataSource]="drives">
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.Date | date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <!-- Particular Column -->
+        <ng-container matColumnDef="Particular">
+            <th mat-header-cell *matHeaderCellDef> Particular </th>
+            <td mat-cell *matCellDef="let element"> {{element.Particular}} </td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="Amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element" class="amount"> {{element.Amount}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

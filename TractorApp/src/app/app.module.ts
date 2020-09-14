@@ -21,6 +21,7 @@ import { dbConfig } from './db.config';
 import { AccountsComponent } from './accounts/accounts.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NameFilterPipe } from './pipes/name-filter.pipe';
+import { DriverComponent } from './driver/driver.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NameFilterPipe } from './pipes/name-filter.pipe';
     IncomeComponent,
     AccountsComponent,
     SettingsComponent,
-    NameFilterPipe
+    NameFilterPipe,
+    DriverComponent
   ],
   imports: [
     BrowserModule,

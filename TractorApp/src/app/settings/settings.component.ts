@@ -6,6 +6,7 @@ import { PaymentModel } from '../model/payment-model';
 import { IncomeModel } from '../model/income.model';
 import { ExpenseModel } from '../model/expense.model';
 import { PersonModel } from '../model/person.model';
+import { DriverModel } from '../model/driver-model';
 
 @Component({
   selector: 'app-settings',
@@ -26,7 +27,7 @@ export class SettingsComponent implements OnInit {
     const fileContent = await this.readFileContent(file);
     let data: TractorDataModel = JSON.parse(fileContent);
     let totalCount = data.persons.length + data.entries.length + data.expenses.length
-      + data.incomes.length + data.payments.length;
+      + data.incomes.length + data.payments.length + data.drive.length;
     this.importedCount = 0;
     if (data.persons.length > 0)
       data.persons.forEach(p => {
@@ -108,6 +109,22 @@ export class SettingsComponent implements OnInit {
           alert(error);
         });
       });
+    if (data.drive.length > 0)
+      data.drive.forEach(dr => {
+        this.dbService.getByID('Driver', dr.DriverGuid).then(e => {
+          if (!e) {
+            this.dbService.add('Driver', dr).then(() => {
+              this.checkComplete(totalCount);
+            }, error => {
+              console.log(error);
+              alert(error);
+            });
+          } else { this.checkComplete(totalCount); }
+        }, error => {
+          console.log(error);
+          alert(error);
+        });
+      });
   }
 
   checkComplete(tot: number) {
@@ -130,8 +147,13 @@ export class SettingsComponent implements OnInit {
     this.dbService.clear('Entry').then(() => {
       this.dbService.clear('Payment').then(() => {
         this.dbService.clear('Income').then(() => {
-          this.dbService.clear('Expense').then(() => {
-            alert('Data cleared.');
+          this.dbService.clear('Driver').then(() => {
+            this.dbService.clear('Expense').then(() => {
+              alert('Data cleared.');
+            }, error => {
+              console.log(error);
+              alert(error);
+            });
           }, error => {
             console.log(error);
             alert(error);
@@ -160,11 +182,16 @@ export class SettingsComponent implements OnInit {
           data.payments = payments;
           this.dbService.getAll('Income').then((incomes: IncomeModel[]) => {
             data.incomes = incomes;
-            this.dbService.getAll('Expense').then((expenses: ExpenseModel[]) => {
-              data.expenses = expenses;
-              this.exportFile(data);
-              if (clear)
-                this.clearDataAfterBackup();
+            this.dbService.getAll('Driver').then((driver: DriverModel[]) => {
+              data.drive = driver;
+              this.dbService.getAll('Expense').then((expenses: ExpenseModel[]) => {
+                data.expenses = expenses;
+                this.exportFile(data);
+                if (clear)
+                  this.clearDataAfterBackup();
+              }, error => {
+                console.log(error);
+              });
             }, error => {
               console.log(error);
             });

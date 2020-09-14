@@ -19,6 +19,7 @@
     </mat-toolbar>
     <div class="main-container">
       <app-entry *ngIf="page === 'Entry'"></app-entry>
+      <app-driver *ngIf="page === 'Driver'"></app-driver>
       <app-expense *ngIf="page === 'Expense'"></app-expense>
       <app-income *ngIf="page === 'Income'"></app-income>
       <app-accounts *ngIf="page === 'Accounts'"></app-accounts>

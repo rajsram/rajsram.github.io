@@ -60,6 +60,15 @@ export const dbConfig: DBConfig = {
             { name: 'Particular', keypath: 'Particular', options: { unique: false } },
             { name: 'Amount', keypath: 'Amount', options: { unique: false } },
         ]
+    }, {
+        store: 'Driver',
+        storeConfig: { keyPath: 'DriverGuid', autoIncrement: false, options: { unique: true } },
+        storeSchema: [
+            { name: 'PersonGuid', keypath: 'PersonGuid', options: { unique: false } },
+            { name: 'Date', keypath: 'Date', options: { unique: false } },
+            { name: 'Amount', keypath: 'Amount', options: { unique: false } },
+            { name: 'Payment', keypath: 'Payment', options: { unique: false } }
+        ]
     }],
     // // provide the migration factory to the DBConfig
     // migrationFactory
