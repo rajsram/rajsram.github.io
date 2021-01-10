@@ -1,0 +1,18 @@
+{
+    "dashboard": {
+        "available": "Available",
+        "total_in": "In Vehicles",
+        "total_out": "Out Vehicles",
+        "bikes": "Bikes",
+        "cars": "Cars"
+    },
+    "entry": {
+        "number": "Number",
+        "name": "Name",
+        "type": "Vehicle Type",
+        "date": "Date",
+        "time": "Time",
+        "add": "Add",
+        "close": "Close"
+    }
+}
