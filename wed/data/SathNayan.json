@@ -1,0 +1,19 @@
+{
+    "groomBrideName": "Sathish",
+    "brideGroomName": "Nayanthaaraa",
+    "weddingDateTime": "2021-11-17T00:30:00.000Z",
+    "mobiles": [
+        "8825532479"
+    ],
+    "email": "srssathish555@gmail.com",
+    "note": "",
+    "events": [
+        {
+            "title": "Marriage",
+            "address": "ECHANAHALLI",
+            "locationUrl": "",
+            "from": "2021-11-17T00:30:00.000Z",
+            "to": "2021-11-17T01:30:00.000Z"
+        }
+    ]
+}
