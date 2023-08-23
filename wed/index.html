@@ -234,7 +234,7 @@ Version : 1.1
 
                                     <p class="wdp_splash_date" id="weddingDate" style="font-size:34px;"></p>
 
-                                    <p class="wdp_splash_text">We are getting married!</p>
+                                    <p class="wdp_splash_text" id="married">We are getting married!</p>
                                 </div>
 
                             </div>
@@ -515,6 +515,7 @@ Version : 1.1
             if (countDownDate < new Date().getTime()) {
                 document.getElementById("time_h2").innerHTML = "The Celebration from!";
                 document.getElementById("time_p").innerHTML = "We are enjoying...";
+                document.getElementById("married").innerHTML = "We got married!";
             }
 
             let wdt = new Date(data.weddingDateTime);
