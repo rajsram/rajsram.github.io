@@ -165,6 +165,22 @@ Version : 1.1
         sub {
             font-size: 8px;
         }
+
+        .bigger {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        #yearscount.bigger {
+            top: -57px;
+        }
+
+        #secscount.bigger {
+            bottom: -57px;
+        }
     </style>
 </head>
 
@@ -258,14 +274,12 @@ Version : 1.1
                                 <div class="counter">
                                     <div id="timeloader" class="c100 p0 big">
                                         <span>
+                                            <span id="yearscount"></span>
+                                            <span id="monthscount"></span>
                                             <span id="dayscount"></span>
-                                            <sub>Days</sub>
                                             <span id="hrscount"></span>
-                                            <sub>Hours</sub>
                                             <span id="minscount"></span>
-                                            <sub>Mins</sub>
                                             <span id="secscount"></span>
-                                            <sub>Secs</sub>
                                         </span>
                                         <div class="slice">
                                             <div class="bar"></div>
@@ -328,9 +342,9 @@ Version : 1.1
                                 <div class="row">
 
                                     <div class="col-sm-6">
-                                        <div class=""><i class="fa fa-phone"></i>
+                                        <div class="wdp_contact_bar_phone"><i class="fa fa-phone"></i>
                                             <span id="mobiles">
-                                                
+
                                             </span>
                                         </div>
                                     </div>
@@ -363,7 +377,7 @@ Version : 1.1
                                 <div>
                                     <i class="fa fa-pencil-square-o"></i>
                                     <a style="color: #fff;" href="https://rajsram.github.io/apply/"
-                                        target="_blank">Click here to apply similar invitation</a>
+                                        target="_blank">Click here to apply</a>
                                 </div>
                             </div>
 
@@ -470,6 +484,8 @@ Version : 1.1
             // Set the date we're counting down to
             var countDownDate = new Date(data.weddingDateTime).getTime();
 
+            var _years = 0;
+            var _months = 0;
             var _days = 0;
             var _hours = 0;
             var _minutes = 0;
@@ -485,25 +501,40 @@ Version : 1.1
                 var distance = countDownDate > now ? countDownDate - now : now - countDownDate;
 
                 // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var numberOfDays = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var years = Math.floor(numberOfDays / 365.242374);
+                var months = Math.floor(numberOfDays % 365.242374 / 30);
+                var days = Math.floor(numberOfDays % 365.242374 % 30);
                 var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 // Output the result in an element with id="demo"
+                if (years > 0) {
+                    document.getElementById("yearscount").classList.add('bigger');
+                    document.getElementById("secscount").classList.add('bigger');
+                }
+                if (_years != years) {
+                    document.getElementById("yearscount").innerHTML = (years) + '<sub>Year' + (years != 1 ? 's' : '') + '</sub>';
+                    _years = years;
+                }
+                if (_months != months) {
+                    document.getElementById("monthscount").innerHTML = (months) + '<sub>Month' + (months != 1 ? 's' : '') + '</sub>';
+                    _months = months;
+                }
                 if (_days != days) {
-                    document.getElementById("dayscount").innerHTML = days;
+                    document.getElementById("dayscount").innerHTML = (days) + '<sub>Day' + (days != 1 ? 's' : '') + '</sub>';
                     _days = days;
                 }
                 if (_hours != hours) {
-                    document.getElementById("hrscount").innerHTML = hours < 10 ? '0' + hours : hours;
+                    document.getElementById("hrscount").innerHTML = (hours < 10 ? '0' + hours : hours) + '<sub>Hour' + (hours != 1 ? 's' : '') + '</sub>';
                     _hours = hours;
                 }
                 if (_minutes != minutes) {
-                    document.getElementById("minscount").innerHTML = minutes < 10 ? '0' + minutes : minutes;
+                    document.getElementById("minscount").innerHTML = (minutes < 10 ? '0' + minutes : minutes) + '<sub>Min' + (minutes != 1 ? 's' : '') + '</sub>';
                     _minutes = minutes;
                 }
                 if (_seconds != seconds) {
-                    document.getElementById("secscount").innerHTML = seconds < 10 ? '0' + seconds : seconds;
+                    document.getElementById("secscount").innerHTML = (seconds < 10 ? '0' + seconds : seconds) + '<sub>Sec' + (seconds != 1 ? 's' : '') + '</sub>';
                     var per = Math.round((seconds / 60) * 100);
                     document.getElementById('timeloader').classList.replace('p' + _per, 'p' + per);
                     _seconds = seconds;
@@ -512,7 +543,7 @@ Version : 1.1
             }, 1000);
 
             if (countDownDate < new Date().getTime()) {
-                document.getElementById("time_h2").innerHTML = "The Celebration from!";
+                document.getElementById("time_h2").innerHTML = "The Celebration!";
                 document.getElementById("time_p").innerHTML = "We are enjoying...";
                 document.getElementById("married").innerHTML = "We got married!";
             }
@@ -614,11 +645,11 @@ Version : 1.1
             return strTime;
         }
 
-        if(
+        if (
             (("standalone" in window.navigator) && !window.navigator.standalone) // ios
             ||
-            (!window.matchMedia('(display-mode: standalone)').matches ) // android
-        ){
+            (!window.matchMedia('(display-mode: standalone)').matches) // android
+        ) {
             //addToHomescreen();
         }
     </script>
