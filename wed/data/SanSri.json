@@ -1,0 +1,19 @@
+{
+    "groomBrideName": "Santhosh",
+    "brideGroomName": "SriPriya",
+    "weddingDateTime": "2026-05-28T00:30:00.000Z",
+    "mobiles": [
+        "9488750506"
+    ],
+    "email": "",
+    "note": "Once in a while, right in the middle of an ordinary life, love gives us a fairy tale.",
+    "events": [
+        {
+            "title": "Wedding Reception",
+            "address": "SGR Kalyana Mandapam, Rayakottai, Tamil Nadu 635116",
+            "locationUrl": "https://maps.app.goo.gl/w6vBRBTSTB5FJgra6",
+            "from": "2026-05-31T05:30:00.000Z",
+            "to": "2026-05-31T09:30:00.000Z"
+        }
+    ]
+}
