@@ -478,6 +478,38 @@ Version : 1.1
                 $(".auto-scroll").hide('slow');
             }
         });
+//////////////////// For dynamic meta tags and favicon based on couple
+            let basePath = window.location.origin + window.location.pathname;
+            let defaultImage = basePath + 'images/hearts.png';
+            let coupleImage = basePath + 'data/' + couple + '.png';
+
+            function updateMetaTags(imageUrl) {
+                // Update favicon (rel="icon" type="image/ico")
+                let iconIco = document.querySelector('link[rel="icon"][type="image/ico"]');
+                if (iconIco) iconIco.href = imageUrl;
+
+                // Update og:image meta tag
+                let ogImage = document.querySelector('meta[property="og:image"]');
+                if (ogImage) ogImage.content = imageUrl;
+
+                // Update favicon (rel="icon")
+                let icon = document.querySelector('link[rel="icon"]:not([type])');
+                if (icon) icon.href = imageUrl;
+
+                // Update apple-touch-icon
+                let appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
+                if (appleIcon) appleIcon.href = imageUrl;
+            }
+
+            let testImg = new Image();
+            testImg.onload = function () {
+                updateMetaTags(coupleImage);
+            };
+            testImg.onerror = function () {
+                updateMetaTags(defaultImage);
+            };
+            testImg.src = coupleImage;
+/////////////////////////////////
 
         function loadData() {
 
