@@ -431,6 +431,9 @@ body {
     cursor: pointer;
     margin-top: 15px;
     transition: all 0.3s;
+    min-height: 44px;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .checkout-btn:hover {
@@ -451,10 +454,12 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: 300;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
+    padding: 20px 0;
 }
 
 .modal.active {
@@ -467,9 +472,11 @@ body {
     padding: 30px;
     width: 95%;
     max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
+    max-height: none;
+    min-height: auto;
+    overflow-y: visible;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    margin: auto;
 }
 
 .modal-header {
@@ -560,6 +567,9 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
+    min-height: 44px;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .btn-cancel {
@@ -590,10 +600,30 @@ body {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 250;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .overlay.active {
     display: block;
+}
+
+/* iOS fix for fixed positioning */
+body.modal-open {
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Better form input sizing on mobile */
+input[type="text"],
+input[type="tel"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 8px;
 }
 
 /* Responsive Design */
@@ -645,6 +675,8 @@ body {
     .modal-content {
         width: 95%;
         padding: 20px;
+        max-height: none;
+        margin: 20px auto;
     }
 
     .form-actions {
@@ -654,6 +686,21 @@ body {
     .product-image {
         height: 150px;
         font-size: 60px;
+    }
+
+    .modal-header {
+        margin-bottom: 15px;
+        padding-bottom: 12px;
+    }
+
+    .order-summary {
+        margin-bottom: 15px;
+        padding: 12px;
+    }
+
+    .order-summary h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
     }
 }
 
@@ -697,6 +744,28 @@ body {
 
     .modal-content {
         width: 95%;
-        max-height: 95vh;
+        padding: 20px;
+        border-radius: 15px 15px 0 0;
+        max-width: 100%;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-cancel,
+    .btn-submit {
+        width: 100%;
+    }
+
+    .checkout-form {
+        overflow-y: auto;
     }
 }

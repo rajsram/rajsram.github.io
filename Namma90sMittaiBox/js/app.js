@@ -384,11 +384,29 @@ function openModal() {
     document.getElementById('checkoutModal').classList.add('active');
     document.getElementById('overlay').classList.add('active');
     document.getElementById('cartSidebar').classList.remove('active');
+    
+    // Prevent body scroll on mobile
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+    
+    // Scroll to top of modal on mobile
+    setTimeout(() => {
+        const modal = document.getElementById('checkoutModal');
+        modal.scrollTop = 0;
+        // Focus on first form field
+        const firstInput = document.querySelector('.checkout-form input');
+        if (firstInput) firstInput.focus();
+    }, 100);
 }
 
 function closeModal() {
     document.getElementById('checkoutModal').classList.remove('active');
     document.getElementById('overlay').classList.remove('active');
+    
+    // Re-enable body scroll
+    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
+    
     // Clear form
     document.getElementById('checkoutForm').reset();
 }
