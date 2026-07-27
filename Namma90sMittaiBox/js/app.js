@@ -438,7 +438,7 @@ function generateWhatsAppMessage(name, address, instructions) {
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const total = subtotal + 50;
     
-    let message = `*Namma 90s Mittai Box - Order Details*\n\n`;
+    let message = `*Namma 90's Mittai Box - Order Details*\n\n`;
     message += `*Customer Details:*\n`;
     message += `Name: ${name}\n`;
     message += `Phone: ${document.getElementById('phone').value.trim()}\n`;
@@ -458,7 +458,7 @@ function generateWhatsAppMessage(name, address, instructions) {
         message += `*Special Instructions:*\n${instructions}\n\n`;
     }
     
-    message += `Thank you for ordering from Namma 90s Mittai Box!`;
+    message += `Thank you for ordering from Namma 90's Mittai Box!`;
     
     return message;
 }
