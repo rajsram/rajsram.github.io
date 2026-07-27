@@ -456,10 +456,10 @@ body {
     width: 100%;
     height: 100%;
     z-index: 300;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     overflow-y: auto;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .modal.active {
@@ -469,7 +469,7 @@ body {
 .modal-content {
     background: white;
     border-radius: 15px;
-    padding: 30px;
+    padding: 25px;
     width: 95%;
     max-width: 500px;
     max-height: none;
@@ -483,8 +483,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
     border-bottom: 2px solid var(--light-color);
 }
 
@@ -498,7 +498,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
@@ -528,23 +528,23 @@ body {
 
 .order-summary {
     background: var(--light-color);
-    padding: 15px;
+    padding: 12px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .order-summary h3 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: var(--dark-color);
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .order-item {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 6px 0;
     border-bottom: 1px solid #ddd;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .order-item:last-child {
@@ -554,7 +554,7 @@ body {
 .form-actions {
     display: flex;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .btn-cancel,
@@ -626,6 +626,11 @@ textarea {
     border-radius: 8px;
 }
 
+/* Bottom Margin */
+.bottom-margin {
+    height: 35px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .header-content {
@@ -674,9 +679,9 @@ textarea {
 
     .modal-content {
         width: 95%;
-        padding: 20px;
+        padding: 18px;
         max-height: none;
-        margin: 20px auto;
+        margin: 10px auto;
     }
 
     .form-actions {
@@ -689,18 +694,18 @@ textarea {
     }
 
     .modal-header {
-        margin-bottom: 15px;
-        padding-bottom: 12px;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
     }
 
     .order-summary {
-        margin-bottom: 15px;
-        padding: 12px;
+        margin-bottom: 12px;
+        padding: 10px;
     }
 
     .order-summary h3 {
-        font-size: 14px;
-        margin-bottom: 10px;
+        font-size: 13px;
+        margin-bottom: 8px;
     }
 }
 
@@ -744,9 +749,10 @@ textarea {
 
     .modal-content {
         width: 95%;
-        padding: 20px;
+        padding: 16px;
         border-radius: 15px 15px 0 0;
         max-width: 100%;
+        margin: 5px auto;
     }
 
     .form-group input,
@@ -755,9 +761,14 @@ textarea {
         font-size: 16px;
     }
 
+    .form-group {
+        margin-bottom: 12px;
+    }
+
     .form-actions {
         flex-direction: column;
         gap: 10px;
+        margin-top: 12px;
     }
 
     .btn-cancel,

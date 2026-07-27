@@ -393,10 +393,11 @@ function openModal() {
     setTimeout(() => {
         const modal = document.getElementById('checkoutModal');
         modal.scrollTop = 0;
+        window.scrollTo(0, 0);
         // Focus on first form field
         const firstInput = document.querySelector('.checkout-form input');
         if (firstInput) firstInput.focus();
-    }, 100);
+    }, 50);
 }
 
 function closeModal() {
