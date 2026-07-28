@@ -1,13 +1,5 @@
 import { CartItem, CheckoutFormData } from '../types';
-
-const BUSINESS_PHONE = '8300857139';
-
-// UPI Configuration
-const UPI_CONFIG = {
-  upiId: 'srajesh775@okhdfcbank', // Replace with actual UPI ID
-  payeeName: "Namma 90's Mittai Box",
-  merchantCode: 'MITTAI90'
-};
+import { BUSINESS_PHONE, UPI_CONFIG } from '../data/business';
 
 interface UPIPaymentDetails {
   upiLink: string;

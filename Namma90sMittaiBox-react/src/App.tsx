@@ -9,7 +9,7 @@ import {
   OrderCompleteModal
 } from './components';
 import { useCart, useProductFilter } from './hooks';
-import { products } from './data';
+import { products } from './data/products';
 import { FilterCategory, CheckoutFormData } from './types';
 import { generateWhatsAppMessage, sendToWhatsApp } from './utils/whatsapp';
 

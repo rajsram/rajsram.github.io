@@ -38,30 +38,36 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
           ) : (
             cart.map((item) => (
               <div key={item.id} className="cart-item">
-                <div className="cart-item-info">
+                <div className="cart-item-left">
                   <div className="cart-item-name">{item.name}</div>
                   <div className="cart-item-price">₹{item.price}</div>
-                  <div className="cart-item-qty">
-                    <button
-                      className="qty-btn"
-                      onClick={() => onUpdateQuantity(item.id, -1)}
-                    >
-                      −
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button
-                      className="qty-btn"
-                      onClick={() => onUpdateQuantity(item.id, 1)}
-                    >
-                      +
-                    </button>
-                  </div>
+                </div>
+                <div className="cart-item-qty">
+                  <button
+                    className="qty-btn"
+                    onClick={() => onUpdateQuantity(item.id, -1)}
+                  >
+                    −
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button
+                    className="qty-btn"
+                    onClick={() => onUpdateQuantity(item.id, 1)}
+                  >
+                    +
+                  </button>
                 </div>
                 <button
                   className="remove-btn"
                   onClick={() => onRemoveItem(item.id)}
+                  title="Remove item"
                 >
-                  Remove
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                  </svg>
                 </button>
               </div>
             ))
