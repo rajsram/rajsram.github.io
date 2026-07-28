@@ -1,0 +1,162 @@
+.complete-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 300;
+}
+
+.complete-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 301;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.complete-content {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.complete-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2.5rem;
+  color: #1f2937;
+  font-weight: bold;
+  animation: scaleIn 0.4s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.complete-modal h2 {
+  font-size: 1.75rem;
+  color: #1f2937;
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+
+.customer-greeting {
+  font-size: 1.1rem;
+  color: #374151;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
+.complete-message {
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 1rem 0 1.5rem;
+  line-height: 1.6;
+}
+
+.contact-info {
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.contact-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #059669;
+  margin: 0 0 0.5rem;
+}
+
+.contact-details {
+  font-size: 0.95rem;
+  color: #047857;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.btn-close {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #1f2937;
+  border: none;
+  padding: 0.75rem 2.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  min-width: 150px;
+}
+
+.btn-close:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+}
+
+.btn-close:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .complete-modal {
+    width: 95%;
+  }
+
+  .complete-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .complete-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+  }
+
+  .complete-modal h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn-close {
+    width: 100%;
+  }
+}

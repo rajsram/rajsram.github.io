@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CartItem, CheckoutFormData } from '../types';
+import { PaymentInfo } from './PaymentInfo';
+import { customerDetailsStorage } from '../utils/storage';
 import './CheckoutModal.css';
 
 interface CheckoutModalProps {
@@ -19,9 +21,20 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     name: '',
     phone: '',
     address: '',
-    instructions: ''
+    instructions: '',
+    paymentMethod: 'upi'
   });
   const [errors, setErrors] = useState<Partial<CheckoutFormData>>({});
+
+  // Load saved customer details when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      const savedDetails = customerDetailsStorage.load();
+      if (savedDetails) {
+        setFormData(savedDetails);
+      }
+    }
+  }, [isOpen]);
 
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const deliveryFee = 50;
@@ -55,12 +68,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       return;
     }
 
+    // Save customer details for future orders
+    customerDetailsStorage.save(formData);
+
     onSubmit(formData);
     setFormData({
       name: '',
       phone: '',
       address: '',
-      instructions: ''
+      instructions: '',
+      paymentMethod: 'upi'
     });
     setErrors({});
   };
@@ -81,11 +98,36 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }
   };
 
+  const handlePaymentMethodChange = (method: 'upi' | 'cod') => {
+    setFormData(prev => ({
+      ...prev,
+      paymentMethod: method
+    }));
+  };
+
+  const handleClearSavedDetails = () => {
+    if (confirm('Are you sure you want to clear all saved details?')) {
+      customerDetailsStorage.clear();
+      setFormData({
+        name: '',
+        phone: '',
+        address: '',
+        instructions: '',
+        paymentMethod: 'upi'
+      });
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
     <>
-      <div className="modal-overlay" onClick={onClose} />
+      <button
+        className="modal-overlay"
+        onClick={onClose}
+        aria-label="Close order details modal"
+        type="button"
+      />
       <div className="modal">
         <div className="modal-content">
           <div className="modal-header">
@@ -95,7 +137,17 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
           <form className="checkout-form" onSubmit={handleSubmit}>
             <div className="form-section">
-              <h3>Customer Information</h3>
+              <div className="form-section-header">
+                <h3>Customer Information</h3>
+                <button
+                  type="button"
+                  className="btn-clear-details"
+                  onClick={handleClearSavedDetails}
+                  title="Clear saved customer details"
+                >
+                  🗑️ Clear Address
+                </button>
+              </div>
 
               <div className="form-group">
                 <label htmlFor="name">Full Name *</label>
@@ -176,6 +228,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   <span>₹{total}</span>
                 </div>
               </div>
+
+              <PaymentInfo
+                amount={total}
+                paymentMethod={formData.paymentMethod}
+                onPaymentMethodChange={handlePaymentMethodChange}
+              />
             </div>
 
             <div className="modal-actions">

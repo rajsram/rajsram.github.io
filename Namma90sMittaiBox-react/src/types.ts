@@ -17,6 +17,7 @@ export interface CheckoutFormData {
   phone: string;
   address: string;
   instructions: string;
+  paymentMethod: 'upi' | 'cod';
 }
 
 export type FilterCategory = 'all' | 'sweets' | 'savories' | 'beverages';

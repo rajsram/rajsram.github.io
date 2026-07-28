@@ -4,3 +4,6 @@ export { ProductCard } from './ProductCard';
 export { CartSidebar } from './CartSidebar';
 export { CheckoutModal } from './CheckoutModal';
 export { Notification } from './Notification';
+export { PaymentInfo } from './PaymentInfo';
+export { OrderConfirmationModal } from './OrderConfirmationModal';
+export { OrderCompleteModal } from './OrderCompleteModal';

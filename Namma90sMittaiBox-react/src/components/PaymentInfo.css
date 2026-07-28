@@ -1,0 +1,274 @@
+.payment-info {
+  background: linear-gradient(135deg, #f5f7fa 0%, #f0f4f8 100%);
+  border: 2px solid #e0e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.payment-info h3 {
+  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.payment-method-selection {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.radio-option input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.radio-option label {
+  display: inline;
+  margin: 0;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+.payment-details-section {
+  margin-top: 1rem;
+}
+
+.payment-details-section h4 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* UPI Section */
+.upi-section .payment-details {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+.payment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.detail-value {
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.detail-value.amount {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.detail-value.reference {
+  font-family: 'Courier New', monospace;
+  background: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.upi-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.upi-app-button,
+.qr-toggle-button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upi-app-button {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+}
+
+.upi-app-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 107, 53, 0.3);
+}
+
+.upi-app-button:active {
+  transform: translateY(0);
+}
+
+.qr-toggle-button {
+  background: white;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.qr-toggle-button:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.qr-section {
+  text-align: center;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.qr-section h4 {
+  margin: 0 0 1rem;
+  color: var(--text-dark);
+}
+
+.qr-code {
+  max-width: 300px;
+  width: 100%;
+  border: 3px solid white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  background: white;
+}
+
+/* COD Section */
+.cod-section {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-left: 4px solid #f59e0b;
+  padding: 1.25rem;
+  border-radius: 6px;
+}
+
+.cod-section h4 {
+  margin: 0 0 1rem;
+  color: #b45309;
+  font-size: 1.1rem;
+}
+
+.cod-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cod-info p {
+  margin: 0;
+  color: #92400e;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.amount-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #fcd34d;
+}
+
+.amount-info .label {
+  font-weight: 600;
+  color: #b45309;
+  font-size: 0.95rem;
+}
+
+.amount-info .amount {
+  font-weight: 700;
+  color: #b45309;
+  font-size: 1.2rem;
+}
+
+.amount-info .reference {
+  font-family: 'Courier New', monospace;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #b45309;
+}
+
+@media (max-width: 640px) {
+  .payment-info {
+    padding: 1rem;
+  }
+
+  .payment-method-selection {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .radio-option {
+    padding: 0.75rem;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+  }
+
+  .upi-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .upi-app-button,
+  .qr-toggle-button {
+    width: 100%;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .payment-details-section h4 {
+    font-size: 0.95rem;
+  }
+
+  .amount-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
