@@ -1,0 +1,44 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-light);
+}
+
+.main-container {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.main-content {
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 1rem 0;
+  }
+
+  .main-content {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 0.5rem 0;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+}
