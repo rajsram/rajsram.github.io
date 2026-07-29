@@ -1,10 +1,10 @@
 export interface Product {
   id: number;
   name: string;
-  category: 'sweets' | 'savories' | 'beverages';
+  category: 'sweets' | 'savories' | 'beverages' | 'combos';
   price: number;
   description: string;
-  emoji: string;
+  images: string[]; // array of image filenames
   rating: number;
 }
 
@@ -20,4 +20,4 @@ export interface CheckoutFormData {
   paymentMethod: 'upi' | 'cod';
 }
 
-export type FilterCategory = 'all' | 'sweets' | 'savories' | 'beverages';
+export type FilterCategory = 'all' | 'sweets' | 'beverages' | 'savories' | 'combos';

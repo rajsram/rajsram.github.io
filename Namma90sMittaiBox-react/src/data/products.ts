@@ -4,168 +4,71 @@ export const products: Product[] = [
   // Sweets
   {
     id: 1,
-    name: 'Gulab Jamun',
+    name: 'Dry Jamun [250g]',
     category: 'sweets',
-    price: 150,
-    description: 'Soft and sweet milk solids fried and soaked in sugar syrup',
-    emoji: '🍭',
-    rating: 4.5
+    price: 149,
+    description: 'Soft, delicious dry jamuns with a rich and authentic taste.',
+    images: ['dry-jamun/IMG_1.PNG', 'dry-jamun/IMG_2.PNG'],
+    rating: 4.7
   },
   {
     id: 2,
-    name: 'Jalebi',
+    name: 'Ghee Laddu [250g]',
     category: 'sweets',
-    price: 120,
-    description: 'Crispy and sweet spirals with a tangy twist',
-    emoji: '🔶',
-    rating: 4.3
+    price: 159,
+    description: 'Freshly handcrafted with pure ghee, offering a rich, traditional taste in every bite.',
+    images: ['laddu/IMG_1.PNG', 'laddu/IMG_2.PNG'],
+    rating: 4.6
   },
   {
     id: 3,
-    name: 'Barfi',
+    name: 'Coconut Burfi [250g]',
     category: 'sweets',
-    price: 180,
-    description: 'Rich fudgy sweet with nuts and aromatic flavors',
-    emoji: '🟫',
+    price: 119,
+    description: 'Fresh homemade coconut burfi with a rich traditional flavour.',
+    images: ['coconut-burfi/IMG_1.PNG', 'coconut-burfi/IMG_2.PNG'],
     rating: 4.6
   },
   {
     id: 4,
-    name: 'Rasmalai',
+    name: 'Pori Urundai [4 pieces]',
     category: 'sweets',
-    price: 200,
-    description: 'Soft cottage cheese dumplings in creamy milk syrup',
-    emoji: '🤍',
+    price: 89,
+    description: 'Crunchy and traditional pori urundai',
+    images: ['pori-urundai/IMG_1.PNG', 'pori-urundai/IMG_2.PNG'],
     rating: 4.7
-  },
-  {
-    id: 5,
-    name: 'Halwa',
-    category: 'sweets',
-    price: 160,
-    description: 'Rich and creamy wheat pudding with ghee and nuts',
-    emoji: '🟤',
-    rating: 4.5
-  },
-  {
-    id: 6,
-    name: 'Laddu',
-    category: 'sweets',
-    price: 140,
-    description: 'Sweet round balls with gram flour and ghee',
-    emoji: '🟡',
-    rating: 4.4
-  },
-
-  // Savories
-  {
-    id: 7,
-    name: 'Chakli',
-    category: 'savories',
-    price: 100,
-    description: 'Spiral-shaped savory snack with spices',
-    emoji: '🌀',
-    rating: 4.2
-  },
-  {
-    id: 8,
-    name: 'Murukku',
-    category: 'savories',
-    price: 90,
-    description: 'Crunchy rice flour and urad flour snack',
-    emoji: '🌪️',
-    rating: 4.1
-  },
-  {
-    id: 9,
-    name: 'Chivda',
-    category: 'savories',
-    price: 110,
-    description: 'Mixed savory mix with nuts and spices',
-    emoji: '🥜',
-    rating: 4.3
-  },
-  {
-    id: 10,
-    name: 'Samosa',
-    category: 'savories',
-    price: 80,
-    description: 'Crispy pastry filled with spiced potato and peas',
-    emoji: '🔺',
-    rating: 4.4
-  },
-  {
-    id: 11,
-    name: 'Chikali',
-    category: 'savories',
-    price: 95,
-    description: 'Soft bread rolls with savory filling',
-    emoji: '🥖',
-    rating: 4.2
-  },
-  {
-    id: 12,
-    name: 'Papad',
-    category: 'savories',
-    price: 60,
-    description: 'Thin and crispy lentil wafers',
-    emoji: '📄',
-    rating: 4.0
   },
 
   // Beverages
   {
-    id: 13,
-    name: 'Filter Coffee',
+    id: 5,
+    name: 'Rose Milk [200ml]',
     category: 'beverages',
-    price: 50,
-    description: 'Strong traditional South Indian filter coffee',
-    emoji: '☕',
+    price: 69,
+    description: 'Creamy, refreshing rose milk with a rich and delightful flavour.',
+    images: ['rose-milk/IMG_1.PNG', 'rose-milk/IMG_2.PNG'],
     rating: 4.6
   },
+
+  // combos
   {
-    id: 14,
-    name: 'Masala Chai',
-    category: 'beverages',
-    price: 40,
-    description: 'Aromatic tea with spices and milk',
-    emoji: '🍵',
-    rating: 4.5
+    id: 6,
+    name: 'Combo Box',
+    category: 'combos',
+    price: 189,
+    description: 'A delightful assortment of our finest sweets, perfect for sharing and gifting.',
+    images: ['combo/IMG_1.PNG', 'combo/IMG_2.PNG'],
+    rating: 4.8
   },
   {
-    id: 15,
-    name: 'Lassi',
-    category: 'beverages',
-    price: 60,
-    description: 'Refreshing yogurt-based drink with fruits',
-    emoji: '🥛',
-    rating: 4.4
-  },
-  {
-    id: 16,
-    name: 'Mango Shake',
-    category: 'beverages',
-    price: 80,
-    description: 'Creamy mango beverage with ice cream',
-    emoji: '🥤',
+    id: 7,
+    name: 'Combo Box (without Rose Milk)',
+    category: 'combos',
+    price: 129,
+    description: 'A delightful assortment of our finest sweets, perfect for sharing and gifting.',
+    images: ['combo/IMG_1.PNG', 'combo/IMG_2.PNG'],
     rating: 4.7
-  },
-  {
-    id: 17,
-    name: 'Coconut Water',
-    category: 'beverages',
-    price: 70,
-    description: 'Fresh and natural coconut water',
-    emoji: '🥥',
-    rating: 4.3
-  },
-  {
-    id: 18,
-    name: 'Juice',
-    category: 'beverages',
-    price: 75,
-    description: 'Fresh mixed fruit juice',
-    emoji: '🧃',
-    rating: 4.4
   }
+
+  // Savories
 ];

@@ -16,13 +16,73 @@
 
 .product-image {
   background: linear-gradient(135deg, #ffecd2, #fcb69f);
-  padding: 2rem;
+  padding: 0;
   font-size: 3rem;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 150px;
+  min-height: 365px;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+
+.slide-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.slide-nav.prev {
+  left: 0.5rem;
+}
+
+.slide-nav.next {
+  right: 0.5rem;
+}
+
+.image-indicators {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  width: 1rem;
 }
 
 .product-content {
@@ -122,8 +182,12 @@
 
 @media (max-width: 768px) {
   .product-image {
-    min-height: 120px;
-    font-size: 2.5rem;
+    min-height: 240px;
+  }
+
+  .slide-nav {
+    padding: 0.4rem 0.6rem;
+    font-size: 1rem;
   }
 
   .product-title {
