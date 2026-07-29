@@ -27,7 +27,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     );
   };
 
-  const imagePath = `/images/${product.images[currentImageIndex]}`;
+  const imagePath = `./images/${product.images[currentImageIndex]}`;
 
   return (
     <div className="product-card">
