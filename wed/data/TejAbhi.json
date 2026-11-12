@@ -1,0 +1,24 @@
+{
+	"groomBrideName": "Abhishek G",
+	"brideGroomName": "Tejaswini V",
+	"weddingDateTime": "2026-12-03T04:00:00.000Z",
+	"mobiles": [],
+	"email": "",
+	"note": "We cordially invite you to celebrate their wedding ceremony and bless them as they begin a beautiful new journey together. Your presence will make our celebration truly special.",
+	"events": [
+		{
+			"title": "Reception",
+			"address": "G M Convention Hall, #79, Railway Layout 2nd Stage, Near Ullal RTO, Ullal Main Road, Bangalore - 560056",
+			"locationUrl": "",
+			"from": "2026-12-02T13:30:00.000Z",
+			"to": "2026-12-02T18:29:00.000Z"
+		},
+		{
+			"title": "Wedding",
+			"address": "G M Convention Hall, #79, Railway Layout 2nd Stage, Near Ullal RTO, Ullal Main Road, Bangalore - 560056",
+			"locationUrl": "",
+			"from": "2026-12-03T04:00:00.000Z",
+			"to": "2026-12-03T05:20:00.000Z"
+		}
+	]
+}
